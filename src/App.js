@@ -20,11 +20,10 @@ class App extends React.Component {
     return (
       <main>
         <Nav />
-        {auth.id ? (
-          <button onClick={logout}>Logout {auth.username}</button>
-        ) : (
-          <SignIn />
-        )}
+        
+        {auth.id ? (<button onClick={logout}>Logout {auth.username}</button>) : 
+        (<Route exact path='/login' component={SignIn}></Route>)} 
+
         {auth.id ? (
           <Link to="/cart">Cart ({cart.lineItems.length})</Link>
         ) : null}
