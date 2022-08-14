@@ -1,28 +1,27 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 app.use(express.json());
-const { User } = require('./db');
-const path = require('path');
+const { User } = require("./db");
+const path = require("path");
 
-app.use('/dist', express.static('dist'));
+app.use("/dist", express.static("dist"));
+app.use("/public", express.static(path.join(__dirname, "./public")));
 
-
-const isLoggedIn = async(req, res, next)=> {
+const isLoggedIn = async (req, res, next) => {
   try {
     req.user = await User.findByToken(req.headers.authorization);
     next();
-  }
-  catch(ex){
+  } catch (ex) {
     next(ex);
   }
 };
 
-app.get('/', (req, res)=> res.sendFile(path.join(__dirname, 'index.html')));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 
-app.use('/api/orders', require('./routes/orders'));
-app.use('/api/sessions', require('./routes/sessions'));
+app.use("/api/orders", require("./routes/orders"));
+app.use("/api/sessions", require("./routes/sessions"));
 
-app.use((err, req, res, next)=> {
+app.use((err, req, res, next) => {
   console.log(err);
   res.status(err.status || 500).send({ error: err });
 });
