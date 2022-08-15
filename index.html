@@ -9,10 +9,61 @@
       form > * {
         margin: 1rem;
       }
-      .logo {
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
+      .links {
+        color: white;
+      }
+      .links:link {
+        text-decoration: none;
+      }
+
+      .links:visited {
+        text-decoration: none;
+      }
+
+      .links:hover {
+        text-decoration: none;
+        font-family: cursive;
+        color: #ffc107;
+      }
+
+      .links:active {
+        text-decoration: none;
+      }
+      .search {
+        background-color: white;
+        margin-right: 5px;
+      }
+      .search-button {
+        margin-right: 2px;
+      }
+      .left-menu-button {
+        background: none;
+        border: none;
+        color: white;
+      }
+      .left-menu-button:hover {
+        border-bottom: 1px solid red;
+      }
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #343a40;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
       }
     </style>
     <script defer src="/dist/main.js"></script>

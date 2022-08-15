@@ -4,7 +4,7 @@ import { fetchCart, exchangeToken, logout } from "./store";
 import { Link, Route } from "react-router-dom";
 import SignIn from "./SignIn";
 import Cart from "./Cart";
-import Nav from "./NavBar";
+import Nav from "./Nav";
 
 class App extends React.Component {
   componentDidMount() {
