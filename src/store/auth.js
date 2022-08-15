@@ -1,16 +1,21 @@
 import axios from 'axios';
+import { _logout, _handleToken } from './action_creators';
+
+const SET_AUTH = 'SET_AUTH';
+
 const auth = (state = {}, action)=> {
-  if(action.type === 'SET_AUTH'){
-    state = action.auth;
+  switch (action.type) {
+    case SET_AUTH: 
+      return action.auth;
+    default:
+      return state;
   }
-  return state;
 };
 
 export const logout = ()=> {
   return (dispatch)=> {
     window.localStorage.removeItem('token');
-    dispatch({ type: 'SET_AUTH', auth: {}});
-
+    dispatch(_logout());
   };
 };
 
@@ -24,22 +29,27 @@ export const exchangeToken = ()=> {
         }
       });
       const auth = response.data;
-      dispatch({ auth, type: 'SET_AUTH'});
+      dispatch(_handleToken(auth));
     }
   };
 };
+
+
 export const login = (credentials)=> {
   return async(dispatch)=> {
-    let response = await axios.post('/api/sessions', credentials);
-    const { token } = response.data;
+
+    let response = await axios.post('/api/sessions', credentials)
+    const {token} = response.data;
+
     window.localStorage.setItem('token', token); 
-    response = await axios.get('/api/sessions', {
+
+    const auth = (await axios.get('/api/sessions', {
       headers: {
         authorization: token
       }
-    });
-    const auth = response.data;
-    dispatch({ auth, type: 'SET_AUTH'});
+    })).data
+    
+    dispatch(_handleToken(auth));
 
   };
 };
