@@ -4,11 +4,6 @@ const { conn, User, Product } = require('./db');
 const SneaksAPI = require('sneaks-api')
 const sneaks = new SneaksAPI()
 
-const seedDBProducts = async()=> {
-  
-}
-seedDBProducts()
-
 const setUp = async()=> {
   try {
     await conn.sync({ force: true });

@@ -121,6 +121,7 @@ describe('Shopping', ()=> {
 
         });
       });
+
       describe('not the first time', ()=> {
         it('updates a lineItem', async()=> {
           const moe = await User.findOne({
@@ -150,6 +151,26 @@ describe('Shopping', ()=> {
 
         });
       });
+
+      describe('RESTFUL API', ()=> {
+        describe('/api/products', () => { 
+          it('Get all products, GET /api/products'), async()=> {
+          const moe = await User.findOne({
+            where: {
+              username: 'moe'
+            }
+          });
+            const token = jwt.sign({ id: moe.id}, process.env.JWT);
+            
+            let response = await app.get('/api/products')
+              .set('authorization', token)
+              
+            expect(response.status).to.equal(200)
+            
+          }
+        })
+      })
+
     });
   });
 });
