@@ -37,7 +37,14 @@ const setUp = async()=> {
         .filter(shoe => shoe.description !== '')
         .map(async(shoe) => {
         await Promise.all([
-          Product.create({name:shoe.name})
+          Product.create({
+            name:shoe.name,
+            price: shoe.retailPrice,
+            colorway: shoe.colorway,
+            brand: shoe.brand,
+            imageLocation: shoe.thumbnail,
+            description: shoe.description
+          })
         ])
       })
     })

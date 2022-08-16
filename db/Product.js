@@ -6,7 +6,6 @@ const Product = conn.define('product', {
   name: {
     type: Sequelize.STRING
   },
-  
   brand:{
     type:STRING
   },
@@ -33,10 +32,6 @@ const Product = conn.define('product', {
   gender:{
     type: ENUM('Mens', 'Womens', 'Unisex'),
     defaultValue:'Unisex'
-    
-
-
-
   },
   isFemale:{
     type: Sequelize.VIRTUAL,
@@ -50,10 +45,8 @@ const Product = conn.define('product', {
       return this.productType==='Mens'
     }
   }
-
-
-
 });
+
 Product.findMensProduct = function(){
   return this.findAll({
     where:{
@@ -62,13 +55,13 @@ Product.findMensProduct = function(){
   })
 }
 
-  Product.findWomensProduct = function(){
-    return this.findAll({
-      where:{
-        productType:'Womens',
-      }
-    })
-  }
+Product.findWomensProduct = function(){
+  return this.findAll({
+    where:{
+      productType:'Womens',
+    }
+  })
+}
 
 module.exports = Product;
 
