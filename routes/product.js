@@ -3,15 +3,8 @@ const app = express.Router();
 const { Product} = require('../db');
 module.exports = app;
 
-app.get('/api/products', async (req, res, next) => {
-  try {
-    res.send(await Product.findAll({
-      
-    }))
-  } catch (error) {
-    next(error)
-  }
-})
+app.use('/routes', express.static(path.join(__dirname, "./routes")))
+
 
 app.post("/api/products", async (req, res) => {
   const newProduct = new Product(req.body);
@@ -20,7 +13,7 @@ app.post("/api/products", async (req, res) => {
 
 })
 
-app.get('/api/products', async (req, res, next) => {
+app.get('/api/products/womens', async (req, res, next) => {
   try {
     res.send(await Product.findWomensProduct())
       
@@ -29,7 +22,7 @@ app.get('/api/products', async (req, res, next) => {
   }
 })
 
-app.get('/api/products', async (req, res, next) => {
+app.get('/api/products/mens', async (req, res, next) => {
   try {
     res.send(await Product.findMensProduct())
       

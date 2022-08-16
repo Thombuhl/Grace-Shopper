@@ -13,7 +13,7 @@ const setUp = async()=> {
     await User.create({ username: 'lorenzo', password: 'lorenzo123'});
     await User.create({ username: 'doobin', password: 'doobin123'});
     const lucy = await User.create({ username: 'lucy', password: 'lucy_pw'});
-    const foo = await Product.create({ name: 'foo' }); 
+    const foo = await Product.create({ name: 'foo', brand:'acme' }); 
     const bar = await Product.create({ name: 'bar' }); 
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });

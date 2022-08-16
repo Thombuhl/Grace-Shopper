@@ -30,19 +30,19 @@ const Product = conn.define('product', {
     type:TEXT
   },
   gender:{
-    type: ENUM('Mens', 'Womens', 'Unisex'),
+    type: ENUM('MENS', 'WOMENS', 'UNISEX'),
     defaultValue:'Unisex'
   },
   isFemale:{
     type: Sequelize.VIRTUAL,
     get:function(){
-      return this.productType==='Womens'
+      return this.productType==='WOMENS'
     }
   },
   isMale :{
     type:Sequelize.VIRTUAL,
     get: function(){
-      return this.productType==='Mens'
+      return this.productType==='MENS'
     }
   }
 });

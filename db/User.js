@@ -11,7 +11,16 @@ const User = conn.define('user', {
   },
   password: {
     type: Sequelize.STRING
-  }
+  },
+  firstName: {
+
+  },
+  lastName: {
+
+  },
+  email: {
+
+  },
 });
 
 
