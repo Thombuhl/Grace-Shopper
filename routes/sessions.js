@@ -18,6 +18,16 @@ app.post('/', async(req, res, next)=> {
   }
 });
 
+app.post('/signup', async(req,res,next)=> {
+  try {
+    console.log(req.body)
+    res.send(await User.create(req.body))
+  }
+  catch(er){
+    next(er)
+  }
+})
+
 app.get('/', isLoggedIn, async(req, res, next)=> {
   res.send(req.user);
 });
