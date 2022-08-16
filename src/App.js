@@ -6,11 +6,8 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Nav from "./Nav";
 
-class _App extends React.Component {
-  constructor() {
-    super();
-
-  }
+class _App extends Component {
+  
 
   render() {
     return (

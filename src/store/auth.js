@@ -40,6 +40,7 @@ export const login = (credentials)=> {
 
     let response = await axios.post('/api/sessions', credentials)
     const {token} = response.data;
+    console.log(token)
 
     window.localStorage.setItem('token', token); 
 

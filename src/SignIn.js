@@ -21,6 +21,7 @@ class SignIn extends Component{
   }
   onSubmit(ev){
     ev.preventDefault();
+    console.log('here')
     this.props.login(this.state);
   }
   render(){
@@ -31,14 +32,14 @@ class SignIn extends Component{
         <h2>LOGIN</h2>
         <div>
           <label>Username</label>
-          <input  className="input-group mb-3" name='username' onChange={ onChange } value={ username } placeholder='Enter Username'/>
+          <input className="input-group mb-3" name='username' onChange={ onChange } value={ username } placeholder='Enter Username'/>
         </div>
         <div>
           <label>Password</label>
           <input className="input-group mb-3" name='password' onChange={ onChange } value={ password } placeholder='Enter Password'/>
         </div>
         <Link to="/newpassword">Forgot your Password?</Link>
-        <Link to="/" id='sign-btn' className="btn btn-secondary btn-lg">Sign In</Link>
+        <button id='sign-btn' className="btn btn-secondary btn-lg">Sign In</button>
         <Link to='signup'>Create account</Link>
       </form>
     );
