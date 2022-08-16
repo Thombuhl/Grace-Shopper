@@ -29,8 +29,10 @@ const User = conn.define('user', {
 
 
 User.addHook('beforeSave', async(user)=> {
-  user.password = await bcrypt.hash(user.password, 5);
-});
+  if(user._changed.has('password')){
+    user.password = await bcrypt.hash(user.password, 10)
+  }
+})
 
 User.prototype.createOrderFromCart = async function(){
   const cart = await this.getCart();

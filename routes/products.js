@@ -12,6 +12,18 @@ app.get('/', async (req, res, next) => {
   }
 })
 
+app.get('/:id', async (req, res, next) => {
+  try {
+    res.send(await Product.findAll({
+      where: {
+        id:req.params.id
+      }
+    }))
+  } catch (error) {
+    next(error)
+  }
+})
+
 app.post("/", async (req, res) => {
   const newProduct = new Product(req.body);
   const savedProduct = await newProduct.save();

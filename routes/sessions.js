@@ -44,3 +44,9 @@ app.post('/signup', async(req,res,next)=> {
 app.get('/', isLoggedIn, async(req, res, next)=> {
   res.send(req.user);
 });
+
+app.put('/', isLoggedIn, async(req,res,next)=> {
+  const user = req.user
+  user.update(req.body)
+  res.send(user)
+})

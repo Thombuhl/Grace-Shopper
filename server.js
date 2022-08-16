@@ -24,6 +24,7 @@ const setUp = async()=> {
       if(er){
         console.log('error')
       }
+    // Iterate through the products and return only the information we want
       products.map(product => {
         return {
           name: product.make,
@@ -35,7 +36,9 @@ const setUp = async()=> {
           silhoutte: product.silhoutte
         }
       })
+      // Filter to make sure each shoe has a discription
         .filter(shoe => shoe.description !== '')
+      // Create a Product instance of each shoe
         .map(async(shoe) => {
         await Promise.all([
           Product.create({
@@ -52,7 +55,6 @@ const setUp = async()=> {
         ])
       })
     })
-
   }
   catch(ex){
     console.log(ex);
