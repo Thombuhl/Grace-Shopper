@@ -6,7 +6,6 @@ const Product = conn.define('product', {
   name: {
     type: Sequelize.STRING
   },
-  
   brand:{
     type:STRING
   },
@@ -27,48 +26,48 @@ const Product = conn.define('product', {
   colorway:{
     type: STRING,
   },
+  silhoutte:{
+    type: STRING,
+  },
   description:{
     type:TEXT
   },
   gender:{
-    type: ENUM('Mens', 'Womens', 'Unisex'),
-    defaultValue:'Unisex'
-    
-
-
-
+    type: ENUM('MENS', 'WOMENS', 'UNISEX'),
+    defaultValue:'UNISEX'
+  },
+  numberInStock: {
+    type: FLOAT
   },
   isFemale:{
     type: Sequelize.VIRTUAL,
     get:function(){
-      return this.productType==='Womens'
+      return this.productType==='WOMENS'
     }
   },
   isMale :{
     type:Sequelize.VIRTUAL,
     get: function(){
-      return this.productType==='Mens'
+      return this.productType==='MENS'
     }
   }
-
-
-
 });
+
 Product.findMensProduct = function(){
   return this.findAll({
     where:{
-      productType:'Mens',
+      productType:'MENS',
     }
   })
 }
 
-  Product.findWomensProduct = function(){
-    return this.findAll({
-      where:{
-        productType:'Womens',
-      }
-    })
-  }
+Product.findWomensProduct = function(){
+  return this.findAll({
+    where:{
+      productType:'WOMENS',
+    }
+  })
+}
 
 module.exports = Product;
 

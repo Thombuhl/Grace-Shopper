@@ -14,17 +14,18 @@ describe('Shopping', ()=> {
     it('Logs the User In', async()=> {
       let response = await app.post('/api/sessions')
         .send({ username: 'moe', password: 'MOE'});
-
       expect(response.status).to.equal(200);
+
       const token = response.body.token;
       expect(token).to.be.ok;
+      
       response = await app.get('/api/sessions')
         .set('authorization', token);
       expect(response.status).to.equal(200);
       expect(response.body.username).to.equal('moe');
-
     });
   });
+
   describe('The Shopping Experience', ()=> {
     it('User can create an order', async()=> {
       const moe = await User.findOne({
@@ -70,6 +71,7 @@ describe('Shopping', ()=> {
       expect(response.body.id).to.equal(cart.id);
 
     });
+
     describe('adding an item to a cart', ()=> {
       describe('setting quantity to zero', ()=> {
         it('remove it from cart', async()=> {
@@ -146,10 +148,22 @@ describe('Shopping', ()=> {
             .send({ product: foo, quantity: 7});
           const updatedLineItem = response.body.lineItems.find( lineItem => lineItem.productId === foo.id);
           expect(updatedLineItem.id).to.equal(lineItem.id);
-
-
+          
         });
       });
     });
+
   });
+
+  describe('REST API Product', ()=> {
+    it('Can GET All Products', async()=> {
+      let response = await app.get('/api/products')
+      expect(response.status).to.equal(200)
+      expect(response.body.length).to.equal(1)
+    })
+    it('Can GET Single Product', async()=> {
+      let response = await app.get('/api/products/1')
+      expect(response.status).to.equal(200)
+    })
+  })
 });

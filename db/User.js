@@ -7,17 +7,32 @@ const bcrypt = require('bcrypt');
 
 const User = conn.define('user', {
   username: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique: true
   },
   password: {
     type: Sequelize.STRING
-  }
+  },
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
+  },
+  email: {
+    type: Sequelize.STRING,
+    validate: {
+      isEmail: true
+    }
+  },
 });
 
 
 User.addHook('beforeSave', async(user)=> {
-  user.password = await bcrypt.hash(user.password, 5);
-});
+  if(user._changed.has('password')){
+    user.password = await bcrypt.hash(user.password, 10)
+  }
+})
 
 User.prototype.createOrderFromCart = async function(){
   const cart = await this.getCart();
