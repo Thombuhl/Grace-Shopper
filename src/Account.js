@@ -33,7 +33,7 @@ class _Account extends React.Component {
 
   render() {
     const { auth, logout, cart } = this.props;
-   
+  
     return (
       <main>
         {auth.id ? (
@@ -48,7 +48,7 @@ class _Account extends React.Component {
           {auth.id ? (
             <Fragment>
               <Route path="/cart" component={Cart} />
-            </Fragment>
+            </Fragment> 
           ) : null}
     </main>
     );

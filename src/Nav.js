@@ -133,14 +133,16 @@ class Nav extends Component  {
                 </div>)}
             
               <RightNavItem>
+                <Link className="links" to="/cart">
                 <IconButton
-                  onClick={ () => 'heelo'}
+                  onClick={() => <h1>Hello</h1>}
                   aria-label="cart"
                 >
                   <Badge badgeContent={0} showZero color="primary">
                     <ShoppingCartIcon style={{ color: "white" }} />
                   </Badge>
                 </IconButton>
+                </Link>
               </RightNavItem>
             </RightNav>
           </Wrapper>
