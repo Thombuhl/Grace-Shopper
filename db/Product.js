@@ -31,7 +31,7 @@ const Product = conn.define('product', {
   },
   gender:{
     type: ENUM('MENS', 'WOMENS', 'UNISEX'),
-    defaultValue:'Unisex'
+    defaultValue:'UNISEX'
   },
   isFemale:{
     type: Sequelize.VIRTUAL,
@@ -50,7 +50,7 @@ const Product = conn.define('product', {
 Product.findMensProduct = function(){
   return this.findAll({
     where:{
-      productType:'Mens',
+      productType:'MENS',
     }
   })
 }
@@ -58,7 +58,7 @@ Product.findMensProduct = function(){
 Product.findWomensProduct = function(){
   return this.findAll({
     where:{
-      productType:'Womens',
+      productType:'WOMENS',
     }
   })
 }

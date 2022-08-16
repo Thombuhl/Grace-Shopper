@@ -13,13 +13,17 @@ const User = conn.define('user', {
     type: Sequelize.STRING
   },
   firstName: {
-
+    type: Sequelize.STRING
   },
   lastName: {
-
+    type: Sequelize.STRING
   },
   email: {
-
+    type: Sequelize.STRING,
+    unique:true,
+    validate: {
+      isEmail: true
+    }
   },
 });
 

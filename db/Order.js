@@ -7,12 +7,12 @@ const Order = conn.define('order', {
     defaultValue: true
   },
   delivered: {
-
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   confirmationId: {
-    
+    type: Sequelize.UUID
   },
-
 });
 
 module.exports = Order;
