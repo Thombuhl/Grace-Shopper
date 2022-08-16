@@ -11,7 +11,6 @@ app.post('/', isLoggedIn, async(req, res, next)=> {
   catch(ex){
     next(ex);
   }
-
 });
 
 app.put('/cart', isLoggedIn, async(req, res, next)=> {
