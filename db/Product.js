@@ -33,6 +33,9 @@ const Product = conn.define('product', {
     type: ENUM('MENS', 'WOMENS', 'UNISEX'),
     defaultValue:'UNISEX'
   },
+  numberInStock: {
+    type: FLOAT
+  },
   isFemale:{
     type: Sequelize.VIRTUAL,
     get:function(){

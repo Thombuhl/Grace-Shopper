@@ -39,11 +39,13 @@ const setUp = async()=> {
         await Promise.all([
           Product.create({
             name:shoe.name,
-            price: shoe.retailPrice,
-            colorway: shoe.colorway,
             brand: shoe.brand,
-            imageLocation: shoe.thumbnail,
-            description: shoe.description
+            size: Math.ceil(Math.random()*15),
+            price: shoe.price,
+            imageLocation: shoe.imageLocation,
+            colorway: shoe.colorway,
+            description: shoe.description,
+            numberInStock: Math.ceil(Math.random()*100)
           })
         ])
       })
