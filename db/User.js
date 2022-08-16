@@ -7,7 +7,8 @@ const bcrypt = require('bcrypt');
 
 const User = conn.define('user', {
   username: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique: true
   },
   password: {
     type: Sequelize.STRING
@@ -20,7 +21,6 @@ const User = conn.define('user', {
   },
   email: {
     type: Sequelize.STRING,
-    unique:true,
     validate: {
       isEmail: true
     }

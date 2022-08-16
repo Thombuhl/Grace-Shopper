@@ -7,12 +7,12 @@ const sneaks = new SneaksAPI()
 const setUp = async()=> {
   try {
     await conn.sync({ force: true });
-    await User.create({ username: 'moe', password: 'moe_pw'});
-    await User.create({ username: 'chris', password: 'chris123'});
-    await User.create({ username: 'thomas', password: 'thomas123'});
-    await User.create({ username: 'lorenzo', password: 'lorenzo123'});
-    await User.create({ username: 'doobin', password: 'doobin123'});
-    const lucy = await User.create({ username: 'lucy', password: 'lucy_pw'});
+    await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gsdt7.com'});
+    await User.create({ username: 'chris', password: 'chris123', email: 'chris@gsdt7.com'});
+    await User.create({ username: 'thomas', password: 'thomas123', email: 'thomas@gsdt7.com'});
+    await User.create({ username: 'lorenzo', password: 'lorenzo123', email: 'lorenzo@gsdt7.com'});
+    await User.create({ username: 'doobin', password: 'doobin123', email: 'doobin@gsdt7.com'});
+    const lucy = await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gsdt7.com'});
     const foo = await Product.create({ name: 'foo', brand:'acme' }); 
     const bar = await Product.create({ name: 'bar' }); 
     await lucy.addToCart({ product: foo, quantity: 3 });
@@ -25,7 +25,6 @@ const setUp = async()=> {
         console.log('error')
       }
       products.map(product => {
-        console.log(product)
         return {
           name: product.make,
           price: product.retailPrice,
