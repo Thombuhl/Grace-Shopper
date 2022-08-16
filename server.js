@@ -25,13 +25,15 @@ const setUp = async()=> {
         console.log('error')
       }
       products.map(product => {
+        console.log(product)
         return {
           name: product.make,
           price: product.retailPrice,
           colorway: product.colorway,
           brand: product.brand,
           imageLocation: product.thumbnail,
-          description: product.description
+          description: product.description,
+          silhoutte: product.silhoutte
         }
       })
         .filter(shoe => shoe.description !== '')
@@ -45,7 +47,8 @@ const setUp = async()=> {
             imageLocation: shoe.imageLocation,
             colorway: shoe.colorway,
             description: shoe.description,
-            numberInStock: Math.ceil(Math.random()*100)
+            numberInStock: Math.ceil(Math.random()*100),
+            silhoutte: shoe.silhoutte
           })
         ])
       })

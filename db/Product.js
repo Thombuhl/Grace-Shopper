@@ -26,6 +26,9 @@ const Product = conn.define('product', {
   colorway:{
     type: STRING,
   },
+  silhoutte:{
+    type: STRING,
+  },
   description:{
     type:TEXT
   },
