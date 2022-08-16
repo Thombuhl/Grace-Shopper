@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const cart = (state = { lineItems: [ ] }, action)=> {
   if(action.type === 'SET_CART'){
     state = action.cart;
@@ -17,6 +18,8 @@ export const fetchCart = ()=> {
 
   };
 };
+
+
 
 
 export default cart;
