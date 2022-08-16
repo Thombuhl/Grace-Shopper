@@ -30,7 +30,6 @@ app.post("/", async (req, res) => {
   res.send(savedProduct);
 })
 
-
 app.get('/womens', async (req, res, next) => {
   try {
     res.send(await Product.findWomensProduct())
@@ -46,5 +45,3 @@ app.get('/mens', async (req, res, next) => {
     next(error)
   }
 })
-
-
