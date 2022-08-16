@@ -148,8 +148,7 @@ describe('Shopping', ()=> {
             .send({ product: foo, quantity: 7});
           const updatedLineItem = response.body.lineItems.find( lineItem => lineItem.productId === foo.id);
           expect(updatedLineItem.id).to.equal(lineItem.id);
-
-
+          
         });
       });
     });
