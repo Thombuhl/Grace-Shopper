@@ -1,56 +1,67 @@
-import React, { Component } from 'react';
-import { login } from './store';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { login } from "./store";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-
-
-class SignIn extends Component{
-  constructor(){
+class SignIn extends Component {
+  constructor() {
     super();
     this.state = {
-      username: '',
-      password: ''
+      username: "",
+      password: "",
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-   
   }
-  onChange(ev){
+  onChange(ev) {
     this.setState({ [ev.target.name]: ev.target.value });
   }
-  onSubmit(ev){
+  onSubmit(ev) {
     ev.preventDefault();
-    console.log('here')
+    console.log("here");
     this.props.login(this.state);
   }
-  render(){
-    const { onChange, onSubmit, } = this;
+  render() {
+    const { onChange, onSubmit } = this;
     const { username, password } = this.state;
     return (
-      <form onSubmit={ onSubmit } className="form-group" id="sign-in">
+      <form onSubmit={onSubmit} className="form-group" id="sign-in">
         <h2>LOGIN</h2>
         <div>
           <label>Username</label>
-          <input className="input-group mb-3" name='username' onChange={ onChange } value={ username } placeholder='Enter Username'/>
+          <input
+            className="input-group mb-3"
+            name="username"
+            onChange={onChange}
+            value={username}
+            placeholder="Enter Username"
+          />
         </div>
         <div>
           <label>Password</label>
-          <input className="input-group mb-3" name='password' onChange={ onChange } value={ password } placeholder='Enter Password'/>
+          <input
+            className="input-group mb-3"
+            name="password"
+            onChange={onChange}
+            value={password}
+            placeholder="Enter Password"
+          />
         </div>
         <Link to="/newpassword">Forgot your Password?</Link>
-        <button id='sign-btn' className="btn btn-secondary btn-lg">Sign In</button>
-        <Link to='signup'>Create account</Link>
+        <button id="sign-btn" className="btn btn-secondary btn-lg">
+          Sign In
+        </button>
+        <Link to="signup">Create account</Link>
       </form>
     );
-  };
-};
+  }
+}
 
-const mapDispatch = (dispatch)=> {
+const mapDispatch = (dispatch) => {
   return {
-    login: (credentials)=> {
+    login: (credentials) => {
       dispatch(login(credentials));
-    }
+    },
   };
 };
 
