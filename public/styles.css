@@ -1,11 +1,11 @@
 body {
-  background-color: darkcyan;
+  font-family: sans-serif;
+  background-color: white;
 }
 #sign-in {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3rem;
 }
 #sign-in input {
   width: 28rem;

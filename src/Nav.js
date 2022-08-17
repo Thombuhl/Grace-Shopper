@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { HashRouter as Router, Link } from "react-router-dom";
 import styled from "styled-components";
@@ -7,7 +7,7 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import IconButton from "@mui/material/IconButton";
-import {logout, exchangeToken, userCart } from "./store";
+import { logout, exchangeToken, userCart } from "./store";
 
 const Container = styled.div`
   height: 70px;
@@ -47,14 +47,13 @@ const Logo = styled.h1`
   color: white;
 `;
 
-class Nav extends Component  {
-
+class Nav extends Component {
   componentDidMount() {
     this.props.exchangeToken();
   }
 
-  render () {
-    const {auth, logout, userCart} = this.props
+  render() {
+    const { auth, logout, userCart } = this.props;
     return (
       <div>
         <Container>
@@ -118,23 +117,28 @@ class Nav extends Component  {
                   <SearchIcon style={{ color: "gray", padding: 2 }} />
                 }
               />
-                {auth.id ? (<button onClick={logout}>Logout {auth.username}</button>) : 
-                (<div>
-                <RightNavItem>
-                  <Link className="links" to="/login">
-                    Login
-                  </Link>
-                </RightNavItem>
-                <RightNavItem>
-                  <Link className="links" to="/signup">
-                    SignUp
-                  </Link>
-                </RightNavItem>
-                </div>)}
-            
+              {auth.id ? (
+                <button onClick={logout}>Logout {auth.username}</button>
+              ) : (
+                <div>
+                  <RightNav>
+                    <RightNavItem>
+                      <Link className="links" to="/login">
+                        Login
+                      </Link>
+                    </RightNavItem>
+                    <RightNavItem>
+                      <Link className="links" to="/signup">
+                        SignUp
+                      </Link>
+                    </RightNavItem>
+                  </RightNav>
+                </div>
+              )}
+
               <RightNavItem>
                 <IconButton
-                  onClick={ () => 'heelo'}
+                  onClick={() => console.log("Go to cart!")}
                   aria-label="cart"
                 >
                   <Badge badgeContent={0} showZero color="primary">
@@ -147,11 +151,11 @@ class Nav extends Component  {
         </Container>
       </div>
     );
-  };
-};
-const mapStateToProps = ({auth}) => {
+  }
+}
+const mapStateToProps = ({ auth }) => {
   return {
-    auth
+    auth,
   };
 };
 
@@ -160,9 +164,7 @@ const mapDispatch = (dispatch) => {
     logout: () => dispatch(logout()),
     exchangeToken: () => dispatch(exchangeToken()),
     // userCart: () => dispatch(userCart())
-
   };
 };
-
 
 export default connect(mapStateToProps, mapDispatch)(Nav);
