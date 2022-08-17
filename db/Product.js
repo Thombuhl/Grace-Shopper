@@ -1,74 +1,72 @@
-const { FLOAT, STRING, TEXT, ENUM } = require('sequelize/lib/data-types');
-const conn = require('./conn');
+const { FLOAT, STRING, TEXT, ENUM } = require("sequelize/lib/data-types");
+const conn = require("./conn");
 const { Sequelize } = conn;
 
-const Product = conn.define('product', {
+const Product = conn.define("product", {
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
-  brand:{
-    type:STRING
+  brand: {
+    type: STRING,
   },
-  size:{
-    type:FLOAT,
-    validate:{
-      min:1,
-      max:15
+  size: {
+    type: FLOAT,
+    validate: {
+      min: 1,
+      max: 15,
     },
   },
-  price:{
+  price: {
     type: FLOAT,
-    defaultValue: 0.0
+    defaultValue: 0.0,
   },
-  imageLocation:{
+  imageLocation: {
     type: STRING,
   },
-  colorway:{
+  colorway: {
     type: STRING,
   },
-  silhoutte:{
+  silhoutte: {
     type: STRING,
   },
-  description:{
-    type:TEXT
+  description: {
+    type: TEXT,
   },
-  gender:{
-    type: ENUM('MENS', 'WOMENS', 'UNISEX'),
-    defaultValue:'UNISEX'
+  gender: {
+    type: ENUM("MENS", "WOMENS", "UNISEX"),
+    defaultValue: "UNISEX",
   },
   numberInStock: {
-    type: FLOAT
+    type: FLOAT,
   },
-  isFemale:{
+  isFemale: {
     type: Sequelize.VIRTUAL,
-    get:function(){
-      return this.productType==='WOMENS'
-    }
+    get: function () {
+      return this.productType === "WOMENS";
+    },
   },
-  isMale :{
-    type:Sequelize.VIRTUAL,
-    get: function(){
-      return this.productType==='MENS'
-    }
-  }
+  isMale: {
+    type: Sequelize.VIRTUAL,
+    get: function () {
+      return this.productType === "MENS";
+    },
+  },
 });
 
-Product.findMensProduct = function(){
+Product.findMensProduct = function () {
   return this.findAll({
-    where:{
-      productType:'MENS',
-    }
-  })
-}
+    where: {
+      productType: "MENS",
+    },
+  });
+};
 
-Product.findWomensProduct = function(){
+Product.findWomensProduct = function () {
   return this.findAll({
-    where:{
-      productType:'WOMENS',
-    }
-  })
-}
+    where: {
+      productType: "WOMENS",
+    },
+  });
+};
 
 module.exports = Product;
-
-

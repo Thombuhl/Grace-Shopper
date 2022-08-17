@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Nav from "./Nav";
 import Carousel from "./Carousel";
-import Products from "./Products"
-
+import Products from "./Products";
 
 class Home extends Component {
   render() {
@@ -15,7 +14,5 @@ class Home extends Component {
     );
   }
 }
-
-
 
 export default connect()(Home);
