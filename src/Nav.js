@@ -63,7 +63,9 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link to="/mens">Mens</Link>
+                    <Link style={{ color: "white" }} to="/mens">
+                      Mens
+                    </Link>
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>
@@ -75,7 +77,9 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link to="/womens">Womens</Link>
+                    <Link style={{ color: "white" }} to="/womens">
+                      Womens
+                    </Link>
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>
@@ -87,7 +91,9 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link to="/unisex">Unisex</Link>
+                    <Link style={{ color: "white" }} to="/unisex">
+                      Unisex
+                    </Link>
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>

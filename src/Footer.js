@@ -34,10 +34,7 @@ const Footer = () => {
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book. It has survived not only
           five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
+          remaining essentially unchanged.
         </Info>
         <SocialMedia>
           <SocialMediaIcon>
@@ -90,7 +87,12 @@ const Footer = () => {
       <RightFooter>
         <Title>Contacts</Title>
         <RightItem>
-          <PlaceIcon style={{ marginRight: "5px" }} /> 1 Infinite Loop
+          <a
+            href="https://www.google.com/maps/place/1+Infinite+Loop,+Cupertino,+CA+95014/@37.3318226,-122.0322864,17z/data=!3m1!4b1!4m5!3m4!1s0x808fb5b7176a341d:0x4ae040c5bfc59fcd!8m2!3d37.3318226!4d-122.0300924"
+            style={{ color: "white", textDecoration: "none" }}
+          >
+            <PlaceIcon style={{ marginRight: "5px" }} /> 1 Infinite Loop
+          </a>
         </RightItem>
         <RightItem>
           <SmartphoneIcon style={{ marginRight: "5px" }} /> +1 234-567-890
