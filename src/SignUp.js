@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { signup } from "./store/auth";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { signup } from './store/auth';
 
 class SignUp extends Component {
   constructor() {
     super();
     this.state = {
-      username: "",
-      password: "",
-      email: "",
-      gender: "",
+      username: '',
+      password: '',
+      email: '',
+      gender: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);

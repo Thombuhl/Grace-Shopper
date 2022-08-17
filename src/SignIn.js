@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { login } from "./store";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { login } from './store';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class SignIn extends Component {
   constructor() {
     super();
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -18,7 +18,7 @@ class SignIn extends Component {
   }
   onSubmit(ev) {
     ev.preventDefault();
-    console.log("here");
+    console.log('here');
     this.props.login(this.state);
   }
   render() {
