@@ -21,7 +21,6 @@ class SignIn extends Component{
   }
   onSubmit(ev){
     ev.preventDefault();
-    console.log('here')
     this.props.login(this.state);
   }
   render(){

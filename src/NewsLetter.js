@@ -15,7 +15,7 @@ class NewsLetter extends Component {
       <Container>
         <Title>Newsletter</Title>
         <Info>
-          Signup for exclusive deals and sneakpeeks of the upcoming releases!
+          Signup for exclusive deals and sneak peeks of the upcoming releases!
         </Info>
         <InputDiv>
           <InputEmail type="email" placeholder="Example@email.com" />

@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin-top: 30px;
   display: flex;
+  background-color: #343a40;
+  color: white;
+  align-items: center;
 `;
 
 // LEFT FOOTER
@@ -13,12 +15,16 @@ export const LeftFooter = styled.div`
   padding: 20px;
 `;
 
-export const Logo = styled.h1``;
+export const Logo = styled.h1`
+  display: flex;
+  justify-content: center;
+`;
 export const Info = styled.p`
   margin: 20px 0px;
 `;
 export const SocialMedia = styled.div`
   display: flex;
+  justify-content: center;
 `;
 export const SocialMediaIcon = styled.div`
   width: 40px;

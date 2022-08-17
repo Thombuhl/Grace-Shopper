@@ -41,13 +41,19 @@ const Footer = () => {
         </Info>
         <SocialMedia>
           <SocialMediaIcon>
-            <FacebookIcon />
+            <a href="https://facebook.com">
+              <FacebookIcon style={{ color: "#f6e3c5" }} />
+            </a>
           </SocialMediaIcon>
           <SocialMediaIcon>
-            <InstagramIcon />
+            <a href="https://instagram.com">
+              <InstagramIcon style={{ color: "#f6e3c5" }} />
+            </a>
           </SocialMediaIcon>
           <SocialMediaIcon>
-            <TwitterIcon />
+            <a href="https://twitter.com">
+              <TwitterIcon style={{ color: "#f6e3c5" }} />
+            </a>
           </SocialMediaIcon>
         </SocialMedia>
       </LeftFooter>
@@ -55,27 +61,27 @@ const Footer = () => {
         <Title>Resources</Title>
         <List>
           <CenterItem>
-            <Link style={{ color: "black" }} to="/">
+            <Link style={{ color: "#f6e3c5" }} to="/">
               Home
             </Link>
           </CenterItem>
           <CenterItem>
-            <Link style={{ color: "black" }} to="/cart">
+            <Link style={{ color: "#f6e3c5" }} to="/cart">
               Cart
             </Link>
           </CenterItem>
           <CenterItem>
-            <Link style={{ color: "black" }} to="/mens">
+            <Link style={{ color: "#f6e3c5" }} to="/mens">
               Mens
             </Link>
           </CenterItem>
           <CenterItem>
-            <Link style={{ color: "black" }} to="/womens">
+            <Link style={{ color: "#f6e3c5" }} to="/womens">
               Womens
             </Link>
           </CenterItem>
           <CenterItem>
-            <Link style={{ color: "black" }} to="/unisex">
+            <Link style={{ color: "#f6e3c5" }} to="/unisex">
               Unisex
             </Link>
           </CenterItem>

@@ -13,6 +13,7 @@ const Container = styled.div`
   height: 70px;
   background-color: #343a40;
   color: white;
+  border-radius: 2px;
 `;
 const Wrapper = styled.div`
   padding: 10px 20px;
