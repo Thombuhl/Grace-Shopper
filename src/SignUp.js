@@ -43,7 +43,7 @@ class SignUp extends Component{
         </div>
         <div>
           <label>Gender</label>
-          <input className="input-group mb-3" name='gender' onChange={ onChange } value={ gender } placeholder='Enter Gender'required/>
+          <input className="input-group mb-3" name='gender' onChange={ onChange } value={ gender } placeholder='Enter Gender'/>
         </div>
         <Link to="/login">Have an account?</Link>
         <button>Sign Up</button>
