@@ -36,12 +36,6 @@ class _Account extends React.Component {
   
     return (
       <main>
-        {auth.id ? (
-            <button onClick={logout}>Logout {auth.username}</button>
-          ) : (
-            <Route exact path="/login" component={SignIn}></Route>
-          )}
-
           {auth.id ? (
             <Link to="/cart">Cart ({cart.lineItems.length})</Link>
           ) : null}

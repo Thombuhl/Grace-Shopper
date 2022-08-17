@@ -39,8 +39,8 @@ export const login = (credentials)=> {
   return async(dispatch)=> {
 
     let response = await axios.post('/api/sessions', credentials)
+  
     const {token} = response.data;
-    console.log(token)
 
     window.localStorage.setItem('token', token); 
 
@@ -49,9 +49,7 @@ export const login = (credentials)=> {
         authorization: token
       }
     })).data
-    
     dispatch(_handleToken(auth));
-
   };
 };
 

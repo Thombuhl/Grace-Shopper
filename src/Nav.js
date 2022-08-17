@@ -7,7 +7,7 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import IconButton from "@mui/material/IconButton";
-import {logout, exchangeToken, userCart } from "./store";
+import {logout, exchangeToken, fetchCart } from "./store";
 
 const Container = styled.div`
   height: 70px;
@@ -54,7 +54,7 @@ class Nav extends Component  {
   }
 
   render () {
-    const {auth, logout, userCart} = this.props
+    const {auth, logout, fetchCart} = this.props
     return (
       <div>
         <Container>
@@ -118,7 +118,7 @@ class Nav extends Component  {
                   <SearchIcon style={{ color: "gray", padding: 2 }} />
                 }
               />
-                {auth.id ? (<button onClick={logout}>Logout {auth.username}</button>) : 
+                {auth.id ? (<button onClick={logout}><Link className="links" to='/'>Logout</Link></button>) : 
                 (<div>
                 <RightNavItem>
                   <Link className="links" to="/login">
@@ -135,7 +135,7 @@ class Nav extends Component  {
               <RightNavItem>
                 <Link className="links" to="/cart">
                 <IconButton
-                  onClick={() => <h1>Hello</h1>}
+                  onClick={fetchCart}
                   aria-label="cart"
                 >
                   <Badge badgeContent={0} showZero color="primary">
@@ -161,6 +161,7 @@ const mapDispatch = (dispatch) => {
   return {
     logout: () => dispatch(logout()),
     exchangeToken: () => dispatch(exchangeToken()),
+    fetchCart: ()=> dispatch(fetchCart())
     // userCart: () => dispatch(userCart())
 
   };

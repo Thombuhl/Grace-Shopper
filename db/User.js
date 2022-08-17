@@ -64,6 +64,7 @@ User.prototype.addToCart = async function({ product, quantity}){
 }
 
 User.prototype.getCart = async function(){
+  console.log(conn.models)
   let order = await conn.models.order.findOne({
     where: {
       userId: this.id,
