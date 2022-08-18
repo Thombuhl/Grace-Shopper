@@ -86,6 +86,22 @@ User.prototype.getCart = async function () {
   return order;
 };
 
+User.prototype.getPreviousOrders = async function () {
+  let order = await conn.models.order.findOne({
+    where: {
+      userId: this.id,
+      isCart: false,
+    },
+    include: [
+      {
+        model: conn.models.lineItem,
+        include: [conn.models.product],
+      },
+    ],
+  });
+  return order;
+};
+
 User.authenticate = async function (credentials) {
   const user = await this.findOne({
     where: {

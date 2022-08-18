@@ -28,13 +28,28 @@ app.get("/cart", isLoggedIn, async (req, res, next) => {
   }
 });
 
-app.delete('/cart', isLoggedIn, async (req, res, next)=> {
+app.post('/purchase', isLoggedIn, async (req, res, next) => {
+  const cart = await req.user.getCart()
+  cart.isCart = false
+  cart.save()
+  res.send(await req.user.getPreviousOrders())
+})
+
+app.get('/purchases', isLoggedIn, async (req, res, next) => {
+  try {
+    res.send(await req.user.getPreviousOrders());
+  } catch (ex) {
+    next(ex)
+  }
+})
+
+app.delete('/cart', isLoggedIn, async (req, res, next) => {
   try{
     const cart = await req.user.getCart()
     const items = cart.lineItems.find( item => item.id === req.body.id)
     await items.destroy()
     res.sendStatus(204)
-  } catch (er) {
-    next(er)
+  } catch (ex) {
+    next(ex)
   }
 })
