@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   flex: 1;
@@ -37,7 +37,7 @@ const Button = styled.button`
 const CategoryName = ({ category }) => {
   return (
     <Container>
-      <Link to={`/${category.title}`}>
+      <Link to={`/${category.title}`.toLowerCase()}>
         <Image src={category.img} />
         <Info>
           <Title>{category.title}</Title>
