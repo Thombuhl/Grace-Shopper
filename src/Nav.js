@@ -50,12 +50,15 @@ const Logo = styled.h1`
 `;
 
 class Nav extends Component {
+
+
+
   componentDidMount() {
     this.props.exchangeToken();
   }
 
   render () {
-    const {auth, logout, fetchCart} = this.props
+    const {auth, logout, fetchCart, cart} = this.props
     return (
       <div>
         <Container>
@@ -160,11 +163,14 @@ class Nav extends Component {
     );
   }
 }
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, cart }, preProps) => {
+  console.log(preProps)
   return {
     auth,
+    cart
   };
 };
+
 
 const mapDispatch = (dispatch) => {
   return {

@@ -62,7 +62,7 @@ class SignIn extends Component {
             placeholder="Enter Password"
           />
         </div>
-        <Link to="/newpassword">Forgot your Password?</Link>
+        <Link to="/resetpassword">Forgot your Password?</Link>
          <button onClick={()=> {this.setState({login:''})}} className="btn btn-secondary btn-lg"> Sign In</button>
         <Link to='signup'>Create account</Link>
       </form>
