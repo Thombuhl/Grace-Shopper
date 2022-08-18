@@ -71,6 +71,7 @@ const setUp = async () => {
       if (er) {
         console.log("error");
       }
+      
       // Iterate through the products and return only the information we want
       products
         .map((product) => {
@@ -87,7 +88,12 @@ const setUp = async () => {
         // Filter to make sure each shoe has a discription
         .filter((shoe) => shoe.description !== "")
         // Create a Product instance of each shoe
-        .map(async (shoe) => {
+        .map(async (shoe, idx) => {
+          function assignGender(){
+            if(products.length%idx === 2) return 'MENS'
+            else if(products.length%idx === 3) return 'WOMENS'
+            else return 'UNISEX'
+          }
           await Promise.all([
             Product.create({
               name: shoe.name,
@@ -99,6 +105,7 @@ const setUp = async () => {
               description: shoe.description,
               numberInStock: Math.ceil(Math.random() * 100),
               silhoutte: shoe.silhoutte,
+              gender: assignGender()
             }),
           ]);
         });
