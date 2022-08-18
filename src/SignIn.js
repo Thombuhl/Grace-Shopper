@@ -71,10 +71,10 @@ class SignIn extends Component {
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, {history}) => {
   return {
     login: (credentials) => {
-      dispatch(login(credentials));
+      dispatch(login(credentials, history));
     },
   };
 };

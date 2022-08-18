@@ -34,7 +34,7 @@ export const exchangeToken = () => {
   };
 };
 
-export const login = (credentials) => {
+export const login = (credentials, history) => {
   return async (dispatch) => {
 
     let response = await axios.post('/api/sessions', credentials)
@@ -48,8 +48,8 @@ export const login = (credentials) => {
         authorization: token
       }
     })).data
-    
     dispatch(_handleToken(auth));
+    history.push('/')
   };
 };
 
