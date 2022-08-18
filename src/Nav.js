@@ -9,6 +9,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import IconButton from "@mui/material/IconButton";
 import { logout, exchangeToken, userCart } from "./store";
 
+
 const Container = styled.div`
   height: 70px;
   background-color: #343a40;
@@ -53,8 +54,8 @@ class Nav extends Component {
     this.props.exchangeToken();
   }
 
-  render() {
-    const { auth, logout, userCart } = this.props;
+  render () {
+    const {auth, logout, fetchCart} = this.props
     return (
       <div>
         <Container>
@@ -124,34 +125,33 @@ class Nav extends Component {
                   <SearchIcon style={{ color: "gray", padding: 2 }} />
                 }
               />
-              {auth.id ? (
-                <button onClick={logout}>Logout {auth.username}</button>
-              ) : (
-                <div>
-                  <RightNav>
-                    <RightNavItem>
-                      <Link className="links" to="/login">
-                        Login
-                      </Link>
-                    </RightNavItem>
-                    <RightNavItem>
-                      <Link className="links" to="/signup">
-                        SignUp
-                      </Link>
-                    </RightNavItem>
-                  </RightNav>
-                </div>
-              )}
+              
+                {auth.id ? (<button onClick={logout}><Link className="links" to='/'>Logout</Link></button>) : 
+                (<div>
+                <RightNavItem>
+                  <Link className="links" to="/login">
+                    Login
+                  </Link>
+                </RightNavItem>
+                <RightNavItem>
+                  <Link className="links" to="/signup">
+                    SignUp
+                  </Link>
+                </RightNavItem>
+                </div>)}
+            
 
               <RightNavItem>
+                <Link className="links" to="/cart">
                 <IconButton
-                  onClick={() => console.log("Go to cart!")}
+                  onClick={fetchCart}
                   aria-label="cart"
                 >
                   <Badge badgeContent={0} showZero color="primary">
                     <ShoppingCartIcon style={{ color: "white" }} />
                   </Badge>
                 </IconButton>
+                </Link>
               </RightNavItem>
             </RightNav>
           </Wrapper>
@@ -170,6 +170,7 @@ const mapDispatch = (dispatch) => {
   return {
     logout: () => dispatch(logout()),
     exchangeToken: () => dispatch(exchangeToken()),
+    fetchCart: ()=> dispatch(fetchCart())
     // userCart: () => dispatch(userCart())
   };
 };

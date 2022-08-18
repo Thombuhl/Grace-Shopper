@@ -5,7 +5,7 @@ import Home from "./Home";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Nav from "./Nav";
-import Footer from "./Footer";
+import Cart from "./Cart";
 
 class _App extends Component {
   render() {
@@ -13,6 +13,7 @@ class _App extends Component {
       <div>
         <Nav />
         <Route exact path="/" component={Home} />
+        <Route exact path="/cart" component={Cart} />
         <Route exact path="/login" component={SignIn} />
         <Route exact path="/signup" component={SignUp} />
       </div>

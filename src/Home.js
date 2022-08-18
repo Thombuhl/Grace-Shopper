@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import NewsLetter from "./NewsLetter";
 import Heading from "./Heading";
 
+
 class Home extends Component {
   render() {
     return (
