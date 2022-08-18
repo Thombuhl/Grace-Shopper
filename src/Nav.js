@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { HashRouter as Router, Link } from "react-router-dom";
 import styled from "styled-components";
@@ -7,12 +7,14 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import IconButton from "@mui/material/IconButton";
-import {logout, exchangeToken, userCart } from "./store";
+import { logout, exchangeToken, fetchCart } from "./store";
+
 
 const Container = styled.div`
   height: 70px;
   background-color: #343a40;
   color: white;
+  border-radius: 2px;
 `;
 const Wrapper = styled.div`
   padding: 10px 20px;
@@ -47,14 +49,13 @@ const Logo = styled.h1`
   color: white;
 `;
 
-class Nav extends Component  {
-
+class Nav extends Component {
   componentDidMount() {
     this.props.exchangeToken();
   }
 
   render () {
-    const {auth, logout, userCart} = this.props
+    const {auth, logout, fetchCart} = this.props
     return (
       <div>
         <Container>
@@ -63,7 +64,9 @@ class Nav extends Component  {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link to="/mens">Mens</Link>
+                    <Link style={{ color: "white" }} to="/mens">
+                      Mens
+                    </Link>
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>
@@ -75,7 +78,9 @@ class Nav extends Component  {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link to="/womens">Womens</Link>
+                    <Link style={{ color: "white" }} to="/womens">
+                      Womens
+                    </Link>
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>
@@ -87,7 +92,9 @@ class Nav extends Component  {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link to="/unisex">Unisex</Link>
+                    <Link style={{ color: "white" }} to="/unisex">
+                      Unisex
+                    </Link>
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>
@@ -118,7 +125,8 @@ class Nav extends Component  {
                   <SearchIcon style={{ color: "gray", padding: 2 }} />
                 }
               />
-                {auth.id ? (<button onClick={logout}>Logout {auth.username}</button>) : 
+              
+                {auth.id ? (<button onClick={logout}><Link className="links" to='/'>Logout</Link></button>) : 
                 (<div>
                 <RightNavItem>
                   <Link className="links" to="/login">
@@ -132,26 +140,29 @@ class Nav extends Component  {
                 </RightNavItem>
                 </div>)}
             
+
               <RightNavItem>
+                <Link className="links" to="/cart">
                 <IconButton
-                  onClick={ () => 'heelo'}
+                  onClick={fetchCart}
                   aria-label="cart"
                 >
                   <Badge badgeContent={0} showZero color="primary">
                     <ShoppingCartIcon style={{ color: "white" }} />
                   </Badge>
                 </IconButton>
+                </Link>
               </RightNavItem>
             </RightNav>
           </Wrapper>
         </Container>
       </div>
     );
-  };
-};
-const mapStateToProps = ({auth}) => {
+  }
+}
+const mapStateToProps = ({ auth }) => {
   return {
-    auth
+    auth,
   };
 };
 
@@ -159,10 +170,9 @@ const mapDispatch = (dispatch) => {
   return {
     logout: () => dispatch(logout()),
     exchangeToken: () => dispatch(exchangeToken()),
+    fetchCart: ()=> dispatch(fetchCart())
     // userCart: () => dispatch(userCart())
-
   };
 };
-
 
 export default connect(mapStateToProps, mapDispatch)(Nav);

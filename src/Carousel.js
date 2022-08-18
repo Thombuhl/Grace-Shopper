@@ -1,86 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { carouselData } from "./carouselData";
+import {
+  Container,
+  ArrowDirection,
+  Wrapper,
+  Slide,
+  Info,
+  Image,
+  ImageDiv,
+  InfoDiv,
+  Title,
+  Button,
+} from "./styledComponents/CarouselStyles";
 
 const Carousel = () => {
+  const [slideItem, setSlideItem] = useState(0);
+  const arrowClick = (direction) => {
+    if (direction === "back") {
+      setSlideItem(slideItem > 0 ? slideItem - 1 : 3);
+    } else {
+      setSlideItem(slideItem < 3 ? slideItem + 1 : 0);
+    }
+  };
   return (
-    <div>
-      <div
-        id="carouselExampleIndicators"
-        className="carousel slide mx-auto my-5"
-        data-ride="carousel"
-      >
-        <ol className="carousel-indicators">
-          <li data-slide-to="0" className="active"></li>
-          <li data-slide-to="1"></li>
-          <li data-slide-to="2"></li>
-          <li data-slide-to="3"></li>
-          <li data-slide-to="4"></li>
-        </ol>
-        <div className="carousel-inner">
-          <div className="carousel-caption d-none d-md-block">
-            <p className="text-warning">Top Picks</p>
-          </div>
-          <div className="carousel-item active">
-            <img
-              className="d-block w-100"
-              src="/public/logo.png"
-              alt="First slide"
-            />
-          </div>
-          <div className="carousel-item">
-            <img
-              className="d-block w-100"
-              src="/public/logo.png"
-              alt="Second slide"
-            />
-          </div>
-          <div className="carousel-item">
-            <img
-              className="d-block w-100"
-              src="/public/logo.png"
-              alt="Third slide"
-            />
-          </div>
-          <div className="carousel-item">
-            <img
-              className="d-block w-100"
-              src="/public/logo.png"
-              alt="Fourth slide"
-            />
-          </div>
-          <div className="carousel-item">
-            <img
-              className="d-block w-100"
-              src="/public/logo.png"
-              alt="Fifth slide"
-            />
-          </div>
-        </div>
-        <a
-          className="carousel-control-prev"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="sr-only">Previous</span>
-        </a>
-        <a
-          className="carousel-control-next"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
+    <Container>
+      <ArrowDirection direction="back" onClick={() => arrowClick("back")}>
+        <ArrowBackIosNewIcon />
+      </ArrowDirection>
+      <Wrapper slideItem={slideItem}>
+        {carouselData.map((slideItem) => {
+          return (
+            <Slide key={slideItem.id}>
+              <ImageDiv>
+                <Image src={slideItem.img}></Image>
+              </ImageDiv>
+              <InfoDiv>
+                <Title>{slideItem.title}</Title>
+                <Info>{slideItem.info}</Info>
+                <Button onClick={() => console.log("Shop now!")}>
+                  Shop Now
+                </Button>
+              </InfoDiv>
+            </Slide>
+          );
+        })}
+      </Wrapper>
+      <ArrowDirection direction="forward" onClick={() => arrowClick("forward")}>
+        <ArrowForwardIosIcon />
+      </ArrowDirection>
+    </Container>
   );
 };
 
