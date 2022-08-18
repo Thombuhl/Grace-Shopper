@@ -10,6 +10,8 @@ const setUp = async () => {
     await User.create({
       username: "moe",
       password: "moe_pw",
+      firstName: 'Moesy',
+      lastName: 'Smith',
       email: "moe@gsdt7.com",
     });
     await User.create({
@@ -35,6 +37,8 @@ const setUp = async () => {
     const lucy = await User.create({
       username: "lucy",
       password: "lucy_pw",
+      firstName: 'Luceil',
+      lastName: 'Munez',
       email: "lucy@gsdt7.com",
     });
     const foo = await Product.create({ 
