@@ -47,7 +47,7 @@ Insert gif or link to demo
 ```
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. productId Int |
+|   `id`    | `integer`| **Required**. productId Int       |
 
 
 
