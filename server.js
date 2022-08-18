@@ -67,10 +67,11 @@ const setUp = async () => {
     const port = process.env.PORT || 3000;
     app.listen(port, () => console.log(`listening on port ${port}`));
 
-    await sneaks.getProducts("shoes", 100, function (er, products) {
+    await sneaks.getProducts("shoes", 50, function (er, products) {
       if (er) {
         console.log("error");
       }
+      
       // Iterate through the products and return only the information we want
       products
         .map((product) => {
@@ -87,7 +88,12 @@ const setUp = async () => {
         // Filter to make sure each shoe has a discription
         .filter((shoe) => shoe.description !== "")
         // Create a Product instance of each shoe
-        .map(async (shoe) => {
+        .map(async (shoe, idx) => {
+          function assignGender(){
+            if(products.length%idx === 2) return 'MENS'
+            else if(products.length%idx === 3) return 'WOMENS'
+            else return 'UNISEX'
+          }
           await Promise.all([
             Product.create({
               name: shoe.name,
@@ -99,6 +105,7 @@ const setUp = async () => {
               description: shoe.description,
               numberInStock: Math.ceil(Math.random() * 100),
               silhoutte: shoe.silhoutte,
+              gender: assignGender()
             }),
           ]);
         });
