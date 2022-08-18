@@ -1,6 +1,6 @@
 const conn = require("./conn");
 const { Sequelize } = conn;
-
+const { v4 } = require('uuid')
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -34,7 +34,9 @@ User.addHook("beforeSave", async (user) => {
 
 User.prototype.createOrderFromCart = async function () {
   const cart = await this.getCart();
+  const uuid = v4()
   cart.isCart = false;
+  cart.confirmationId = uuid
   return cart.save();
 };
 
@@ -83,6 +85,22 @@ User.prototype.getCart = async function () {
       include: [conn.models.lineItem],
     });
   }
+  return order;
+};
+
+User.prototype.getPreviousOrders = async function () {
+  let order = await conn.models.order.findOne({
+    where: {
+      userId: this.id,
+      isCart: false,
+    },
+    include: [
+      {
+        model: conn.models.lineItem,
+        include: [conn.models.product],
+      },
+    ],
+  });
   return order;
 };
 

@@ -5,9 +5,13 @@ const { Product } = require("../db");
 module.exports = app;
 
 app.post("/", async (req, res) => {
-  const newProduct = new Product(req.body);
-  const savedProduct = await newProduct.save();
-  res.send(savedProduct);
+  try {
+    const newProduct = new Product(req.body);
+    const savedProduct = await newProduct.save();
+    res.send(savedProduct);
+  } catch (ex) {
+    next(ex)
+  }
 });
 
 app.get("/mens", async (req, res, next) => {

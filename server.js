@@ -1,6 +1,5 @@
 const app = require("./app");
 const { conn, User, Product } = require("./db");
-
 const SneaksAPI = require("sneaks-api");
 const sneaks = new SneaksAPI();
 

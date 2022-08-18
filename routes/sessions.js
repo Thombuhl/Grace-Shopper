@@ -5,17 +5,6 @@ const { isLoggedIn } = require("./middleware");
 
 module.exports = app;
 
-app.post("/", async (req, res, next) => {
-  try {
-    const credentials = {
-      username: req.body.username,
-      password: req.body.password,
-    };
-    res.send({ token: await User.authenticate(credentials) });
-  } catch (ex) {
-    next(ex);
-  }
-});
 
 app.post("/signup", async (req, res, next) => {
   try {
@@ -50,11 +39,23 @@ app.get("/", isLoggedIn, async (req, res, next) => {
     lastName: req.user.lastName,
     email: req.user.email
   }
-  res.send(req.user);
+  res.send(userInfo);
 });
 
 app.put("/", isLoggedIn, async (req, res, next) => {
   const user = req.user;
   user.update(req.body);
   res.send(user);
+});
+
+app.post("/", async (req, res, next) => {
+  try {
+    const credentials = {
+      username: req.body.username,
+      password: req.body.password,
+    };
+    res.send({ token: await User.authenticate(credentials) });
+  } catch (ex) {
+    next(ex);
+  }
 });
