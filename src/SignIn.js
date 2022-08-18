@@ -5,10 +5,8 @@ import { Link, Redirect } from 'react-router-dom';
 import auth from './store/auth';
 
 
-
-
-class SignIn extends Component{
-  constructor(){
+class SignIn extends Component {
+  constructor() {
     super();
     this.state = {
       username: '',
@@ -43,15 +41,27 @@ class SignIn extends Component{
       return <Redirect to='/'/>
     } else {
     return (
-      <form onSubmit={ onSubmit } className="form-group" id="sign-in">
+      <form onSubmit={onSubmit} className="form-group" id="sign-in">
         <h2>LOGIN</h2>
         <div>
           <label>Username</label>
-          <input className="input-group mb-3" name='username' onChange={ onChange } value={ username } placeholder='Enter Username'/>
+          <input
+            className="input-group mb-3"
+            name="username"
+            onChange={onChange}
+            value={username}
+            placeholder="Enter Username"
+          />
         </div>
         <div>
           <label>Password</label>
-          <input className="input-group mb-3" name='password' onChange={ onChange } value={ password } placeholder='Enter Password'/>
+          <input
+            className="input-group mb-3"
+            name="password"
+            onChange={onChange}
+            value={password}
+            placeholder="Enter Password"
+          />
         </div>
         <Link to="/newpassword">Forgot your Password?</Link>
          <button onClick={()=> {this.setState({login:''})}} className="btn btn-secondary btn-lg"> Sign In</button>
@@ -62,11 +72,11 @@ class SignIn extends Component{
   };
 };
 
-const mapDispatch = (dispatch)=> {
+const mapDispatch = (dispatch) => {
   return {
-    login: (credentials)=> {
+    login: (credentials) => {
       dispatch(login(credentials));
-    }
+    },
   };
 };
 

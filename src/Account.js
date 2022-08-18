@@ -11,10 +11,10 @@ class _Account extends React.Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false
-    }
+      loggedIn: false,
+    };
 
-    this.bind = this.displayLogout.bind(this)
+    this.bind = this.displayLogout.bind(this);
   }
 
   componentDidMount() {
@@ -33,21 +33,28 @@ class _Account extends React.Component {
 
   render() {
     const { auth, logout, cart } = this.props;
-  
+    
     return (
       <main>
-          {auth.id ? (
-            <Link to="/cart">Cart ({cart.lineItems.length})</Link>
-          ) : null}
-          {auth.id ? (
-            <Fragment>
-              <Route path="/cart" component={Cart} />
-            </Fragment> 
-          ) : null}
-    </main>
+        {auth.id ? (
+          <button onClick={logout}>Logout {auth.username}</button>
+        ) : (
+          <Route exact path="/login" component={SignIn}></Route>
+        )}
+
+        {auth.id ? (
+          <Link to="/cart">Cart ({cart.lineItems.length})</Link>
+        ) : null}
+        {auth.id ? (
+          <Fragment>
+            <Route path="/cart" component={Cart} />
+          </Fragment>
+        ) : null}
+      </main>
     );
-  }
-}
+  };
+};
+
 const mapDispatch = (dispatch) => {
   return {
     exchangeToken: () => dispatch(exchangeToken()),
@@ -60,4 +67,4 @@ const mapStateToProps = (state) => {
 };
 
 const Account = connect(mapStateToProps, mapDispatch)(_Account);
-export default Account
+export default Account;

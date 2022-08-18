@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {signup} from './store/auth';
+import { signup } from './store/auth';
 
-class SignUp extends Component{
-  constructor(){
+class SignUp extends Component {
+  constructor() {
     super();
     this.state = {
       username: '',
@@ -16,47 +16,75 @@ class SignUp extends Component{
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChange(ev){
+  onChange(ev) {
     this.setState({ [ev.target.name]: ev.target.value });
   }
-  onSubmit(ev){
+  onSubmit(ev) {
     ev.preventDefault();
     this.props.signup(this.state);
   }
-  render(){
-    const { onChange, onSubmit, } = this;
+  render() {
+    const { onChange, onSubmit } = this;
     const { username, password, email, gender } = this.state;
     return (
-      <form onSubmit={ onSubmit } className="form-group" id="sign-in">
+      <form onSubmit={onSubmit} className="form-group" id="sign-in">
         <h2>SIGN UP</h2>
         <div>
           <label>Username</label>
-          <input className="input-group mb-3" name='username' onChange={ onChange } value={ username } placeholder='Enter Username' required/>
+          <input
+            className="input-group mb-3"
+            name="username"
+            onChange={onChange}
+            value={username}
+            placeholder="Enter Username"
+            required
+          />
         </div>
         <div>
           <label>Password</label>
-          <input className="input-group mb-3" name='password' onChange={ onChange } value={ password } placeholder='Enter Password' required/>
+          <input
+            className="input-group mb-3"
+            name="password"
+            onChange={onChange}
+            value={password}
+            placeholder="Enter Password"
+            required
+          />
         </div>
         <div>
           <label>Email</label>
-          <input className="input-group mb-3" name='email' onChange={ onChange } value={ email } placeholder='Enter Email' required/>
+          <input
+            className="input-group mb-3"
+            name="email"
+            onChange={onChange}
+            value={email}
+            placeholder="Enter Email"
+            required
+          />
         </div>
         <div>
           <label>Gender</label>
-          <input className="input-group mb-3" name='gender' onChange={ onChange } value={ gender } placeholder='Enter Gender'/>
+          <input
+            className="input-group mb-3"
+            name="gender"
+            onChange={onChange}
+            value={gender}
+            placeholder="Enter Gender"
+            required
+          />
         </div>
         <Link to="/login">Have an account?</Link>
         <button>Sign Up</button>
       </form>
     );
-  };
-};
+  }
+}
 
-const mapDispatch = (dispatch)=> {
+const mapDispatch = (dispatch) => {
   return {
     signup: (usrInfo) => {
       dispatch(signup(usrInfo));
-    }
+    },
   };
 };
 

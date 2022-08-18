@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { HashRouter as Router, Link } from "react-router-dom";
 import styled from "styled-components";
@@ -7,7 +7,8 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import IconButton from "@mui/material/IconButton";
-import {logout, exchangeToken, fetchCart } from "./store";
+import { logout, exchangeToken, userCart } from "./store";
+
 
 const Container = styled.div`
   height: 70px;
@@ -47,11 +48,11 @@ const Logo = styled.h1`
   color: white;
 `;
 
-class Nav extends Component  {
-
+class Nav extends Component {
   componentDidMount() {
     this.props.exchangeToken();
   }
+
 
   render () {
     const {auth, logout, fetchCart} = this.props
@@ -149,11 +150,11 @@ class Nav extends Component  {
         </Container>
       </div>
     );
-  };
-};
-const mapStateToProps = ({auth}) => {
+  }
+}
+const mapStateToProps = ({ auth }) => {
   return {
-    auth
+    auth,
   };
 };
 
@@ -163,9 +164,7 @@ const mapDispatch = (dispatch) => {
     exchangeToken: () => dispatch(exchangeToken()),
     fetchCart: ()=> dispatch(fetchCart())
     // userCart: () => dispatch(userCart())
-
   };
 };
-
 
 export default connect(mapStateToProps, mapDispatch)(Nav);

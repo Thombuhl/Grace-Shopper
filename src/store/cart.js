@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios from "axios";
+
 
 const SET_CART = 'SET_CART';
 const UPDATE_LINEITEM_Q = 'UPDATE_CART';
@@ -14,20 +15,17 @@ const cart = (state = { lineItems: [ ] }, action)=> {
       return state.filter(lineItem => lineItem.id !== action.item.id)
     default: 
       return state;
-  }
-
-
-}
+  };
+};
 
 export const fetchCart = () => {
   return async(dispatch)=> {
     const response = await axios.get('/api/orders/cart', {
       headers: {
-        authorization: window.localStorage.getItem('token')
-      }
+        authorization: window.localStorage.getItem("token"),
+      },
     });
     dispatch({ type: SET_CART, cart: response.data });
-
   };
 };
 
@@ -51,9 +49,7 @@ export const deleteLineItem = (item) => {
       },
     });
     dispatch({type: DELETE_LINEITEM, _lineItem: item})
-
-  }
-}
-
+  };
+};
 
 export default cart;
