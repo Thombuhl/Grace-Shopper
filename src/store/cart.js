@@ -43,7 +43,7 @@ export const updateLineItemQuantity = (newQuantity) => {
 
 export const deleteLineItem = (item) => {
   return async(dispatch) => {
-     await axios.delete('/api/orders/cart', item,  {
+    const response = await axios.put('/api/orders/cart', item,  {
       headers: {
         authorization: window.localStorage.getItem('token')
       },

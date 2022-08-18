@@ -23,7 +23,7 @@ class Cart extends Component {
     const change ={[ev.target.name]: ev.target.value};
     this.setState(change);
     this.props.updateLineItemQuantity(change);
-  }
+  };
 
   render() {
 
@@ -44,7 +44,7 @@ class Cart extends Component {
                   <p>Color:{lineItem.product.colorway}</p>
                   <p>Price:{lineItem.product.Price}</p>
                   <p>About:{lineItem.product.description}</p>
-                  <button onClick={() => this.props.deleteLineItem()}>X</button>
+                  <button onClick={() => this.props.deleteLineItem({[lineItem.product.name]: 0})}>X</button>
                 </li>
                   )
             })

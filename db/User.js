@@ -39,6 +39,7 @@ User.prototype.createOrderFromCart = async function () {
 };
 
 User.prototype.addToCart = async function ({ product, quantity }) {
+  console.log(product, quantity)
   const cart = await this.getCart();
   let lineItem = await conn.models.lineItem.findOne({
     where: {
