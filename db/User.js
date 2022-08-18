@@ -63,6 +63,7 @@ User.prototype.addToCart = async function ({ product, quantity }) {
   return this.getCart();
 };
 
+
 User.prototype.getCart = async function () {
   let order = await conn.models.order.findOne({
     where: {

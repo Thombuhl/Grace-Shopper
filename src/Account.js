@@ -33,7 +33,7 @@ class _Account extends React.Component {
 
   render() {
     const { auth, logout, cart } = this.props;
-
+    
     return (
       <main>
         {auth.id ? (
@@ -52,8 +52,9 @@ class _Account extends React.Component {
         ) : null}
       </main>
     );
-  }
-}
+  };
+};
+
 const mapDispatch = (dispatch) => {
   return {
     exchangeToken: () => dispatch(exchangeToken()),

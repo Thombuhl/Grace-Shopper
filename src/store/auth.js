@@ -42,14 +42,18 @@ export const login = (credentials) => {
 
     window.localStorage.setItem("token", token);
 
-    const auth = (
-      await axios.get("/api/sessions", {
-        headers: {
-          authorization: token,
-        },
-      })
-    ).data;
+    let response = await axios.post('/api/sessions', credentials)
+  
+    const {token} = response.data;
 
+    window.localStorage.setItem('token', token); 
+
+    const auth = (await axios.get('/api/sessions', {
+      headers: {
+        authorization: token
+      }
+    })).data
+    
     dispatch(_handleToken(auth));
   };
 };
