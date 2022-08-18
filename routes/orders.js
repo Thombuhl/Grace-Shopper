@@ -29,10 +29,14 @@ app.get("/cart", isLoggedIn, async (req, res, next) => {
 });
 
 app.post('/purchases', isLoggedIn, async (req, res, next) => {
-  const cart = await req.user.getCart()
-  cart.isCart = false
-  cart.save()
-  res.send(await req.user.getPreviousOrders())
+  try {
+    const cart = await req.user.getCart()
+    cart.isCart = false
+    cart.save()
+    res.send(await req.user.getPreviousOrders())
+  } catch (ex) {
+    next(ex)
+  }
 })
 
 app.get('/purchases', isLoggedIn, async (req, res, next) => {
