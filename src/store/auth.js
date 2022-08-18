@@ -36,8 +36,6 @@ export const exchangeToken = () => {
 
 export const login = (credentials) => {
   return async (dispatch) => {
-  
-    window.localStorage.setItem("token", token);
 
     let response = await axios.post('/api/sessions', credentials)
   

@@ -9,7 +9,7 @@ class Cart extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUpdateQuantity = this.onChangeChangeUpdateQuantity.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
 
@@ -19,7 +19,7 @@ class Cart extends Component {
     };
   };
 
-  onChangeUpdateQuantity(ev) {
+  onChange(ev) {
     const change ={[ev.target.name]: ev.target.value};
     this.setState(change);
     this.props.updateLineItemQuantity(change);
@@ -39,7 +39,7 @@ class Cart extends Component {
               return (
                 <li key={ lineItem.id }>
                   { lineItem.product.name } { lineItem.quantity } 
-                  <input type='number' name={lineItem.product.name} value={lineItem.quantity} onChangeUpdateQuantity={onChange}/>
+                  <input type='number' name={lineItem.product.name} value={lineItem.quantity} onChange={onChange}/>
                   <p> Size:{lineItem.product.size}</p>
                   <p>Color:{lineItem.product.colorway}</p>
                   <p>Price:{lineItem.product.Price}</p>

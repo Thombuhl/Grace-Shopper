@@ -7,7 +7,7 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import IconButton from "@mui/material/IconButton";
-import { logout, exchangeToken, userCart } from "./store";
+import { logout, exchangeToken, fetchCart } from "./store";
 
 
 const Container = styled.div`
