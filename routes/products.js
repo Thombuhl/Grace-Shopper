@@ -4,9 +4,35 @@ const { Product } = require("../db");
 
 module.exports = app;
 
-app.get("/", async (req, res, next) => {
+app.post("/", async (req, res) => {
+  const newProduct = new Product(req.body);
+  const savedProduct = await newProduct.save();
+  res.send(savedProduct);
+});
+
+app.get("/mens", async (req, res, next) => {
   try {
-    res.send(await Product.findAll());
+    res.send(await Product.findMensProduct());
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get("/womens", async (req, res, next) => {
+  try {
+    res.send(await Product.findWomensProduct());
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get("/colorways", async (req, res, next) => {
+  try {
+    res.send(await Product.findAll({
+      where: {
+        silhoutte: req.body.silhoutte
+      }
+    }))
   } catch (error) {
     next(error);
   }
@@ -26,23 +52,9 @@ app.get("/:id", async (req, res, next) => {
   }
 });
 
-app.post("/", async (req, res) => {
-  const newProduct = new Product(req.body);
-  const savedProduct = await newProduct.save();
-  res.send(savedProduct);
-});
-
-app.get("/womens", async (req, res, next) => {
+app.get("/", async (req, res, next) => {
   try {
-    res.send(await Product.findWomensProduct());
-  } catch (error) {
-    next(error);
-  }
-});
-
-app.get("/mens", async (req, res, next) => {
-  try {
-    res.send(await Product.findMensProduct());
+    res.send(await Product.findAll());
   } catch (error) {
     next(error);
   }
