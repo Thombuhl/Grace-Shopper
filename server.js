@@ -1,6 +1,5 @@
 const app = require("./app");
 const { conn, User, Product } = require("./db");
-
 const SneaksAPI = require("sneaks-api");
 const sneaks = new SneaksAPI();
 
@@ -10,6 +9,8 @@ const setUp = async () => {
     await User.create({
       username: "moe",
       password: "moe_pw",
+      firstName: 'Moesy',
+      lastName: 'Smith',
       email: "moe@gsdt7.com",
     });
     await User.create({
@@ -35,6 +36,8 @@ const setUp = async () => {
     const lucy = await User.create({
       username: "lucy",
       password: "lucy_pw",
+      firstName: 'Luceil',
+      lastName: 'Munez',
       email: "lucy@gsdt7.com",
     });
     const foo = await Product.create({ 
@@ -71,6 +74,7 @@ const setUp = async () => {
       if (er) {
         console.log("error");
       }
+      
       // Iterate through the products and return only the information we want
       products
         .map((product) => {
@@ -88,6 +92,12 @@ const setUp = async () => {
         .filter((shoe) => shoe.description !== "")
         // Create a Product instance of each shoe
         .map(async (shoe) => {
+          function assignGender(){
+            const rand = Math.ceil(Math.random()*3)
+            if(rand === 1) return 'MENS'
+            else if(rand === 2) return 'WOMENS'
+            else return 'UNISEX'
+          }
           await Promise.all([
             Product.create({
               name: shoe.name,
@@ -98,7 +108,8 @@ const setUp = async () => {
               colorway: shoe.colorway,
               description: shoe.description,
               numberInStock: Math.ceil(Math.random() * 100),
-              silhoutte: shoe.silhoutte,
+              silhoutte: shoe.silhoutte.split(' ').join(''),
+              gender: assignGender()
             }),
           ]);
         });

@@ -58,6 +58,7 @@ export const signup = (userInfo) => {
    const response =  await axios.post("/api/sessions/signup", userInfo);
    const {token} = response.data
    console.log(token)
+
   };
 };
 export default auth;
