@@ -28,7 +28,7 @@ app.get("/cart", isLoggedIn, async (req, res, next) => {
   }
 });
 
-app.post('/purchase', isLoggedIn, async (req, res, next) => {
+app.post('/purchases', isLoggedIn, async (req, res, next) => {
   const cart = await req.user.getCart()
   cart.isCart = false
   cart.save()
