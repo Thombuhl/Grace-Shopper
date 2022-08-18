@@ -54,7 +54,6 @@ const Product = conn.define("product", {
 });
 
 Product.findMensProduct = function () {
-  console('---this', this)
   return this.findAll({
     where: {
       gender: "MENS",

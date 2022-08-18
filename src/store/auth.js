@@ -56,7 +56,7 @@ export const login = (credentials) => {
 export const signup = (userInfo) => {
   return async () => {
     console.log(userInfo);
-    await axios.post("/api/signup", userInfo);
+    await axios.post("/api/sessions/signup", userInfo);
   };
 };
 export default auth;
