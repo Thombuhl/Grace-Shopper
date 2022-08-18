@@ -4,26 +4,28 @@ import { Link } from 'react-router-dom';
 import { signup } from './store/auth';
 
 class SignUp extends Component {
-  constructor() {
+  constructor () {
     super();
     this.state = {
       username: '',
       password: '',
       email: '',
-      gender: '',
+      gender: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChange(ev) {
+  onChange (ev) {
     this.setState({ [ev.target.name]: ev.target.value });
   }
-  onSubmit(ev) {
+
+  onSubmit (ev) {
     ev.preventDefault();
     this.props.signup(this.state);
   }
-  render() {
+
+  render () {
     const { onChange, onSubmit } = this;
     const { username, password, email, gender } = this.state;
     return (
@@ -84,7 +86,7 @@ const mapDispatch = (dispatch) => {
   return {
     signup: (usrInfo) => {
       dispatch(signup(usrInfo));
-    },
+    }
   };
 };
 

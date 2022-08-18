@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import { connect } from "react-redux";
-import Home from "./Home";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
-import Nav from "./Nav";
-import Cart from "./Cart";
+import React, { Component } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Home from './Home';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import Nav from './Nav';
+import Cart from './Cart';
 
 class _App extends Component {
-  render() {
+  render () {
     return (
       <div>
         <Nav />

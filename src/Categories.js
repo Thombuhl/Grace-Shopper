@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import { categoriesData } from "./CategoriesData";
-import CategoryName from "./CategoryName";
+import React from 'react';
+import styled from 'styled-components';
+import { categoriesData } from './CategoriesData';
+import CategoryName from './CategoryName';
 
 const Container = styled.div`
   display: flex;

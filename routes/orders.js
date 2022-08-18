@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const app = express.Router();
-const { isLoggedIn } = require("./middleware");
+const { isLoggedIn } = require('./middleware');
 
 module.exports = app;
 
-app.post("/", isLoggedIn, async (req, res, next) => {
+app.post('/', isLoggedIn, async (req, res, next) => {
   try {
     res.send(await req.user.createOrderFromCart());
   } catch (ex) {
@@ -12,7 +12,7 @@ app.post("/", isLoggedIn, async (req, res, next) => {
   }
 });
 
-app.put("/cart", isLoggedIn, async (req, res, next) => {
+app.put('/cart', isLoggedIn, async (req, res, next) => {
   try {
     res.send(await req.user.addToCart(req.body));
   } catch (ex) {
@@ -20,7 +20,7 @@ app.put("/cart", isLoggedIn, async (req, res, next) => {
   }
 });
 
-app.get("/cart", isLoggedIn, async (req, res, next) => {
+app.get('/cart', isLoggedIn, async (req, res, next) => {
   try {
     res.send(await req.user.getCart());
   } catch (ex) {
@@ -28,13 +28,13 @@ app.get("/cart", isLoggedIn, async (req, res, next) => {
   }
 });
 
-app.delete('/cart', isLoggedIn, async (req, res, next)=> {
-  try{
-    const cart = await req.user.getCart()
-    const items = cart.lineItems.find( item => item.id === req.body.id)
-    await items.destroy()
-    res.sendStatus(204)
+app.delete('/cart', isLoggedIn, async (req, res, next) => {
+  try {
+    const cart = await req.user.getCart();
+    const items = cart.lineItems.find(item => item.id === req.body.id);
+    await items.destroy();
+    res.sendStatus(204);
   } catch (er) {
-    next(er)
+    next(er);
   }
-})
+});

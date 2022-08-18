@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Button,
   Container,
   Info,
   InputDiv,
   InputEmail,
-  Title,
-} from "./styledComponents/NewsLetterStyles";
-import SendIcon from "@mui/icons-material/Send";
+  Title
+} from './styledComponents/NewsLetterStyles';
+import SendIcon from '@mui/icons-material/Send';
 
 class NewsLetter extends Component {
-  render() {
+  render () {
     return (
       <Container>
         <Title>Newsletter</Title>

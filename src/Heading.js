@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Info } from "./styledComponents/HeadingStyles";
+import React from 'react';
+import { Container, Info } from './styledComponents/HeadingStyles';
 
 const Heading = () => {
   return (

@@ -1,15 +1,15 @@
-const express = require("express");
+const express = require('express');
 const app = express.Router();
-const { User } = require("../db");
-const { isLoggedIn } = require("./middleware");
+const { User } = require('../db');
+const { isLoggedIn } = require('./middleware');
 
 module.exports = app;
 
-app.post("/", async (req, res, next) => {
+app.post('/', async (req, res, next) => {
   try {
     const credentials = {
       username: req.body.username,
-      password: req.body.password,
+      password: req.body.password
     };
     res.send({ token: await User.authenticate(credentials) });
   } catch (ex) {
@@ -17,24 +17,24 @@ app.post("/", async (req, res, next) => {
   }
 });
 
-app.post("/signup", async (req, res, next) => {
+app.post('/signup', async (req, res, next) => {
   try {
     const users = await User.findAll({
       where: {
-        username: req.body.username,
-      },
+        username: req.body.username
+      }
     });
     if (users.length === 0) {
       await User.create(req.body);
       const credentials = {
         username: req.body.username,
-        password: req.body.password,
+        password: req.body.password
       };
-      res.send({ token: await User.authenticate(credentials)})
+      res.send({ token: await User.authenticate(credentials) });
     } else {
       const credentials = {
         username: req.body.username,
-        password: req.body.password,
+        password: req.body.password
       };
       res.send({ token: await User.authenticate(credentials) });
     }
@@ -43,17 +43,17 @@ app.post("/signup", async (req, res, next) => {
   }
 });
 
-app.get("/", isLoggedIn, async (req, res, next) => {
+app.get('/', isLoggedIn, async (req, res, next) => {
   const userInfo = {
     username: req.user.username,
     firstName: req.user.firstName,
     lastName: req.user.lastName,
     email: req.user.email
-  }
+  };
   res.send(req.user);
 });
 
-app.put("/", isLoggedIn, async (req, res, next) => {
+app.put('/', isLoggedIn, async (req, res, next) => {
   const user = req.user;
   user.update(req.body);
   res.send(user);

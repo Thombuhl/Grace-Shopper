@@ -1,4 +1,4 @@
-const { User } = require("../db");
+const { User } = require('../db');
 
 const isLoggedIn = async (req, res, next) => {
   try {
@@ -10,5 +10,5 @@ const isLoggedIn = async (req, res, next) => {
 };
 
 module.exports = {
-  isLoggedIn,
+  isLoggedIn
 };
