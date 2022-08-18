@@ -37,8 +37,30 @@ const setUp = async () => {
       password: "lucy_pw",
       email: "lucy@gsdt7.com",
     });
-    const foo = await Product.create({ name: "foo", brand: "acme" });
-    const bar = await Product.create({ name: "bar" });
+    const foo = await Product.create({ 
+      name: "adidas NMD R1 V2",
+      brand: "adidas",
+      size: 3,
+      price: 140,
+      imageLocation: "https://images.stockx.com/images/adidas-NMD-R1-V2-United-By-Sneakers-Munich.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&trim=color&q=90&dpr=2&updated_at=1643667443",
+      colorway: "Black/Carbon/Solar Red",
+      silhoutte: "adidas NMD R1 V2",
+      description: "Giving the nod to Munich, the NMD_R1 V2 'United By Sneakers - Munich' released as part of a pack paying tribute to host cities of the Olympic Games. The shoe features the German national colors throughout its performance construction, which includes a knit build on the upper. Underfoot, the color-blocked midsole provides cushioning, with a Munich callout on the forefoot EVA plug.",
+      gender: 'UNISEX',
+      numberInStock: 58,
+    });
+    const bar = await Product.create({ 
+      name: "adidas Ultra Boost Mid",
+      brand: "adidas",
+      size: 15,
+      price: 240,
+      imageLocation: "https://images.stockx.com/images/Adidas-Ultra-Boost-Mid-Packer-Shoes-x-Solebox-Silfra-Rift-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&trim=color&q=90&dpr=2&updated_at=1612545881",
+      colorway: "Core Black/Light Grey/Petrol",
+      silhoutte: "adidas Ultra Boost Mid",
+      description: "With this launch in November 2017, as part of the Sneaker Exchange brand, adidas Consortium brought together Solexbox and Packer Shoes. This Ultra Boost Mid features a Silfra Rift-inspired layout where the North American and Eurasian tectonic plates intersect on the Mid-Atlantic Ridge. It is also finished in black-grey gradient coloring, with pink and Photo Blue speckles accented.",
+      gender: "UNISEX",
+      numberInStock: 54,
+    });
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });
     const port = process.env.PORT || 3000;
