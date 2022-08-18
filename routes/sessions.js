@@ -44,6 +44,12 @@ app.post("/signup", async (req, res, next) => {
 });
 
 app.get("/", isLoggedIn, async (req, res, next) => {
+  const userInfo = {
+    username: req.user.username,
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
+    email: req.user.email
+  }
   res.send(req.user);
 });
 
