@@ -25,7 +25,12 @@ app.post("/signup", async (req, res, next) => {
       },
     });
     if (users.length === 0) {
-      res.send(await User.create(req.body));
+      await User.create(req.body);
+      const credentials = {
+        username: req.body.username,
+        password: req.body.password,
+      };
+      res.send({ token: await User.authenticate(credentials)})
     } else {
       const credentials = {
         username: req.body.username,
