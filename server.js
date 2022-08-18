@@ -109,7 +109,7 @@ const setUp = async () => {
               colorway: shoe.colorway,
               description: shoe.description,
               numberInStock: Math.ceil(Math.random() * 100),
-              silhoutte: shoe.silhoutte,
+              silhoutte: shoe.silhoutte.split(' ').join(''),
               gender: assignGender()
             }),
           ]);

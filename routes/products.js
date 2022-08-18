@@ -26,6 +26,18 @@ app.get("/womens", async (req, res, next) => {
   }
 });
 
+app.get("/colorways", async (req, res, next) => {
+  try {
+    res.send(await Product.findAll({
+      where: {
+        silhoutte: req.body.silhoutte
+      }
+    }))
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.get("/:id", async (req, res, next) => {
   try {
     res.send(
