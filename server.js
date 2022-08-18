@@ -88,10 +88,11 @@ const setUp = async () => {
         // Filter to make sure each shoe has a discription
         .filter((shoe) => shoe.description !== "")
         // Create a Product instance of each shoe
-        .map(async (shoe, idx) => {
+        .map(async (shoe) => {
           function assignGender(){
-            if(products.length%idx === 2) return 'MENS'
-            else if(products.length%idx === 3) return 'WOMENS'
+            const rand = Math.ceil(Math.random()*3)
+            if(rand === 1) return 'MENS'
+            else if(rand === 2) return 'WOMENS'
             else return 'UNISEX'
           }
           await Promise.all([

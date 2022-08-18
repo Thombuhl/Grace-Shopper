@@ -42,7 +42,11 @@ app.get("/womens", async (req, res, next) => {
 
 app.get("/mens", async (req, res, next) => {
   try {
-    res.send(await Product.findMensProduct());
+    res.send(await Product.findAll({
+      where:{
+        gender:"MENS"
+      }
+    }));
   } catch (error) {
     next(error);
   }

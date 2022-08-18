@@ -27,3 +27,14 @@ app.get("/cart", isLoggedIn, async (req, res, next) => {
     next(ex);
   }
 });
+
+app.delete('/cart', isLoggedIn, async (req, res, next)=> {
+  try{
+    const cart = await req.user.getCart()
+    const items = cart.lineItems.find( item => item.id === req.body.id)
+    await items.destroy()
+    res.sendStatus(204)
+  } catch (er) {
+    next(er)
+  }
+})
