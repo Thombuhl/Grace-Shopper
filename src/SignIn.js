@@ -30,9 +30,8 @@ class SignIn extends Component {
       this.props.login(this.state) 
     } catch (err) {
       console.log(err)
-    }
-  
-  }
+    };
+  };
 
   render(){
     const { onChange, onSubmit, } = this;

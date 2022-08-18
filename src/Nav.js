@@ -14,6 +14,7 @@ const Container = styled.div`
   height: 70px;
   background-color: #343a40;
   color: white;
+  border-radius: 2px;
 `;
 const Wrapper = styled.div`
   padding: 10px 20px;
@@ -53,7 +54,6 @@ class Nav extends Component {
     this.props.exchangeToken();
   }
 
-
   render () {
     const {auth, logout, fetchCart} = this.props
     return (
@@ -64,7 +64,9 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link to="/mens">Mens</Link>
+                    <Link style={{ color: "white" }} to="/mens">
+                      Mens
+                    </Link>
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>
@@ -76,7 +78,9 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link to="/womens">Womens</Link>
+                    <Link style={{ color: "white" }} to="/womens">
+                      Womens
+                    </Link>
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>
@@ -88,7 +92,9 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link to="/unisex">Unisex</Link>
+                    <Link style={{ color: "white" }} to="/unisex">
+                      Unisex
+                    </Link>
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>
@@ -119,6 +125,7 @@ class Nav extends Component {
                   <SearchIcon style={{ color: "gray", padding: 2 }} />
                 }
               />
+              
                 {auth.id ? (<button onClick={logout}><Link className="links" to='/'>Logout</Link></button>) : 
                 (<div>
                 <RightNavItem>
@@ -133,6 +140,7 @@ class Nav extends Component {
                 </RightNavItem>
                 </div>)}
             
+
               <RightNavItem>
                 <Link className="links" to="/cart">
                 <IconButton
