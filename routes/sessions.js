@@ -37,7 +37,8 @@ app.get("/", isLoggedIn, async (req, res, next) => {
     username: req.user.username,
     firstName: req.user.firstName,
     lastName: req.user.lastName,
-    email: req.user.email
+    email: req.user.email,
+    id: req.user.id
   }
   res.send(userInfo);
 });

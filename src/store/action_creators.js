@@ -1,4 +1,7 @@
+
+
 const SET_AUTH = "SET_AUTH";
+const DELETE_PRODUCT = 'DELETE_PRODUCT';
 
 const _logout = () => {
   return {
@@ -14,4 +17,14 @@ const _handleToken = (auth) => {
   };
 };
 
-export { _logout, _handleToken };
+
+const _deleteProduct = (product) => {
+  return {
+    type: DELETE_PRODUCT,
+    product
+  }
+}
+
+export { _logout, _handleToken, _deleteProduct };
+
+

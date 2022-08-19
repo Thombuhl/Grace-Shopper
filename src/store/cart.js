@@ -1,9 +1,10 @@
 import axios from "axios";
+import {_deleteProduct} from "./action_creators";
 
 
 const SET_CART = 'SET_CART';
 const UPDATE_LINEITEM_Q = 'UPDATE_CART';
-const DELETE_LINEITEM = 'DELETE_LINEITEM';
+const DELETE_PRODUCT = 'DELETE_PRODUCT';
 
 const cart = (state = { lineItems: [ ] }, action)=> {
   switch(action.type) {
@@ -11,10 +12,10 @@ const cart = (state = { lineItems: [ ] }, action)=> {
       return action.cart;
     case UPDATE_LINEITEM_Q:
       return state.map(lineItem => lineItem.id !== action._lineItem.id ? lineItem : action._lineItem)
-    case DELETE_LINEITEM:
-      return state.filter(lineItem => lineItem.id !== action.item.id)
+    case DELETE_PRODUCT:
+      return state.filter(lineItem => lineItem.product.id !== action.id)
     default: 
-      return state;
+      return state
   };
 };
 
@@ -41,14 +42,20 @@ export const updateLineItemQuantity = (newQuantity) => {
   };
 };
 
-export const deleteLineItem = (item) => {
+export const deleteLineItem = (product) => {
+
+  const token = window.localStorage.getItem('token');
+  
   return async(dispatch) => {
-    const response = await axios.put('/api/orders/cart', item,  {
+   await axios.delete('/api/orders/cart', {
       headers: {
-        authorization: window.localStorage.getItem('token')
+        authorization: token
       },
+      data: {
+        product
+      }
     });
-    dispatch({type: DELETE_LINEITEM, _lineItem: item})
+    dispatch(_deleteProduct(product))
   };
 };
 
