@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const { conn, User, Product } = require("./db");
 const app = require("supertest")(require("./app"));
 const { expect } = require("chai");
