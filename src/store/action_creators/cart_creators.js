@@ -15,10 +15,10 @@ const _updateProd = (product) => {
 };
 
 
-const _deleteProduct = (product) => {
+const _deleteProduct = (lineItem) => {
   return {
     type: DELETE_PRODUCT,
-    product
+    lineItem
   };
 };
 

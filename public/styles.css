@@ -22,6 +22,12 @@ body {
   font-size: 36px;
   font-weight: 900;
 }
+
+#lineItems li {
+  border: solid black 2px;
+  width: 300px
+}
+
 .logo {
   border-radius: 50%;
   width: 50px;

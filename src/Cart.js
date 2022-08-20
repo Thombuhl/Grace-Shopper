@@ -2,49 +2,43 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {deleteLineItem} from './store';
-import { exchangeToken, fetchCart } from './store';
-
+import {deleteLineItem, fetchCart} from './store';
 
 class Cart extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
   };
-
 
   componentDidMount() {
-    this.props.fetchCart
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.auth.id && this.props.auth.id) {
-      this.props.fetchCart();
-    } 
- 
+    this.props.fetchCart()
   };
+
+  // componentDidUpdate(prevProps) {
+  //   if (!prevProps.auth.id && this.props.auth.id) {
+  //     this.props.fetchCart();
+  //   }; 
+  // };
   
 
   render() {
-  const { cart, deleteLineItem } = this.props;
-  const lineItemsArr = cart.lineItems
-  
+  const { cart, deleteLineItem} = this.props;
+
     return (
-      <section id='lineItems'>
-        <h1>My Cart</h1>
+      <main id='lineItems'>
           <ul>
             {
-           lineItemsArr.map( lineItem => {
+              cart.lineItems.map(lineItem => {
                 return (
-                  <li key={ lineItem.id }>
-                    { lineItem.product.name } { lineItem.quantity } 
-                      <button onClick={() => deleteLineItem(lineItem.product)}>X</button>
+                  <li key={ lineItem.id } >
+                   <p>{lineItem.product.name} {lineItem.quantity}</p>
+                      <button onClick={() => deleteLineItem(lineItem)}>DELETE</button>
                   </li>
                 )
-              })
+              }) 
             }
           </ul>
         <button><Link className="links" to='/checkout'>Checkout</Link></button> 
-    </section>
+     </main>
     );
   }
 }
@@ -58,9 +52,6 @@ const mapStateToProps = ({ cart, auth }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    exchangeToken: () => {
-      dispatch(exchangeToken())
-    },
     fetchCart: () => {
       dispatch(fetchCart())
     },

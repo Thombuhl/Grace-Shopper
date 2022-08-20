@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { fetchCart, login} from './store';
+import { login} from './store';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -61,9 +61,6 @@ function mapDispatch(dispatch, { history }) {
   return {
     login: (credentials) => {
       dispatch(login(credentials, history));
-    },
-    fetchCart: () => {
-      dispatch(fetchCart());
     },
   };
 };
