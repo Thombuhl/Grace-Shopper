@@ -1,3 +1,4 @@
+/* eslint-disable */
 const SET_AUTH = "SET_AUTH";
 
 const _logout = () => {

@@ -1,20 +1,23 @@
+/* eslint-disable */
 import axios from "axios";
+import {_deleteProduct, _updateProd} from "./action_creators";
 
 
 const SET_CART = 'SET_CART';
-const UPDATE_LINEITEM_Q = 'UPDATE_CART';
-const DELETE_LINEITEM = 'DELETE_LINEITEM';
+const UPDATE_PROD_QUANTITY = 'UPDATE_PROD_QUANTITY';
+const DELETE_PRODUCT = 'DELETE_PRODUCT';
 
 const cart = (state = { lineItems: [ ] }, action)=> {
   switch(action.type) {
     case SET_CART: 
       return action.cart;
-    case UPDATE_LINEITEM_Q:
-      return state.map(lineItem => lineItem.id !== action._lineItem.id ? lineItem : action._lineItem)
-    case DELETE_LINEITEM:
-      return state.filter(lineItem => lineItem.id !== action.item.id)
+    case DELETE_PRODUCT: 
+      return state.lineItems = state.lineItems.filter(item => item.id !== action.product.id)
+    case UPDATE_PROD_QUANTITY:
+      return state.lineItens.map(lineItem => lineItem.id !== action._lineItem.id ? lineItem : action._lineItem)
+
     default: 
-      return state;
+      return state
   };
 };
 
@@ -30,25 +33,34 @@ export const fetchCart = () => {
 };
 
 
-export const updateLineItemQuantity = (newQuantity) => {
-  return async(dispatch) => {
-    const response = await axios.put('/api/orders/cart', newQuantity, {
-      headers: {
-        authorization: window.localStorage.getItem('token')
-      }, 
-    });
-    dispatch({type: UPDATE_LINEITEM_Q, _lineItem: response.data})
-  };
-};
+// export const updateLineItemQuantity = (product, quantity) => {
+//   const token = window.localStorage.getItem('token')
+  
+//   return async(dispatch) => {
 
-export const deleteLineItem = (item) => {
+//     const response = await axios.put('/api/orders/cart', product,{
+//       headers: {
+//         authorization: token
+//       }, 
+//     });
+//     dispatch(_updateProd(response.data))
+//   };
+// };
+
+export const deleteLineItem = (product) => {
+  const token = window.localStorage.getItem('token');
+  
   return async(dispatch) => {
-    const response = await axios.put('/api/orders/cart', item,  {
+
+   await axios.delete('/api/orders/cart', {
       headers: {
-        authorization: window.localStorage.getItem('token')
+        authorization: token
       },
+      data: {
+        product
+      }
     });
-    dispatch({type: DELETE_LINEITEM, _lineItem: item})
+    dispatch(_deleteProduct(product))
   };
 };
 

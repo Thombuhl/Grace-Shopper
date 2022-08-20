@@ -1,3 +1,4 @@
+/* eslint-disable */
 const conn = require("./conn");
 const { Sequelize } = conn;
 

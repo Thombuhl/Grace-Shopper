@@ -1,3 +1,4 @@
+/* eslint-disable */
 const app = require("./app");
 const { conn, User, Product } = require("./db");
 const SneaksAPI = require("sneaks-api");
