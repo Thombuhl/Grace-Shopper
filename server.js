@@ -7,13 +7,6 @@ const setUp = async () => {
   try {
     await conn.sync({ force: true });
     await User.create({
-      username: "moe",
-      password: "moe_pw",
-      firstName: 'Moesy',
-      lastName: 'Smith',
-      email: "moe@gsdt7.com",
-    });
-    await User.create({
       username: "chris",
       password: "chris123",
       email: "chris@gsdt7.com",
@@ -32,6 +25,13 @@ const setUp = async () => {
       username: "doobin",
       password: "doobin123",
       email: "doobin@gsdt7.com",
+    });
+    const moe = await User.create({
+      username: "moe",
+      password: "moe_pw",
+      firstName: 'Moesy',
+      lastName: 'Smith',
+      email: "moe@gsdt7.com",
     });
     const lucy = await User.create({
       username: "lucy",
@@ -67,6 +67,7 @@ const setUp = async () => {
     
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });
+    await moe.addToCart({ product: bar, quantity: 7 });
     const port = process.env.PORT || 3000;
     app.listen(port, () => console.log(`listening on port ${port}`));
 
