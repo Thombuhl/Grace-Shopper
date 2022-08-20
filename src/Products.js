@@ -1,25 +1,21 @@
-import { DeviceUnknownSharp, NineK } from '@mui/icons-material';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Container } from './styledComponents/ProductsStyles';
+import ProductCards from './ProductCards';
+import Heading from './Heading';
+import Footer from './Footer';
 
 const Product = ({ products }) => {
   const productsArr = Array.from(products);
   return (
     <div>
-      <h1>Products</h1>
-      <ul>
+      <Heading />
+      <Container>
         {productsArr.map((product) => {
-          return (
-            <div key={product.id}>
-              <img
-                style={{ width: '200px', height: '300px' }}
-                src={product.imageLocation}
-              ></img>
-              <li>{product.name}</li>
-            </div>
-          );
+          return <ProductCards key={product.id} product={product} />;
         })}
-      </ul>
+      </Container>
+      <Footer />
     </div>
   );
 };
