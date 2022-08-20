@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {deleteLineItem, fetchCart} from './store';
+import {deleteLineItem, fetchCart, addToCart} from './store';
 
 class Cart extends Component {
   constructor() {
@@ -21,7 +21,7 @@ class Cart extends Component {
   
 
   render() {
-  const { cart, deleteLineItem} = this.props;
+  const { cart, deleteLineItem, addToCart} = this.props;
 
     return (
       <main id='lineItems'>
@@ -31,6 +31,8 @@ class Cart extends Component {
                 return (
                   <li key={ lineItem.id } >
                    <p>{lineItem.product.name} {lineItem.quantity}</p>
+                      <button onClick={() => addToCart(lineItem, 1)}>+</button>
+                      <button onClick={() => addToCart(lineItem, -1)}>-</button>
                       <button onClick={() => deleteLineItem(lineItem)}>DELETE</button>
                   </li>
                 )
@@ -57,6 +59,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     deleteLineItem: (product) => {
       dispatch(deleteLineItem(product))
+    },
+    addToCart: (product, diff = 1) => {
+      dispatch(addToCart(product, diff))
     }
   };
 };

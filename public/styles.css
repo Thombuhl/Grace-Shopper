@@ -23,9 +23,10 @@ body {
   font-weight: 900;
 }
 
-#lineItems li {
+#lineItems li{
   border: solid black 2px;
-  width: 300px
+  width: 300px;
+  margin: .5rem
 }
 
 .logo {

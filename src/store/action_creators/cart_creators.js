@@ -1,4 +1,4 @@
-import { UPDATE_PROD_QUANTITY, DELETE_PRODUCT, SET_CART } from "../actions/cart_actions"
+import { DELETE_PRODUCT, SET_CART, UPDATE_QUANTITY } from "../actions/cart_actions"
 
 const _setCart = (data) => {
   return {
@@ -22,8 +22,16 @@ const _deleteProduct = (lineItem) => {
   };
 };
 
+const updateQuantity = (quantity) => {
+  return {
+    type: UPDATE_QUANTITY,
+    quantity
+  }
+}
+
 export {
   _deleteProduct,
   _updateProd,
-  _setCart
+  _setCart,
+  updateQuantity
 }
