@@ -22,43 +22,38 @@ class Cart extends Component {
     };
   };
   
-  onChange(ev) {
-    console.log(ev)
-    // this.props.updateLineItemQuantity(ev.target.name)
 
-  }
- 
+  onChange(ev) {
+    const change = { [ev.target.name]: ev.target.value };
+    this.setState(change);
+    this.props.updateLineItemQuantity(change);
+  };
 
   render() {
     const { cart } = this.props;
-    const {onChange} = this
+    const { onChange } = this;
+    // const lineItems = Array.from(cart.lineItem)
 
     return (
       <section id='lineItems'>
         <h1>My Cart</h1>
           <ul>
             {
-             cart.lineItems.map( lineItem => {
+             cart.lineItem.map( lineItem => {
                 return (
                   <li key={ lineItem.id }>
                     { lineItem.product.name } { lineItem.quantity } 
                     <div>
                       <input type='number' 
-                      name={lineItem} 
+                      name={lineItem.product.name} 
+                      value={lineItem.quantity} 
                       onChange={onChange}/>
                     </div>
                         <p> Size:{lineItem.product.size}</p>
                           <p>Color:{lineItem.product.colorway}</p>
                           <p>Price:{lineItem.product.Price}</p>
                         <p>About:{lineItem.product.description}</p>
-                    <button onClick={() => this.props.updateLineItemQuantity(lineItem)}>Add</button>
-                      
-
-
-
-
-
-                      <button onClick={() => this.props.deleteLineItem(lineItem)}>X</button>
+                      <button onClick={() => this.props.deleteLineItem(lineItem.product)}>X</button>
                   </li>
                 )
               })
