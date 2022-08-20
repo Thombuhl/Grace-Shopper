@@ -40,7 +40,7 @@ const CategoryName = ({ category }) => {
       <Link to={`/${category.title}`.toLowerCase()}>
         <Image src={category.img} />
         <Info>
-          <Title>{category.title}</Title>
+          <Title>{category.gender}</Title>
           <Button onClick={(event) => console.log(event)}>
             SHOP {category.title.toUpperCase()}
           </Button>
