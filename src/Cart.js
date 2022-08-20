@@ -35,10 +35,11 @@ class Cart extends Component {
             return (
               <li key={lineItem.id}>
                 {lineItem.product.name} {lineItem.quantity}
+                <br></br>
                 <input
                   type="number"
-                  name={lineItem.product.name}
-                  value={lineItem.quantity}
+                  // name={lineItem.product.name}
+                  value={lineItem.quantity || ''}
                   onChange={onChange}
                 />
                 <p> Size:{lineItem.product.size}</p>

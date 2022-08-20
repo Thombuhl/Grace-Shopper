@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container } from './styledComponents/ProductsStyles';
 import ProductCards from './ProductCards';
 import Heading from './Heading';
 import Footer from './Footer';
+import axios from 'axios';
 
 const Product = ({ products }) => {
   const productsArr = Array.from(products);
@@ -20,11 +21,19 @@ const Product = ({ products }) => {
   );
 };
 
-const mapState = ({ products }) => {
-  console.log('productsPage', products);
+const mapState = ({ products, cart, auth }) => {
+  //   console.log('productsPageProducts', products);
+  console.log('productsPageCart', cart);
+  console.log('productsPageAuth', auth);
   return {
     products,
+    cart,
+    auth,
   };
 };
 
-export default connect(mapState)(Product);
+const mapDispatch = (dispatch) => {
+  return {};
+};
+
+export default connect(mapState, mapDispatch)(Product);

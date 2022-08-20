@@ -54,7 +54,8 @@ class Nav extends Component {
   }
 
   render() {
-    const { auth, logout, fetchCart } = this.props;
+    const { auth, logout, fetchCart, cart } = this.props;
+    // console.log('CartNav', cart.lineItems.length);
     return (
       <div>
         <Container>
@@ -154,7 +155,11 @@ class Nav extends Component {
               <RightNavItem>
                 <Link className="links" to="/cart">
                   <IconButton onClick={fetchCart} aria-label="cart">
-                    <Badge badgeContent={0} showZero color="primary">
+                    <Badge
+                      badgeContent={cart.lineItems ? cart.lineItems.length : 0}
+                      showZero
+                      color="primary"
+                    >
                       <ShoppingCartIcon style={{ color: 'white' }} />
                     </Badge>
                   </IconButton>
@@ -167,9 +172,10 @@ class Nav extends Component {
     );
   }
 }
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, cart }) => {
   return {
     auth,
+    cart,
   };
 };
 
