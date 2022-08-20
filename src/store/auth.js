@@ -1,7 +1,8 @@
+/* eslint-disable */
 import axios from "axios";
-import { _logout, _handleToken } from "./action_creators";
+import { _logout, _handleToken } from "./action_creators/auth_creators";
+import { SET_AUTH } from "./actions/auth_actions";
 
-const SET_AUTH = "SET_AUTH";
 
 const auth = (state = {}, action) => {
   switch (action.type) {

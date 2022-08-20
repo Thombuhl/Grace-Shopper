@@ -17,6 +17,7 @@ module.exports = {
   plugins: [
     'react',
   ],
+  ignorePatterns: ['src/*'],
   rules: {
     quotes: [
       'error',
