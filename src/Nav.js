@@ -63,6 +63,20 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
+                    <Link style={{ color: 'white' }} to="/products">
+                      Shop All
+                    </Link>
+                  </button>
+                  <div className="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                  </div>
+                </div>
+              </LeftNavItem>
+              <LeftNavItem className="menu-item">
+                <div className="dropdown">
+                  <button className="dropdown-btn left-menu-button">
                     <Link style={{ color: 'white' }} to="/mens">
                       Mens
                     </Link>
@@ -77,22 +91,8 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link style={{ color: 'white' }} to="/womens">
-                      Womens
-                    </Link>
-                  </button>
-                  <div className="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                  </div>
-                </div>
-              </LeftNavItem>
-              <LeftNavItem className="menu-item">
-                <div className="dropdown">
-                  <button className="dropdown-btn left-menu-button">
                     <Link style={{ color: 'white' }} to="/unisex">
-                      Unisex
+                      Womens
                     </Link>
                   </button>
                   <div className="dropdown-content">
@@ -126,7 +126,10 @@ class Nav extends Component {
               />
 
               {auth.id ? (
-                <button onClick={logout}>
+                <button
+                  style={{ background: 'none', border: 'none' }}
+                  onClick={logout}
+                >
                   <Link className="links" to="/">
                     Logout
                   </Link>
