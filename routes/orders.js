@@ -14,7 +14,7 @@ app.post("/", isLoggedIn, async (req, res, next) => {
 
 app.put("/cart", isLoggedIn, async (req, res, next) => {
   try {
-    res.send(await req.user.addToCart(req.body));
+    res.send(await req.user.addToCart(req.body.product.id));
   } catch (ex) {
     next(ex);
   }

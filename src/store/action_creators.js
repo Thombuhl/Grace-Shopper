@@ -2,6 +2,7 @@
 
 const SET_AUTH = "SET_AUTH";
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
+const UPDATE_PROD_QUANTITY = 'UPDATE_PROD_QUANTITY'
 
 const _logout = () => {
   return {
@@ -17,6 +18,13 @@ const _handleToken = (auth) => {
   };
 };
 
+const _updateProd = (product) => {
+  return {
+    type: UPDATE_PROD_QUANTITY,
+    product
+  }
+}
+
 
 const _deleteProduct = (product) => {
   return {
@@ -25,6 +33,6 @@ const _deleteProduct = (product) => {
   }
 }
 
-export { _logout, _handleToken, _deleteProduct };
+export { _logout, _handleToken, _deleteProduct, _updateProd };
 
 

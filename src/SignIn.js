@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { login} from './store';
+import { fetchCart, login} from './store';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -13,6 +13,8 @@ class SignIn extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   };
+
+
 
   onChange(ev){
     this.setState({ [ev.target.name]: ev.target.value });
@@ -59,6 +61,9 @@ function mapDispatch(dispatch, { history }) {
   return {
     login: (credentials) => {
       dispatch(login(credentials, history));
+    },
+    fetchCart: () => {
+      dispatch(fetchCart());
     },
   };
 };

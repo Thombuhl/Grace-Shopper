@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateLineItemQuantity } from './store';
-import { deleteLineItem, exchangeToken, fetchCart } from './store';
+import {deleteLineItem, updateLineItemQuantity} from './store';
+import { exchangeToken, fetchCart } from './store';
 
 
 class Cart extends Component {
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
+    this.onChange = this.onChange.bind(this)
   };
 
 
-
-  // componentDidMount() {
-  //   this.props.exchangeToken();
-  // }
+  componentDidMount() {
+    this.props.fetchCart();
+  };
   
   componentDidUpdate(prevProps) {
     if (!prevProps.auth.id && this.props.auth.id) {
@@ -23,16 +22,16 @@ class Cart extends Component {
     };
   };
   
-
   onChange(ev) {
-    const change = { [ev.target.name]: ev.target.value };
-    this.setState(change);
-    this.props.updateLineItemQuantity(change);
-  };
+    console.log(ev)
+    // this.props.updateLineItemQuantity(ev.target.name)
+
+  }
+ 
 
   render() {
     const { cart } = this.props;
-    const { onChange } = this;
+    const {onChange} = this
 
     return (
       <section id='lineItems'>
@@ -45,14 +44,20 @@ class Cart extends Component {
                     { lineItem.product.name } { lineItem.quantity } 
                     <div>
                       <input type='number' 
-                      name={lineItem.product.name} 
-                      value={lineItem.quantity} 
+                      name={lineItem} 
                       onChange={onChange}/>
                     </div>
                         <p> Size:{lineItem.product.size}</p>
                           <p>Color:{lineItem.product.colorway}</p>
                           <p>Price:{lineItem.product.Price}</p>
                         <p>About:{lineItem.product.description}</p>
+                    <button onClick={() => this.props.updateLineItemQuantity(lineItem)}>Add</button>
+                      
+
+
+
+
+
                       <button onClick={() => this.props.deleteLineItem(lineItem)}>X</button>
                   </li>
                 )

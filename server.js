@@ -67,6 +67,10 @@ const setUp = async () => {
     
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });
+    await lucy.addToCart({ product: bar, quantity: 43 });
+    await lucy.addToCart({ product: bar, quantity: 42 });
+    await lucy.addToCart({ product: bar, quantity: 43 });
+    await lucy.addToCart({ product: bar, quantity: 44 });
     const port = process.env.PORT || 3000;
     app.listen(port, () => console.log(`listening on port ${port}`));
 
