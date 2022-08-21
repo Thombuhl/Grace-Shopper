@@ -56,7 +56,7 @@ const Product = conn.define("product", {
 Product.findMensProduct = function () {
   return this.findAll({
     where: {
-      productType: "MENS",
+      gender: "MENS",
     },
   });
 };
@@ -64,7 +64,7 @@ Product.findMensProduct = function () {
 Product.findWomensProduct = function () {
   return this.findAll({
     where: {
-      productType: "WOMENS",
+      gender: "WOMENS",
     },
   });
 };

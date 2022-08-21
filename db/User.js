@@ -1,10 +1,10 @@
-const conn = require("./conn");
+const conn = require('./conn');
 const { Sequelize } = conn;
+const { v4 } = require('uuid');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-
-const User = conn.define("user", {
+const User = conn.define('user', {
   username: {
     type: Sequelize.STRING,
     unique: true,
@@ -26,21 +26,23 @@ const User = conn.define("user", {
   },
 });
 
-User.addHook("beforeSave", async (user) => {
-  if (user._changed.has("password")) {
+User.addHook('beforeSave', async (user) => {
+  if (user._changed.has('password')) {
     user.password = await bcrypt.hash(user.password, 10);
   }
 });
 
 User.prototype.createOrderFromCart = async function () {
   const cart = await this.getCart();
+  const uuid = v4();
   cart.isCart = false;
+  cart.confirmationId = uuid;
   return cart.save();
 };
 
 User.prototype.addToCart = async function ({ product, quantity }) {
   const cart = await this.getCart();
-  let lineItem = await conn.models.lineItem.findOne({
+  const lineItem = await conn.models.lineItem.findOne({
     where: {
       productId: product.id,
       orderId: cart.id,
@@ -62,7 +64,6 @@ User.prototype.addToCart = async function ({ product, quantity }) {
   }
   return this.getCart();
 };
-
 
 User.prototype.getCart = async function () {
   let order = await conn.models.order.findOne({
@@ -86,6 +87,22 @@ User.prototype.getCart = async function () {
   return order;
 };
 
+User.prototype.getPreviousOrders = async function () {
+  const order = await conn.models.order.findOne({
+    where: {
+      userId: this.id,
+      isCart: false,
+    },
+    include: [
+      {
+        model: conn.models.lineItem,
+        include: [conn.models.product],
+      },
+    ],
+  });
+  return order;
+};
+
 User.authenticate = async function (credentials) {
   const user = await this.findOne({
     where: {
@@ -94,23 +111,22 @@ User.authenticate = async function (credentials) {
   });
   if (user && (await bcrypt.compare(credentials.password, user.password))) {
     return jwt.sign({ id: user.id }, process.env.JWT);
-  } else {
-    const error = new Error("Bad Credentials");
-    error.status = 401;
-    throw error;
   }
+  const error = new Error('Bad Credentials');
+  error.status = 401;
+  throw error;
 };
 
 User.findByToken = async function findByToken(token) {
   try {
-    const id = jwt.verify(token, process.env.JWT).id;
+    const { id } = jwt.verify(token, process.env.JWT);
     const user = await User.findByPk(id);
     if (!user) {
-      throw "error";
+      throw 'error';
     }
     return user;
   } catch (ex) {
-    const error = new Error("bad token");
+    const error = new Error('bad token');
     error.status = 401;
     throw error;
   }

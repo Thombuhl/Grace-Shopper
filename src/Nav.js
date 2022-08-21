@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { HashRouter as Router, Link } from 'react-router-dom';
@@ -20,13 +21,16 @@ import {
 } from './styledComponents/NavStyles';
 
 class Nav extends Component {
+
+
+
   componentDidMount() {
     this.props.exchangeToken();
   }
 
+
   render() {
     const { auth, logout, fetchCart, cart } = this.props;
-    // console.log('CartNav', cart.lineItems.length);
     return (
       <div>
         <Container>
@@ -136,6 +140,7 @@ class Nav extends Component {
 
               <RightNavItem>
                 <Link className="links" to="/cart">
+
                   <IconButton onClick={fetchCart} aria-label="cart">
                     <Badge
                       badgeContent={cart.lineItems ? cart.lineItems.length : 0}
@@ -158,15 +163,16 @@ const mapStateToProps = ({ auth, cart }) => {
   return {
     auth,
     cart,
+
   };
 };
+
 
 const mapDispatch = (dispatch) => {
   return {
     logout: () => dispatch(logout()),
     exchangeToken: () => dispatch(exchangeToken()),
     fetchCart: () => dispatch(fetchCart()),
-    // userCart: () => dispatch(userCart())
   };
 };
 

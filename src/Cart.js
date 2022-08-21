@@ -1,27 +1,24 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteLineItem, exchangeToken, fetchCart } from './store';
-import { updateLineItemQuantity } from './store';
 import { Link } from 'react-router-dom';
+import {deleteLineItem, fetchCart, updateCart} from './store';
 
 class Cart extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+  };
 
-    this.onChange = this.onChange.bind(this);
-  }
+  componentDidMount() {
+    this.props.fetchCart()
+  };
 
-  componentDidUpdate(prevProps) {
-    if (!prevProps.auth.id && this.props.auth.id) {
-      this.props.fetchCart();
-    }
-  }
-
-  onChange(ev) {
-    const change = { [ev.target.name]: ev.target.value };
-    this.setState(change);
-    this.props.updateLineItemQuantity(change);
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (!prevProps.auth.id && this.props.auth.id) {
+  //     this.props.fetchCart();
+  //   }; 
+  // };
+  
 
   render() {
     const { cart, products } = this.props;
@@ -45,6 +42,8 @@ class Cart extends Component {
                 <p>Color:{lineItem.product.colorway}</p>
                 <p>Price:{lineItem.product.Price}</p>
                 <p>About:{lineItem.product.description}</p>
+                <button onClick={() => updateCart(lineItem, 1)}>+</button>
+                <button onClick={() => updateCart(lineItem, -1)}>-</button>
                 <button onClick={() => this.props.deleteLineItem()}>X</button>
               </li>
             );
@@ -75,10 +74,15 @@ const mapStateToProps = ({ cart, auth, products }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    exchangeToken: () => dispatch(exchangeToken()),
-    fetchCart: () => dispatch(fetchCart()),
-    updateLineItemQuantity: (obj) => dispatch(updateLineItemQuantity(obj)),
-    deleteLineItem: (item) => dispatch(deleteLineItem(item)),
+    fetchCart: () => {
+      dispatch(fetchCart())
+    },
+    deleteLineItem: (product) => {
+      dispatch(deleteLineItem(product))
+    },
+    updateCart: (product, diff = 1) => {
+      dispatch(updateCart(product, diff))
+    }
   };
 };
 

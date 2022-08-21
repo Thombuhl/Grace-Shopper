@@ -1,0 +1,37 @@
+import { DELETE_PRODUCT, SET_CART, UPDATE_QUANTITY } from "../actions/cart_actions"
+
+const _setCart = (data) => {
+  return {
+    type: SET_CART,
+    cart: data
+  };
+};
+
+const _updateProd = (product) => {
+  return {
+    type: UPDATE_PROD_QUANTITY,
+    product
+  };
+};
+
+
+const _deleteProduct = (lineItem) => {
+  return {
+    type: DELETE_PRODUCT,
+    lineItem
+  };
+};
+
+const updateQuantity = (quantity) => {
+  return {
+    type: UPDATE_QUANTITY,
+    quantity
+  }
+}
+
+export {
+  _deleteProduct,
+  _updateProd,
+  _setCart,
+  updateQuantity
+}
