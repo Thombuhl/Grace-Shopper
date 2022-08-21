@@ -117,6 +117,11 @@ User.authenticate = async function (credentials) {
   throw error;
 };
 
+User.anonymousToken = function () {
+  return jwt.sign({id: 'guest'}, process.env.JWT)
+}
+
+
 User.findByToken = async function findByToken(token) {
   try {
     const { id } = jwt.verify(token, process.env.JWT);

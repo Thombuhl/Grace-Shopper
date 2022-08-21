@@ -61,3 +61,12 @@ app.post("/", async (req, res, next) => {
     next(ex);
   }
 });
+
+
+app.get("/guest", async (req, res, next) =>  {
+  try {
+      res.send(await User.anonymousToken())
+  } catch (ex) {
+    next(ex)
+  }
+});
