@@ -21,7 +21,7 @@ class Cart extends Component {
   
 
   render() {
-    const { cart, products } = this.props;
+    const { cart, products, updateCart } = this.props;
     const { onChange } = this;
 
     return (
@@ -44,7 +44,7 @@ class Cart extends Component {
                 <p>About:{lineItem.product.description}</p>
                 <button onClick={() => updateCart(lineItem, 1)}>+</button>
                 <button onClick={() => updateCart(lineItem, -1)}>-</button>
-                <button onClick={() => this.props.deleteLineItem()}>X</button>
+                <button onClick={() => this.props.deleteLineItem(lineItem)}>X</button>
               </li>
             );
           })}

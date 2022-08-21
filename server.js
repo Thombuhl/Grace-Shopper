@@ -1,3 +1,4 @@
+
 const app = require('./app');
 const { conn, User, Product } = require('./db');
 
@@ -7,12 +8,7 @@ const sneaks = new SneaksAPI();
 const setUp = async () => {
   try {
     await conn.sync({ force: true });
-    await User.create({
 
-      username: 'moe',
-      password: 'moe_pw',
-      email: 'moe@gsdt7.com',
-    });
     await User.create({
       username: 'chris',
       password: 'chris123',

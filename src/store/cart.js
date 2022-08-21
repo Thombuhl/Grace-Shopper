@@ -17,7 +17,7 @@ const cart = (state = initialState, action)=> {
      const lineItems = state.lineItems.filter(lineItem => lineItem.id !== action.lineItem.id)
       return {...state, lineItems}
     case UPDATE_QUANTITY:
-      console.log(action)
+
     default: 
       return state
   };
