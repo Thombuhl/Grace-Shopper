@@ -4,11 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {deleteLineItem, fetchCart, updateCart} from './store';
 
-import {Icon, IconDiv, LineItem} from './styledComponents/CartStyles';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-
 class Cart extends Component {
   constructor() {
     super();
@@ -17,10 +12,10 @@ class Cart extends Component {
   componentDidMount() {
     this.props.fetchCart()
   };
+  
 
   render() {
-    const { cart, products, updateCart } = this.props;
-    const { onChange } = this;
+    const { cart, updateCart } = this.props;
     return (
       <main>
         <h1>My Cart</h1>
@@ -28,19 +23,13 @@ class Cart extends Component {
           {cart.lineItems.map((lineItem) => {
             return (
               <li key={lineItem.id}>
-                {lineItem.product.name} {lineItem.quantity}
-                <input
-                  type="number"
-                  value={lineItem.quantity || ''}
-                  onChange={onChange}
-                />
-                <p> Size:{lineItem.product.size}</p>
-                <p>Color:{lineItem.product.colorway}</p>
-                <p>Price:{lineItem.product.Price}</p>
-                <p>About:{lineItem.product.description}</p>
-                <button onClick={() => updateCart(lineItem, 1)}>+</button>
-                <button onClick={() => updateCart(lineItem, -1)}>-</button>
+                <div>Product Name {lineItem.product.name} </div>
+                <div>Quantity {lineItem.quantity}</div>
+                <div>
+                <button onClick={() => updateCart(lineItem.product, 1)}>+</button>
+                <button onClick={() => updateCart(lineItem.product, -1)}>-</button>
                 <button onClick={() => this.props.deleteLineItem(lineItem)}>X</button>
+                </div>
               </li>
             );
           })}

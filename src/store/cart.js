@@ -1,7 +1,7 @@
 import axios from "axios";
-import {_deleteProduct, _updateProd, _setCart, updateQuantity} from "./action_creators/cart_creators";
-import { DELETE_PRODUCT, SET_CART, UPDATE_QUANTITY } from "./actions/cart_actions";
-const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
+import {_deleteProduct, _updateProd, _setCart, addProduct} from "./action_creators/cart_creators";
+import { ADD_PRODUCT_TO_CART, DELETE_PRODUCT, SET_CART, UPDATE_QUANTITY } from "./actions/cart_actions";
+
 
 
 const initialState = {
@@ -16,7 +16,9 @@ const cart = (state = initialState, action)=> {
     case DELETE_PRODUCT:
      const lineItems = state.lineItems.filter(lineItem => lineItem.id !== action.lineItem.id)
       return {...state, lineItems}
-    case UPDATE_QUANTITY:
+    case ADD_PRODUCT_TO_CART:
+     let newProducts = action.lineItems;
+     return {...state, newProducts}
 
     default: 
       return state
@@ -80,7 +82,7 @@ export const addToCart = (product) => {
         },
       }
     );
-    dispatch({ type: ADD_PRODUCT_TO_CART, cart: response.data });
+    dispatch(addProduct(response.data));
   };
 };
 

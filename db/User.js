@@ -1,3 +1,4 @@
+/* eslint-disable */
 const conn = require('./conn');
 const { Sequelize } = conn;
 const { v4 } = require('uuid');
