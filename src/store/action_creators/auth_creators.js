@@ -1,9 +1,9 @@
-const SET_AUTH = "SET_AUTH";
+import { SET_AUTH } from "../actions/auth_actions";
 
 const _logout = () => {
   return {
     type: SET_AUTH,
-    auth: {},
+    auth: {}
   };
 };
 
@@ -14,4 +14,8 @@ const _handleToken = (auth) => {
   };
 };
 
-export { _logout, _handleToken };
+
+
+export { _logout, _handleToken};
+
+

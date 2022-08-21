@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import auth from './auth';
 import cart from './cart';

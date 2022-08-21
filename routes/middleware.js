@@ -1,3 +1,4 @@
+/* eslint-disable */
 const { User } = require("../db");
 
 const isLoggedIn = async (req, res, next) => {
