@@ -16,7 +16,7 @@ class Home extends Component {
   componentDidMount() {
     const token = window.localStorage.getItem("token");
     if(token) {
-      return ;
+      return;
     } else {
       const {auth} = this.props;
       this.props.anonymousUser(auth);
