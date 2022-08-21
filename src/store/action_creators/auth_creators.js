@@ -16,6 +16,6 @@ const _handleToken = (auth) => {
 
 
 
-export { _logout, _handleToken};
+export { _logout, _handleToken };
 
 
