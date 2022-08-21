@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {deleteLineItem, fetchCart, addToCart} from './store';
 
+import {Icon, IconDiv, LineItem} from './styledComponents/CartStyles';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+
 class Cart extends Component {
   constructor() {
     super();
@@ -24,23 +29,32 @@ class Cart extends Component {
   const { cart, deleteLineItem, addToCart} = this.props;
 
     return (
-      <main id='lineItems'>
-          <ul>
+        <IconDiv>
             {
               cart.lineItems.map(lineItem => {
-                return (
-                  <li key={ lineItem.id } >
+                return ( 
+                  <LineItem key={ lineItem.id } >
                    <p>{lineItem.product.name} {lineItem.quantity}</p>
-                      <button onClick={() => addToCart(lineItem, 1)}>+</button>
-                      <button onClick={() => addToCart(lineItem, -1)}>-</button>
-                      <button onClick={() => deleteLineItem(lineItem)}>DELETE</button>
-                  </li>
+                      <Icon>
+                        <AddIcon onClick={() => addToCart(lineItem, 1)}/>
+                      </Icon>
+                      <Icon>
+                        <RemoveIcon onClick={() => addToCart(lineItem, -1)}/>
+                      </Icon>
+                      <Icon>
+                        <DeleteIcon onClick={() => deleteLineItem(lineItem)}/>
+                      </Icon>
+                  
+                  </LineItem>
                 )
+               
               }) 
+          
             }
-          </ul>
+       
         <button><Link className="links" to='/checkout'>Checkout</Link></button> 
-     </main>
+        </IconDiv>
+
     );
   }
 }
