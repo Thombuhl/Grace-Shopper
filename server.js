@@ -1,3 +1,4 @@
+/* eslint-disable */
 const app = require("./app");
 const { conn, User, Product } = require("./db");
 const SneaksAPI = require("sneaks-api");
@@ -64,6 +65,31 @@ const setUp = async () => {
       gender: "UNISEX",
       numberInStock: 54,
     });
+    const bzz = await Product.create({ 
+      name: "adidas Ultra Boost Mid",
+      brand: "adidas",
+      size: 15,
+      price: 240,
+      imageLocation: "https://images.stockx.com/images/Adidas-Ultra-Boost-Mid-Packer-Shoes-x-Solebox-Silfra-Rift-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&trim=color&q=90&dpr=2&updated_at=1612545881",
+      colorway: "Core Black/Light Grey/Petrol",
+      silhoutte: "adidas Ultra Boost Mid",
+      description: "With this launch in November 2017, as part of the Sneaker Exchange brand, adidas Consortium brought together Solexbox and Packer Shoes. This Ultra Boost Mid features a Silfra Rift-inspired layout where the North American and Eurasian tectonic plates intersect on the Mid-Atlantic Ridge. It is also finished in black-grey gradient coloring, with pink and Photo Blue speckles accented.",
+      gender: "UNISEX",
+      numberInStock: 54,
+    });
+    const bfoo = await Product.create({ 
+      name: "adidas Ultra Boost Mid",
+      brand: "adidas",
+      size: 15,
+      price: 240,
+      imageLocation: "https://images.stockx.com/images/Adidas-Ultra-Boost-Mid-Packer-Shoes-x-Solebox-Silfra-Rift-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&trim=color&q=90&dpr=2&updated_at=1612545881",
+      colorway: "Core Black/Light Grey/Petrol",
+      silhoutte: "adidas Ultra Boost Mid",
+      description: "With this launch in November 2017, as part of the Sneaker Exchange brand, adidas Consortium brought together Solexbox and Packer Shoes. This Ultra Boost Mid features a Silfra Rift-inspired layout where the North American and Eurasian tectonic plates intersect on the Mid-Atlantic Ridge. It is also finished in black-grey gradient coloring, with pink and Photo Blue speckles accented.",
+      gender: "UNISEX",
+      numberInStock: 54,
+    });
+    
     
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });

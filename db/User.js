@@ -1,5 +1,4 @@
 const conn = require('./conn');
-
 const { Sequelize } = conn;
 const { v4 } = require('uuid');
 const jwt = require('jsonwebtoken');
