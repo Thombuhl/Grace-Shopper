@@ -73,10 +73,12 @@ Insert gif or link to demo
 ```http
   PUT /api/orders/cart
 ```
-|     Payload     |   Type   | Description                |
-|    :--------    | :------- | :------------------------- |
-| `authorization` |   `JWT`  |       **Required**         |
-|    `product`    | `Product`|  **Required** Product Obj  |
+
+| Payload               | Type       | Description               |
+| :-------------------- | :--------- | :------------------------ |
+| `authorization`       | `JWT`      | **Required**              |
+| `LineItem`            | `LineItem` | **OPTIONAL** LineItem Obj |
+| `{product, quantity}` | `Obj`      | **OPTIONAL** Prodcut Obj  |
 
 #### Delete an item from cart
 ```http
