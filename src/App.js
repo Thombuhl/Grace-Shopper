@@ -8,6 +8,8 @@ import SignUp from './SignUp';
 import Nav from './Nav';
 import Cart from './Cart';
 import Products from './Products';
+import ProductDetail from './ProductDetail';
+import Login from './Login';
 
 class _App extends Component {
   async componentDidMount() {
@@ -19,9 +21,12 @@ class _App extends Component {
         <Nav />
         <Route exact path="/" component={Home} />
         <Route exact path="/cart" component={Cart} />
-        <Route exact path="/login" component={SignIn} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/products" component={Products} />
+        <Switch>
+          <Route exact path="/products" component={Products} />
+          <Route exact path="/products/:id" component={ProductDetail} />
+        </Switch>
       </div>
     );
   }
@@ -33,6 +38,13 @@ const mapDispatch = (dispatch) => {
       let response = await axios.get('/api/products');
       const products = response.data;
       dispatch({ type: 'GET_PRODUCTS', products });
+      response = await axios.get('/api/orders/cart', {
+        headers: {
+          authorization: window.localStorage.getItem('token'),
+        },
+      });
+      const cart = response.data;
+      dispatch({ type: 'SET_CART', cart });
     },
   };
 };
