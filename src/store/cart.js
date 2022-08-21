@@ -1,6 +1,7 @@
 import axios from "axios";
 import {_deleteProduct, _updateProd, _setCart, updateQuantity} from "./action_creators/cart_creators";
 import { DELETE_PRODUCT, SET_CART, UPDATE_QUANTITY } from "./actions/cart_actions";
+const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 
 
 const initialState = {
@@ -16,7 +17,7 @@ const cart = (state = initialState, action)=> {
      const lineItems = state.lineItems.filter(lineItem => lineItem.id !== action.lineItem.id)
       return {...state, lineItems}
     case UPDATE_QUANTITY:
-      console.log(action)
+
     default: 
       return state
   };
@@ -34,11 +35,7 @@ export const fetchCart = () => {
   };
 };
 
-
-
-
-
-export const addToCart = (product, diff)=> {
+export const updateCart = (product, diff)=> {
   return async(dispatch, getState)=> {
     const lineItem = getState().cart.lineItems.find(lineItem => lineItem.productId === product.id) || { quantity: 0};
     const response = await axios.put('/api/orders/cart', { product, quantity: lineItem.quantity + diff}, {
@@ -55,16 +52,35 @@ export const addToCart = (product, diff)=> {
 export const deleteLineItem = (lineItem) => {
   return async(dispatch) => {
    await axios.delete('/api/orders/cart', {
-
       headers: {
-        authorization: window.localStorage.getItem('token')
+        authorization: window.localStorage.getItem('token'),
       },
       data: {
         lineItem
       }
     });
-
     dispatch(_deleteProduct(lineItem))
+  };
+};
+
+export const addToCart = (product) => {
+  return async (dispatch, getState) => {
+    const lineItem = getState().cart.lineItems.find(
+      (lineItem) => lineItem.productId === product.id
+    ) || { quantity: 0 };
+    const response = await axios.put(
+      '/api/orders/cart',
+      {
+        product,
+        quantity: lineItem.quantity + 1,
+      },
+      {
+        headers: {
+          authorization: window.localStorage.getItem('token'),
+        },
+      }
+    );
+    dispatch({ type: ADD_PRODUCT_TO_CART, cart: response.data });
   };
 };
 

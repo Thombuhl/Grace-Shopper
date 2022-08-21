@@ -2,7 +2,18 @@
 import React, { Component } from 'react';
 import { login} from './store';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import auth from './store/auth';
+import {
+  Container,
+  Wrapper,
+  Title,
+  Form,
+  Input,
+  Button,
+} from './styledComponents/LoginStyles';
+
+
 
 class SignIn extends Component {
   constructor() {
@@ -20,11 +31,15 @@ class SignIn extends Component {
     this.setState({ [ev.target.name]: ev.target.value });
   };
 
-  onSubmit(ev){
-    ev.preventDefault();
-    this.props.login(this.state);
-  };
-
+  onSubmit(ev) {
+    try {
+      ev.preventDefault();
+      this.props.login(this.state);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  
   render() {
     const { onChange, onSubmit} = this;
     const { username, password} = this.state;
@@ -50,9 +65,16 @@ class SignIn extends Component {
                 placeholder="Enter Password"/>
           </div>
         <Link to="/resetpassword"> Forgot your Password? </Link>
-        <button className="btn btn-secondary btn-lg"> Sign In </button>
-        <Link to='signup'> Create account </Link>
-      </form>
+        <button
+            onClick={() => {
+              this.setState({ login: '' });
+            }}
+            className="btn btn-secondary btn-lg"
+          >
+            Sign In
+          </button>
+          <Link to="/signup">Create account</Link>
+        </form>
     );
   };
 };    

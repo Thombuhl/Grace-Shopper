@@ -9,45 +9,16 @@ import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import { logout, exchangeToken, fetchCart } from './store';
-
-const Container = styled.div`
-  height: 70px;
-  background-color: #343a40;
-  color: white;
-  border-radius: 2px;
-`;
-const Wrapper = styled.div`
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const LeftNav = styled.div`
-  flex: 1;
-  display: flex;
-`;
-const LeftNavItem = styled.div`
-  font-size: 1rem;
-  margin-right: 10px;
-`;
-const CenterNav = styled.div`
-  flex: 1;
-`;
-const RightNav = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: flex-end;
-`;
-const RightNavItem = styled.div`
-  font-size: 1rem;
-  margin-left: 10px;
-`;
-const Logo = styled.h1`
-  font-weight: bold;
-  text-align: center;
-  color: white;
-`;
+import {
+  Container,
+  Wrapper,
+  LeftNav,
+  LeftNavItem,
+  CenterNav,
+  RightNav,
+  RightNavItem,
+  Logo,
+} from './styledComponents/NavStyles';
 
 class Nav extends Component {
 
@@ -58,8 +29,8 @@ class Nav extends Component {
   }
 
 
-  render () {
-    const {auth, logout, cart} = this.props
+  render() {
+    const { auth, logout, fetchCart, cart } = this.props;
     return (
       <div>
         <Container>
@@ -68,7 +39,7 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link style={{ color: 'white' }} to="/products">
+                    <Link style={{ color: '#f6e3c5' }} to="/products">
                       Shop All
                     </Link>
                   </button>
@@ -82,7 +53,7 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link style={{ color: 'white' }} to="/mens">
+                    <Link style={{ color: '#f6e3c5' }} to="/mens">
                       Mens
                     </Link>
                   </button>
@@ -96,7 +67,7 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link style={{ color: 'white' }} to="/unisex">
+                    <Link style={{ color: '#f6e3c5' }} to="/womens">
                       Womens
                     </Link>
                   </button>
@@ -131,14 +102,25 @@ class Nav extends Component {
               />
 
               {auth.id ? (
-                <button
-                  style={{ background: 'none', border: 'none' }}
-                  onClick={logout}
-                >
-                  <Link className="links" to="/">
-                    Logout
-                  </Link>
-                </button>
+                <div className="dropdown">
+                  <button
+                    className="dropdown-btn left-menu-button"
+                    style={{ background: 'none', border: 'none' }}
+                    onClick={logout}
+                  >
+                    <Link
+                      className="dropdown-btn left-menu-button"
+                      style={{ color: '#f6e3c5' }}
+                      to="/"
+                    >
+                      Logout
+                    </Link>
+                  </button>
+                  <div className="dropdown-content">
+                    <Link to="/account">My Account</Link>
+                    <a href="">Edit Profile</a>
+                  </div>
+                </div>
               ) : (
                 <div>
                   <RightNav>
@@ -158,9 +140,14 @@ class Nav extends Component {
 
               <RightNavItem>
                 <Link className="links" to="/cart">
-                  <IconButton aria-label="cart">
-                    <Badge badgeContent={0} showZero color="primary">
-                      <ShoppingCartIcon style={{ color: 'white' }} />
+
+                  <IconButton onClick={fetchCart} aria-label="cart">
+                    <Badge
+                      badgeContent={cart.lineItems ? cart.lineItems.length : 0}
+                      showZero
+                      color="primary"
+                    >
+                      <ShoppingCartIcon style={{ color: '#f6e3c5' }} />
                     </Badge>
                   </IconButton>
                 </Link>
@@ -175,7 +162,8 @@ class Nav extends Component {
 const mapStateToProps = ({ auth, cart }) => {
   return {
     auth,
-    cart
+    cart,
+
   };
 };
 

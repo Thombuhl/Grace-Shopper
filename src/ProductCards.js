@@ -9,17 +9,25 @@ import {
 } from './styledComponents/ProductCardStyles';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ReviewsIcon from '@mui/icons-material/Reviews';
+import InfoIcon from '@mui/icons-material/Info';
+import { addToCart } from './store';
+import { connect } from 'react-redux';
 
-const ProductCards = ({ product }) => {
+const ProductCards = ({ product, addToCart }) => {
   return (
     <Container>
       <ImageBackground />
       <Image src={product.imageLocation} />
       <IconDiv>
         <Icon>
-          <Link to="/cart">
-            <ShoppingBasketIcon style={{ color: 'black' }} />
+          <ShoppingBasketIcon
+            onClick={() => addToCart(product)}
+            style={{ color: 'black' }}
+          />
+        </Icon>
+        <Icon>
+          <Link to={`/products/${product.id}`}>
+            <InfoIcon style={{ color: 'black' }} />
           </Link>
         </Icon>
         <Icon>
@@ -30,4 +38,12 @@ const ProductCards = ({ product }) => {
   );
 };
 
-export default ProductCards;
+const mapDispatch = (dispatch) => {
+  return {
+    addToCart: (product) => {
+      dispatch(addToCart(product));
+    },
+  };
+};
+
+export default connect(null, mapDispatch)(ProductCards);

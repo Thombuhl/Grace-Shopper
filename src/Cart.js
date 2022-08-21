@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {deleteLineItem, fetchCart, addToCart} from './store';
+import {deleteLineItem, fetchCart, updateCart} from './store';
 
 import {Icon, IconDiv, LineItem} from './styledComponents/CartStyles';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -18,51 +18,54 @@ class Cart extends Component {
     this.props.fetchCart()
   };
 
-  // componentDidUpdate(prevProps) {
-  //   if (!prevProps.auth.id && this.props.auth.id) {
-  //     this.props.fetchCart();
-  //   }; 
-  // };
-  
-
   render() {
-  const { cart, deleteLineItem, addToCart} = this.props;
-
+    const { cart, products, updateCart } = this.props;
+    const { onChange } = this;
     return (
-        <IconDiv>
-            {
-              cart.lineItems.map(lineItem => {
-                return ( 
-                  <LineItem key={ lineItem.id } >
-                   <p>{lineItem.product.name} {lineItem.quantity}</p>
-                      <Icon>
-                        <AddIcon onClick={() => addToCart(lineItem, 1)}/>
-                      </Icon>
-                      <Icon>
-                        <RemoveIcon onClick={() => addToCart(lineItem, -1)}/>
-                      </Icon>
-                      <Icon>
-                        <DeleteIcon onClick={() => deleteLineItem(lineItem)}/>
-                      </Icon>
-                  
-                  </LineItem>
-                )
-               
-              }) 
-          
-            }
-       
-        <button><Link className="links" to='/checkout'>Checkout</Link></button> 
-        </IconDiv>
+      <main>
+        <h1>My Cart</h1>
+        <ul>
+          {cart.lineItems.map((lineItem) => {
+            return (
+              <li key={lineItem.id}>
+                {lineItem.product.name} {lineItem.quantity}
+                <input
+                  type="number"
+                  value={lineItem.quantity || ''}
+                  onChange={onChange}
+                />
+                <p> Size:{lineItem.product.size}</p>
+                <p>Color:{lineItem.product.colorway}</p>
+                <p>Price:{lineItem.product.Price}</p>
+                <p>About:{lineItem.product.description}</p>
+                <button onClick={() => updateCart(lineItem, 1)}>+</button>
+                <button onClick={() => updateCart(lineItem, -1)}>-</button>
+                <button onClick={() => this.props.deleteLineItem(lineItem)}>X</button>
+              </li>
+            );
+          })}
+        </ul>
+        <section id="cost">
+          <p>Shipping Cost</p>
+          <p>Discount</p>
+          <p></p>
+        </section>
+        <button>
+          <Link className="links" to="/checkout">
+            Checkout
+          </Link>
+        </button>
+      </main>
 
     );
   }
 }
 
-const mapStateToProps = ({ cart, auth }) => {
+const mapStateToProps = ({ cart, auth, products }) => {
   return {
     cart,
     auth,
+    products,
   };
 };
 
@@ -74,8 +77,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteLineItem: (product) => {
       dispatch(deleteLineItem(product))
     },
-    addToCart: (product, diff = 1) => {
-      dispatch(addToCart(product, diff))
+    updateCart: (product, diff = 1) => {
+      dispatch(updateCart(product, diff))
     }
   };
 };
