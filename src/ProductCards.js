@@ -9,7 +9,7 @@ import {
 } from './styledComponents/ProductCardStyles';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ReviewsIcon from '@mui/icons-material/Reviews';
+import InfoIcon from '@mui/icons-material/Info';
 import { addToCart } from './store';
 import { connect } from 'react-redux';
 
@@ -24,6 +24,11 @@ const ProductCards = ({ product, addToCart }) => {
             onClick={() => addToCart(product)}
             style={{ color: 'black' }}
           />
+        </Icon>
+        <Icon>
+          <Link to={`/products/${product.id}`}>
+            <InfoIcon style={{ color: 'black' }} />
+          </Link>
         </Icon>
         <Icon>
           <FavoriteIcon />

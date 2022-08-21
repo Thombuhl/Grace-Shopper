@@ -8,45 +8,16 @@ import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import { logout, exchangeToken, fetchCart } from './store';
-
-const Container = styled.div`
-  height: 70px;
-  background-color: #343a40;
-  color: white;
-  border-radius: 2px;
-`;
-const Wrapper = styled.div`
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const LeftNav = styled.div`
-  flex: 1;
-  display: flex;
-`;
-const LeftNavItem = styled.div`
-  font-size: 1rem;
-  margin-right: 10px;
-`;
-const CenterNav = styled.div`
-  flex: 1;
-`;
-const RightNav = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: flex-end;
-`;
-const RightNavItem = styled.div`
-  font-size: 1rem;
-  margin-left: 10px;
-`;
-const Logo = styled.h1`
-  font-weight: bold;
-  text-align: center;
-  color: white;
-`;
+import {
+  Container,
+  Wrapper,
+  LeftNav,
+  LeftNavItem,
+  CenterNav,
+  RightNav,
+  RightNavItem,
+  Logo,
+} from './styledComponents/NavStyles';
 
 class Nav extends Component {
   componentDidMount() {

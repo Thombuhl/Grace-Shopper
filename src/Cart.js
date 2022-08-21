@@ -24,7 +24,7 @@ class Cart extends Component {
   }
 
   render() {
-    const { cart } = this.props;
+    const { cart, products } = this.props;
     const { onChange } = this;
 
     return (
@@ -65,10 +65,11 @@ class Cart extends Component {
   }
 }
 
-const mapStateToProps = ({ cart, auth }) => {
+const mapStateToProps = ({ cart, auth, products }) => {
   return {
     cart,
     auth,
+    products,
   };
 };
 

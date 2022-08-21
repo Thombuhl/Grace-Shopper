@@ -8,6 +8,7 @@ import SignUp from './SignUp';
 import Nav from './Nav';
 import Cart from './Cart';
 import Products from './Products';
+import ProductDetail from './ProductDetail';
 
 class _App extends Component {
   async componentDidMount() {
@@ -21,7 +22,10 @@ class _App extends Component {
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/login" component={SignIn} />
         <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/products" component={Products} />
+        <Switch>
+          <Route exact path="/products" component={Products} />
+          <Route exact path="/products/:id" component={ProductDetail} />
+        </Switch>
       </div>
     );
   }
