@@ -35,7 +35,7 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link style={{ color: 'white' }} to="/products">
+                    <Link style={{ color: '#f6e3c5' }} to="/products">
                       Shop All
                     </Link>
                   </button>
@@ -49,7 +49,7 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link style={{ color: 'white' }} to="/mens">
+                    <Link style={{ color: '#f6e3c5' }} to="/mens">
                       Mens
                     </Link>
                   </button>
@@ -63,7 +63,7 @@ class Nav extends Component {
               <LeftNavItem className="menu-item">
                 <div className="dropdown">
                   <button className="dropdown-btn left-menu-button">
-                    <Link style={{ color: 'white' }} to="/unisex">
+                    <Link style={{ color: '#f6e3c5' }} to="/womens">
                       Womens
                     </Link>
                   </button>
@@ -98,14 +98,25 @@ class Nav extends Component {
               />
 
               {auth.id ? (
-                <button
-                  style={{ background: 'none', border: 'none' }}
-                  onClick={logout}
-                >
-                  <Link className="links" to="/">
-                    Logout
-                  </Link>
-                </button>
+                <div className="dropdown">
+                  <button
+                    className="dropdown-btn left-menu-button"
+                    style={{ background: 'none', border: 'none' }}
+                    onClick={logout}
+                  >
+                    <Link
+                      className="dropdown-btn left-menu-button"
+                      style={{ color: '#f6e3c5' }}
+                      to="/"
+                    >
+                      Logout
+                    </Link>
+                  </button>
+                  <div className="dropdown-content">
+                    <Link to="/account">My Account</Link>
+                    <a href="">Edit Profile</a>
+                  </div>
+                </div>
               ) : (
                 <div>
                   <RightNav>
@@ -131,7 +142,7 @@ class Nav extends Component {
                       showZero
                       color="primary"
                     >
-                      <ShoppingCartIcon style={{ color: 'white' }} />
+                      <ShoppingCartIcon style={{ color: '#f6e3c5' }} />
                     </Badge>
                   </IconButton>
                 </Link>

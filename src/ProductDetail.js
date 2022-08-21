@@ -26,7 +26,6 @@ import {
 import { addToCart } from './store';
 
 const ProductDetail = ({ product, addToCart }) => {
-  console.log('product', product);
   return (
     <div>
       <Heading />
@@ -36,7 +35,7 @@ const ProductDetail = ({ product, addToCart }) => {
             <Image src={product.imageLocation} />
           </ImageDiv>
           <InfoDiv>
-            <Title>{product.name.toUpperCase()}</Title>
+            <Title>{product.name ? product.name.toUpperCase() : ''}</Title>
             <Info>{product.description}</Info>
             <Price>${product.price}</Price>
             <SizeDiv>
@@ -67,8 +66,10 @@ const ProductDetail = ({ product, addToCart }) => {
 
 const mapState = ({ products }, { match }) => {
   const productId = match.params.id * 1;
-  const product = products.find((product) => product.id === productId) || {};
+  const productsArr = Array.from(products);
+  const product = productsArr.find((product) => product.id === productId) || {};
   return {
+    products,
     product,
   };
 };

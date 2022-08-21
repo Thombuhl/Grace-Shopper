@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   Container,
@@ -19,9 +19,8 @@ const Product = ({ products }) => {
     if (!brandExists) {
       filteredBrandsArr.push(product.brand);
     }
-    console.log('filteredBrand', filteredBrandsArr);
+    return filteredBrandsArr;
   });
-
   return (
     <div>
       <Heading />
@@ -29,8 +28,9 @@ const Product = ({ products }) => {
         <FilterItem style={{ fontSize: '1rem' }}>
           Filter Products:
           <Select>
+            <Option>Brand</Option>
             {filteredBrandsArr.map((brand) => {
-              return <Option>{brand}</Option>;
+              return <Option key={brand}>{brand}</Option>;
             })}
           </Select>
           <Select>
@@ -65,9 +65,6 @@ const Product = ({ products }) => {
 };
 
 const mapState = ({ products, cart, auth }) => {
-  //   console.log('productsPageProducts', products);
-  console.log('productsPageCart', cart);
-  console.log('productsPageAuth', auth);
   return {
     products,
     cart,
