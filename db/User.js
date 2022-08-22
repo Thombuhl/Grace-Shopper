@@ -41,6 +41,57 @@ User.prototype.createOrderFromCart = async function () {
   return cart.save();
 };
 
+
+User.prototype.getFavorite = async function () {
+  let order = await conn.models.order.findOne({
+    where: {
+      userId: this.id,
+      isFavorite: true,
+      isCart: false
+    },
+    include: [
+      {
+        model: conn.models.lineItem,
+        include: [conn.models.product],
+      },
+    ],
+  });
+  if (!order) {
+    order = await conn.models.order.create({ userId: this.id, isFavorite:true, isCart:false });
+    order = await conn.models.order.findByPk(order.id, {
+      include: [conn.models.lineItem],
+    });
+  }
+  return order;
+};
+
+User.prototype.addToFavorite = async function ({ product, quantity }) {
+  quantity=1
+  const favorites = await this.getFavorite();
+  const lineItem = await conn.models.lineItem.findOne({
+    where: {
+      productId: product.id,
+      orderId: favorites.id,
+    },
+  });
+  if (lineItem) {
+    favorites.quantity = quantity;
+    if (lineItem.quantity) {
+      await lineItem.save();
+    } else {
+      await lineItem.destroy();
+    }
+  } else {
+    await conn.models.lineItem.create({
+      productId: product.id,
+      quantity,
+      orderId: favorites.id,
+    });
+  }
+  return this.getFavorite();
+};
+
+
 User.prototype.addToCart = async function ({ product, quantity }) {
   const cart = await this.getCart();
   const lineItem = await conn.models.lineItem.findOne({

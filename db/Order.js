@@ -7,6 +7,10 @@ const Order = conn.define("order", {
     type: Sequelize.BOOLEAN,
     defaultValue: true,
   },
+  isFavorite: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
   delivered: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
