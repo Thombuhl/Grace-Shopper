@@ -41,6 +41,14 @@ User.prototype.createOrderFromCart = async function () {
   return cart.save();
 };
 
+User.prototype.createOrderFromFavorite = async function () {
+  const favorite = await this.getFavorite();
+  const uuid = v4();
+  favorite.isCart = false;
+  favorite.confirmationId = uuid;
+  return favorite.save();
+};
+
 
 User.prototype.getFavorite = async function () {
   let order = await conn.models.order.findOne({

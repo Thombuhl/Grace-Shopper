@@ -5,13 +5,6 @@ const { isLoggedIn } = require("./middleware");
 
 module.exports = app;
 
-app.post("/", isLoggedIn, async (req, res, next) => {
-  try {
-    res.send(await req.user.createOrderFromCart());
-  } catch (ex) {
-    next(ex);
-  }
-});
 
 app.put("/cart", isLoggedIn, async (req, res, next) => {
   try {
@@ -28,6 +21,14 @@ app.get("/cart", isLoggedIn, async (req, res, next) => {
     next(ex);
   }
 });
+
+app.post('/favorite', isLoggedIn, async(req, res, next)=> {
+  try{
+    res.send(await req.user.createOrderFromFavorite())
+  } catch (ex) {
+    next(ex)
+  }
+})
 
 app.put("/favorite", isLoggedIn, async (req, res, next) => {
   try {
@@ -71,3 +72,12 @@ app.delete('/cart', isLoggedIn, async (req, res, next) => {
     next(ex)
   }
 })
+
+
+app.post("/", isLoggedIn, async (req, res, next) => {
+  try {
+    res.send(await req.user.createOrderFromCart());
+  } catch (ex) {
+    next(ex);
+  }
+});
