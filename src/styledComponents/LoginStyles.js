@@ -22,10 +22,7 @@ export const Wrapper = styled.div`
   border-radius: 12px;
 `;
 
-export const Title = styled.h1`
-  font-size: 3rem;
-  font-weight: 900;
-  color: #53bf9d;
+export const Title = styled.h3`
 `;
 
 export const Form = styled.form`
