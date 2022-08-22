@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -25,6 +25,13 @@ export const InputDiv = styled.div`
   width: 50%;
   height: 50px;
   background-color: white;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
 `;
 
 export const InputEmail = styled.input`
