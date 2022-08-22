@@ -84,10 +84,10 @@ Insert gif or link to demo
 ```http
   DELETE /api/orders/cart
 ```
-|     Payload     |   Type   | Description                |
-|    :--------    | :------- | :------------------------- |
-| `authorization` |   `JWT`  |       **Required**         |
-|    `product`    | `Product`|  **Required** Product Obj  |
+|     Payload     |   Type    | Description                |
+|    :--------    | :-------  | :------------------------- |
+| `authorization` |   `JWT`   |       **Required**         |
+|    `LineItem`   | `LineItme`|  **Required** LineItem Obj  |
 
 #### Get all past orders
 ```http
