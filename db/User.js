@@ -25,6 +25,10 @@ const User = conn.define('user', {
       isEmail: true,
     },
   },
+  newsLetter:{
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
 });
 
 User.addHook('beforeSave', async (user) => {
