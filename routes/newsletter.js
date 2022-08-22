@@ -10,14 +10,12 @@ app.put("/", async (req, res, next) => {
     let user = await User.findOne({
       where: {
         email: req.body.email,
-        newsLetter:false
       }
     })
     if(!user) {
-      res.send(await User.create({ ...req.body, email:req.body.email}))
+      res.send(await User.create({ email:req.body.email, newsLetter:true }))
     }
-    await user.update(req.body)
-    res.send(await user.save())
+    res.send(await user.update({ newsLetter:true }))
   } catch (ex) {
     next(ex);
   }
