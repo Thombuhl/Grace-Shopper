@@ -1,8 +1,6 @@
 import React from 'react';
 import Heading from './Heading';
 import Footer from './Footer';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 import { connect } from 'react-redux';
 import {
   Container,
@@ -49,11 +47,6 @@ const ProductDetail = ({ product, addToCart }) => {
               </Size>
             </SizeDiv>
             <AddDiv>
-              <AddAmt>
-                <RemoveIcon />
-                <Amount>1</Amount>
-                <AddIcon />
-              </AddAmt>
               <Button onClick={() => addToCart(product)}>ADD TO CART</Button>
             </AddDiv>
           </InfoDiv>
