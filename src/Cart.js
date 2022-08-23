@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {deleteLineItem, fetchCart, updateCart} from './store';
+import StripeContainer from "./stripe/StripeContainer";
 import {
   Icon, 
   IconDiv,
@@ -31,9 +32,11 @@ class Cart extends Component {
   render() {
     const { cart, updateCart, } = this.props;
     return (
+      <main>
       <MainContainer>
           {cart.lineItems.map((lineItem) => {
             return (
+            
               <Container>
                 <Title>{lineItem.product.name.toUpperCase()} </Title>
                 <DetailDiv>
@@ -49,14 +52,21 @@ class Cart extends Component {
                     <Icon onClick={() => this.props.deleteLineItem(lineItem)}><DeleteOutlineIcon/></Icon>
                   </IconDiv>
               </Container>
-            );
-          })}
+      
+      
+              );
+          })
+          }
         <button>
           <Link className="links" to="/checkout">
             Checkout
           </Link>
         </button>
+        <Detail>
+        </Detail>
       </MainContainer>
+        <StripeContainer />
+      </main>
 
     );
   }
