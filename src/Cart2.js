@@ -7,8 +7,10 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Footer from './Footer';
 import Heading from './Heading';
+import StripeContainer from './stripe/StripeContainer';
 
 import styled from 'styled-components';
+import { TaxiAlertOutlined } from '@mui/icons-material';
 export const Container = styled.div`
   background-color: #f8f8f8;
 `;
@@ -98,6 +100,7 @@ export const Summary = styled.h1`
 export const SummaryItem = styled.div`
   margin: 10px 0;
   font-size: 0.8rem;
+  font-family: sans-serif 
 `;
 
 export const OrderTotal = styled.span``;
@@ -150,6 +153,20 @@ export const HR = styled.hr`
 `;
 
 const CartTwo = ({ cart, updateCart, deleteLineItem }) => {
+
+  let totalAmountOfCart = 0;
+
+  cart.lineItems.forEach(lineItem => {
+    let quantity = lineItem.quantity;
+    let price = lineItem.product.price;
+    if(quantity && price) {
+      let lineItemCost =  price*quantity;
+      totalAmountOfCart = lineItemCost + totalAmountOfCart;
+    }
+  });
+
+  
+
   return (
     <div>
       <Heading />
@@ -214,16 +231,16 @@ const CartTwo = ({ cart, updateCart, deleteLineItem }) => {
           <OrderSummary>
             <Summary>Order Summary</Summary>
             <SummaryItem>
-              <OrderTotal>Total Amount:</OrderTotal>
+              <OrderTotal>Total Amount:{totalAmountOfCart}</OrderTotal>
             </SummaryItem>
             <SummaryItem>
-              <OrderShipping>Shipping:</OrderShipping>
+              <OrderShipping>Shipping:{25}</OrderShipping>
             </SummaryItem>
             <SummaryItem>
-              <OrderTax>Tax:</OrderTax>
+              <OrderTax>Tax:{totalAmountOfCart * 0.04}</OrderTax>
             </SummaryItem>
             <SummaryItem>
-              <OrderSubtotal>Subtotal:</OrderSubtotal>
+              <OrderSubtotal>Subtotal:{totalAmountOfCart + 25 + (totalAmountOfCart * 0.04)}</OrderSubtotal>
             </SummaryItem>
           </OrderSummary>
           <ShopDiv>
@@ -247,6 +264,7 @@ const CartTwo = ({ cart, updateCart, deleteLineItem }) => {
             </ShopButton>
           </ShopDiv>
         </Wrapper>
+        <StripeContainer />
       </Container>
       <Footer />
     </div>
