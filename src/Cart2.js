@@ -243,6 +243,7 @@ const CartTwo = ({ cart, updateCart, deleteLineItem }) => {
               <OrderSubtotal>Subtotal:{totalAmountOfCart + 25 + (totalAmountOfCart * 0.04)}</OrderSubtotal>
             </SummaryItem>
           </OrderSummary>
+          <StripeContainer />
           <ShopDiv>
             <ShopButton>
               <Link
@@ -264,7 +265,6 @@ const CartTwo = ({ cart, updateCart, deleteLineItem }) => {
             </ShopButton>
           </ShopDiv>
         </Wrapper>
-        <StripeContainer />
       </Container>
       <Footer />
     </div>

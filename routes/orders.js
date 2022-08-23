@@ -2,7 +2,9 @@
 const express = require("express");
 const app = express.Router();
 const { isLoggedIn } = require("./middleware");
-const { Product } = require("../db");
+require('dotenv').config()
+const stripe = require("stripe")('sk_test_51LZ1KkHgH8V7eWW5re4zadDxBHH5r5sbWkKxtL9qV2tytsNHjniCnddMCjOAq49QKDActxfoq8KrbGBImfoROYYK00HXDxKON1');
+
 module.exports = app;
 
 
@@ -73,27 +75,27 @@ app.delete('/cart', isLoggedIn, async (req, res, next) => {
   }
 })
 
-app.post("/create-payment-intent", async (req, res) => {
-  const { Product } = req.body;
-console.log(Product)
-  // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(Product.price),
-    currency: "usd",
-    automatic_payment_methods: {
-      enabled: true,
-      description: Product.description,
+app.post("/create-payment-intent", async (req, res, next) => {
+  const { amount, id} = req.body;
+
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount,
+      currency: "USD",
+      description: "order",
       payment_method: id,
-      
-    },
-  });
-
-  res.send({
-    clientSecret: paymentIntent.client_secret,
-  });
-});
-
-
+      confirm: true
+    })
+    console.log(payment)
+    res.json({
+      message: "Payment Successful",
+      success: true
+    })
+  } 
+  catch(error) {
+    next(error)
+  }
+})
 
 app.post("/", isLoggedIn, async (req, res, next) => {
   try {

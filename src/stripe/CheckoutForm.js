@@ -65,7 +65,7 @@ const PaymentForm = ({cart}) => {
           </fieldset>
         </form>
         : <div>
-          <h2>You Bought something</h2>
+          "Order Successful"
         </div>
    
     }

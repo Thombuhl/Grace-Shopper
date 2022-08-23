@@ -50,6 +50,7 @@ class Cart extends Component {
                     <Icon onClick={() => updateCart(lineItem.product, -1)}><RemoveIcon/></Icon>
                     <Icon onClick={() => this.props.deleteLineItem(lineItem)}><DeleteOutlineIcon/></Icon>
                   </IconDiv>
+                  <StripeContainer />
               </Container>
               );
           })
@@ -62,7 +63,6 @@ class Cart extends Component {
         <Detail>
         </Detail>
       </MainContainer>
-        <StripeContainer />
       </main>
 
     );

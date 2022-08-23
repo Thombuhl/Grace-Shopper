@@ -29,6 +29,15 @@ body {
   margin: .5rem
 }
 
+form {
+  height: 50px;
+  width: 300px;
+}
+
+fieldset button {
+  background-color: #f6e3c5;
+}
+
 .logo {
   border-radius: 50%;
   width: 50px;
