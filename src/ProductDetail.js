@@ -41,12 +41,12 @@ const ProductDetail = ({ product, addToCart }) => {
             <Info>{product.description}</Info>
             <Price>${product.price}</Price>
             <SizeDiv>
-              {/* <ColorWay>Color: {product.colorway}</ColorWay> */}
               {
+
                 sizes.map( shoe => (
-                  <ColorWay> {shoe.colorway} </ColorWay>
-                ))
-              }
+                  <a href={`#/products/${shoe.id}`}>{shoe.colorway}</a>
+                  ))
+                }
               <Size>
                 Size:
                 <SizeSelect>
