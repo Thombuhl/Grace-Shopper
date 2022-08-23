@@ -26,7 +26,6 @@ import { addToCart } from './store';
 const ProductDetail = ({ product, addToCart }) => {
   const shoes = useSelector(state => state.products)
   let sizes = Array.from(shoes).filter(shoe => shoe.silhoutte === product.silhoutte)
-  console.log(sizes)
 
   return (
     <div>
@@ -42,7 +41,6 @@ const ProductDetail = ({ product, addToCart }) => {
             <Price>${product.price}</Price>
             <SizeDiv>
               {
-
                 sizes.map( shoe => (
                   <a href={`#/products/${shoe.id}`}>{shoe.colorway}</a>
                   ))
