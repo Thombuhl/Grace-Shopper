@@ -6,13 +6,6 @@ import {CardElement, useElements, useStripe} from "@stripe/react-stripe-js"
 const CARD_OPTIONS = {
 
 }
-export const OrderSummary = styled.div`
-  width: 30vw;
-  height: 25vh;
-  margin: 50px 0;
-  border: 1px solid black;
-  border-radius: 12px;
-`;
 
 const PaymentForm = ({cart}) => {
   const [success, setSuccess] = useState(false)
