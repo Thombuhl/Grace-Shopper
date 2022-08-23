@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import '../../../public/checkout.css'
 
-const Checkout = () => {
+const Checkout = (props) => {
   const userCart = useSelector(state => state.cart)
   const cartTotal = userCart.lineItems.reduce((accum, item)=>{
     return accum += (item.product.price * item.quantity)
@@ -13,9 +13,15 @@ const Checkout = () => {
   const delivery = (cartTotal > 150 ? 0 : .05 * cartTotal).toFixed(2)
   const tax = (.04 * cartTotal).toFixed(2)
   const finalPrice = (cartTotal*1 + delivery*1 + tax*1).toFixed(2) 
+
+  const reviewAndPay = (e)=> {
+    e.preventDefault()
+    console.log(props.history.push('/checkout/payment'))
+  }
+
   return (
     <div className='checkout-component'>
-      <form action="">
+      <form onSubmit={reviewAndPay}>
         {/* <a href="">LOGIN & CHECKOUT FASTER</a> */}
         <div>
           <h3>Contact Details</h3>
