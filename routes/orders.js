@@ -86,7 +86,6 @@ app.post("/create-payment-intent", async (req, res, next) => {
       payment_method: id,
       confirm: true
     })
-    console.log(payment)
     res.json({
       message: "Payment Successful",
       success: true
