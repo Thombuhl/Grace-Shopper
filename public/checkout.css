@@ -6,6 +6,7 @@
 .checkout-component > form {
   width: 70%;
   padding: 1rem 1.5rem;
+  flex-direction: column;
 }
 
 /* .checkout-component form input {
@@ -17,6 +18,7 @@
 }
 
 .checkout-component input {
+  margin: .5rem;
   padding: .5rem;
 }
 
