@@ -9,7 +9,7 @@ import CartTwo from './Cart2';
 import Products from './Products';
 import ProductDetail from './ProductDetail';
 import Login from './Login';
-
+import Checkout from './components/checkout/Checkout'
 class _App extends Component {
   async componentDidMount() {
     this.props.load();
@@ -20,6 +20,7 @@ class _App extends Component {
         <Nav />
         <Route exact path="/" component={Home} />
         <Route exact path="/cart" component={CartTwo} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <Switch>

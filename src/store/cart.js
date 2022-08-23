@@ -8,18 +8,16 @@ const initialState = {
   lineItems: []
 };
 
-
 const cart = (state = initialState, action)=> {
   switch(action.type) {
     case SET_CART: 
       return action.cart
     case DELETE_PRODUCT:
-     const lineItems = state.lineItems.filter(lineItem => lineItem.id !== action.lineItem.id)
+      const lineItems = state.lineItems.filter(lineItem => lineItem.id !== action.lineItem.id)
       return {...state, lineItems}
     case ADD_PRODUCT_TO_CART:
-     let newProducts = action.lineItems;
-     return {...state, newProducts}
-
+      let newProducts = action.lineItems;
+      return {...state, newProducts}
     default: 
       return state
   };
