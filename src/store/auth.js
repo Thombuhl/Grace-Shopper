@@ -37,13 +37,9 @@ export const exchangeToken = () => {
 
 export const login = (credentials, history) => {
   return async (dispatch) => {
-
     let response = await axios.post('/api/sessions', credentials)
-  
-    const {token} = response.data;
-
+    const { token } = response.data;
     window.localStorage.setItem('token', token); 
-
     const auth = (await axios.get('/api/sessions', {
       headers: {
         authorization: token
@@ -54,12 +50,18 @@ export const login = (credentials, history) => {
   };
 };
 
-export const signup = (userInfo) => {
-  return async () => {
-   const response =  await axios.post("/api/sessions/signup", userInfo);
-   const {token} = response.data
-   console.log(token)
-
+export const signup = (userInfo, history) => {
+  return async (dispatch) => {
+    const response =  await axios.post("/api/sessions/signup", userInfo);
+    const { token } = response.data
+    window.localStorage.setItem('token', token); 
+    const auth = (await axios.get('/api/sessions', {
+      headers: {
+        authorization: token
+      }
+    })).data
+    dispatch(_handleToken(auth));
+    history.push('/')
   };
 };
 export default auth;

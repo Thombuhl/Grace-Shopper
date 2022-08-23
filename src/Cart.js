@@ -36,7 +36,6 @@ class Cart extends Component {
       <MainContainer>
           {cart.lineItems.map((lineItem) => {
             return (
-            
               <Container>
                 <Title>{lineItem.product.name.toUpperCase()} </Title>
                 <DetailDiv>
@@ -52,8 +51,6 @@ class Cart extends Component {
                     <Icon onClick={() => this.props.deleteLineItem(lineItem)}><DeleteOutlineIcon/></Icon>
                   </IconDiv>
               </Container>
-      
-      
               );
           })
           }

@@ -30,63 +30,66 @@ class SignUp extends Component {
     const { username, password, email, gender } = this.state;
 
     return (
-      <form onSubmit={onSubmit} className="form-group" id="sign-in">
-        <h2>SIGN UP</h2>
-          <div>
-            <label>Username</label>
-              <input
-                className="input-group mb-3"
-                name="username"
-                onChange={onChange}
-                value={username}
-                placeholder="Enter Username"
-                required
-              />
-          </div>
-          <div>
-            <label>Password</label>
-              <input
-                className="input-group mb-3"
-                name="password"
-                onChange={onChange}
-                value={password}
-                placeholder="Enter Password"
-                required
-              />
-          </div>
-          <div>
-            <label>Email</label>
-              <input
-                className="input-group mb-3"
-                name="email"
-                onChange={onChange}
-                value={email}
-                placeholder="Enter Email"
-                required
-              />
-          </div>
-          <div>
-            <label>Gender</label>
-              <input
-                className="input-group mb-3"
-                name="gender"
-                onChange={onChange}
-                value={gender}
-                placeholder="Enter Gender"
-                required
-              />
-          </div>
-        <Link to="/login"> Have an account? </Link>
-        <button> Sign Up </button>
-      </form>
+      <div>
+        <form onSubmit={onSubmit} className="form-group" id="sign-in">
+          <h2>SIGN UP</h2>
+            <div>
+              <label>Username</label>
+                <input
+                  className="input-group mb-3"
+                  name="username"
+                  onChange={onChange}
+                  value={username}
+                  placeholder="Enter Username"
+                  required
+                />
+            </div>
+            <div>
+              <label>Password</label>
+                <input
+                  className="input-group mb-3"
+                  name="password"
+                  onChange={onChange}
+                  value={password}
+                  placeholder="Enter Password"
+                  required
+                />
+            </div>
+            <div>
+              <label>Email</label>
+                <input
+                  className="input-group mb-3"
+                  name="email"
+                  onChange={onChange}
+                  value={email}
+                  placeholder="Enter Email"
+                  required
+                />
+            </div>
+            <div>
+              <label>Gender</label>
+                <input
+                  className="input-group mb-3"
+                  name="gender"
+                  onChange={onChange}
+                  value={gender}
+                  placeholder="Enter Gender"
+                  required
+                />
+            </div>
+          <button> Sign Up </button>
+        </form>
+        <Link to="/login"> Already have an Account? </Link>
+      </div>
     );
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, { history }) => {
   return {
     signup: (usrInfo) => {
-      dispatch(signup(usrInfo));
+      dispatch(signup(usrInfo, history));
+      history.push('/')
     },
   };
 };
