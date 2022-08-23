@@ -100,7 +100,7 @@ const setUp = async () => {
     const port = process.env.PORT || 3000;
     app.listen(port, () => console.log(`listening on port ${port}`));
 
-    await sneaks.getProducts('shoes', 300, function (er, products) {
+    await sneaks.getProducts('shoes', 500, function (er, products) {
       if (er) {
         console.log('error');
       }

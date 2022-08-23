@@ -113,17 +113,22 @@ const Cart = ({ cart, updateCart, deleteLineItem }) => {
           <OrderSummary>
             <Summary>Order Summary</Summary>
             <SummaryItem>
-              <OrderTotal>Total Amount: ${totalAmountOfCart}</OrderTotal>
+              <OrderTotal>
+                Total Amount: ${totalAmountOfCart.toFixed(2)}
+              </OrderTotal>
             </SummaryItem>
             <SummaryItem>
-              <OrderShipping>Shipping: ${25}</OrderShipping>
+              <OrderShipping>
+                Shipping: {totalAmountOfCart > 150 ? 'Free Shipping' : `$${25}`}
+              </OrderShipping>
             </SummaryItem>
             <SummaryItem>
-              <OrderTax>Tax: ${totalAmountOfCart * 0.04}</OrderTax>
+              <OrderTax>Tax: ${(totalAmountOfCart * 0.04).toFixed(2)}</OrderTax>
             </SummaryItem>
             <SummaryItem>
               <OrderSubtotal>
-                Subtotal: ${totalAmountOfCart + 25 + totalAmountOfCart * 0.04}
+                Subtotal: $
+                {(totalAmountOfCart + 25 + totalAmountOfCart * 0.04).toFixed(2)}
               </OrderSubtotal>
             </SummaryItem>
           </OrderSummary>
