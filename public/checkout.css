@@ -1,3 +1,34 @@
-.component {
-  background-color: green;
+.checkout-component {
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkout-component > form {
+  width: 70%;
+  padding: 1rem 1.5rem;
+}
+
+/* .checkout-component form input {
+  width: 45%;
+} */
+
+.checkout-component > div {
+  width: 30%;
+}
+
+.checkout-component input {
+  padding: .5rem;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-col input {
+  width: 2rem;
 }
