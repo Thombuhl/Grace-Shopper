@@ -20,13 +20,9 @@ import {
 } from './styledComponents/NavStyles';
 
 class Nav extends Component {
-
-
-
   componentDidMount() {
     this.props.exchangeToken();
   }
-
 
   render() {
     const { auth, logout, fetchCart, cart } = this.props;
@@ -81,7 +77,7 @@ class Nav extends Component {
             <CenterNav>
               <Logo>
                 <Link className="links" to="/">
-                  SoleHyped.
+                  SoleNice.
                 </Link>
               </Logo>
             </CenterNav>
@@ -139,7 +135,6 @@ class Nav extends Component {
 
               <RightNavItem>
                 <Link className="links" to="/cart">
-
                   <IconButton onClick={fetchCart} aria-label="cart">
                     <Badge
                       badgeContent={cart.lineItems ? cart.lineItems.length : 0}
@@ -162,10 +157,8 @@ const mapStateToProps = ({ auth, cart }) => {
   return {
     auth,
     cart,
-
   };
 };
-
 
 const mapDispatch = (dispatch) => {
   return {

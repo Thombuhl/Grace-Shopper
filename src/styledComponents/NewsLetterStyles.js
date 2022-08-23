@@ -23,7 +23,7 @@ export const InputDiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 50%;
-  height: 50px;
+  height: 80px;
   background-color: white;
 `;
 
@@ -36,12 +36,16 @@ export const Form = styled.form`
 
 export const InputEmail = styled.input`
   border: none;
-  flex: 9;
+  flex: 10;
+  width: 100%;
+  height: 65%;
   padding-left: 30px;
 `;
 
 export const Button = styled.button`
   flex: 1;
+  width: 100%;
+  height: 65%;
   background-color: #53bf9d;
   color: #f6e3c5;
 `;

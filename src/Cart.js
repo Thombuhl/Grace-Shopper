@@ -1,73 +1,159 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {deleteLineItem, fetchCart, updateCart} from './store';
-import StripeContainer from "./stripe/StripeContainer";
-import {
-  Icon, 
-  IconDiv,
-  Image,
-  ImageDiv, 
-  Container,
-  MainContainer,
-  Title,
-  Detail, 
-  DetailDiv
-} from './styledComponents/CartStyles'
+import { deleteLineItem, fetchCart, updateCart } from './store';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import Footer from './Footer';
+import Heading from './Heading';
+import StripeContainer from './stripe/StripeContainer';
+import {
+  Container,
+  Wrapper,
+  Title,
+  OrderShipping,
+  OrderSubtotal,
+  OrderSummary,
+  OrderTax,
+  OrderTotal,
+  PriceDiv,
+  ProductDiv,
+  ProductColor,
+  ProductDetail,
+  Product,
+  ProductPrice,
+  ProductImage,
+  ProductName,
+  ProductSize,
+  Summary,
+  SummaryItem,
+  ShopDiv,
+  ShopButton,
+  Info,
+  HR,
+  Details,
+  Quantity,
+  Icon,
+} from './styledComponents/CartStyles';
 
-class Cart extends Component {
-  constructor() {
-    super();
-  };
+const Cart = ({ cart, updateCart, deleteLineItem }) => {
+  let totalAmountOfCart = 0;
 
-  componentDidMount() {
-    this.props.fetchCart()
-  };
-  
+  cart.lineItems.forEach((lineItem) => {
+    let quantity = lineItem.quantity;
+    let price = lineItem.product.price;
+    if (quantity && price) {
+      let lineItemCost = price * quantity;
+      totalAmountOfCart = lineItemCost + totalAmountOfCart;
+    }
+  });
 
-  render() {
-    const { cart, updateCart, } = this.props;
-    return (
-      <main>
-      <MainContainer>
+  return (
+    <div>
+      <Heading />
+      <Container>
+        <Wrapper>
+          <Title>Your Cart</Title>
           {cart.lineItems.map((lineItem) => {
             return (
-              <Container>
-                <Title>{lineItem.product.name.toUpperCase()} </Title>
-                <DetailDiv>
-                  <Detail>Quantity {lineItem.quantity}</Detail> 
-                  <Detail>${lineItem.product.price}</Detail>  
-                </DetailDiv>
-                  <ImageDiv>
-                    <Image src={lineItem.product.imageLocation} />
-                  </ImageDiv>
-                  <IconDiv>
-                    <Icon onClick={() => updateCart(lineItem.product, 1)}><AddIcon/></Icon>
-                    <Icon onClick={() => updateCart(lineItem.product, -1)}><RemoveIcon/></Icon>
-                    <Icon onClick={() => this.props.deleteLineItem(lineItem)}><DeleteOutlineIcon/></Icon>
-                  </IconDiv>
-              </Container>
-              );
-          })
-          }
-        <button>
-          <Link className="links" to="/checkout">
-            Checkout
-          </Link>
-        </button>
-        <Detail>
-        </Detail>
-      </MainContainer>
+              <ProductDiv key={lineItem.id}>
+                <Info>
+                  <HR />
+                  <Product>
+                    <ProductDetail>
+                      <ProductImage
+                        src={lineItem.product.imageLocation}
+                      ></ProductImage>
+                      <Details>
+                        <ProductName>
+                          <strong>Product Name:</strong>
+                          {lineItem.product.name.toUpperCase()}
+                        </ProductName>
+                        <ProductColor>
+                          <strong>Colorway:</strong>
+                          {lineItem.product.colorway}
+                        </ProductColor>
+                        <ProductSize>
+                          <strong>Size:</strong>
+                          {lineItem.product.size}
+                        </ProductSize>
+                      </Details>
+                    </ProductDetail>
+                    <PriceDiv>
+                      <Quantity>
+                        <Icon onClick={() => updateCart(lineItem.product, -1)}>
+                          <RemoveIcon />
+                        </Icon>
+                        <Icon
+                          style={{
+                            backgroundColor: '#53bf9d',
+                            width: '20px',
+                            height: '20px',
+                            cursor: 'wait',
+                            color: '#f6e3c5',
+                          }}
+                        >
+                          {lineItem.quantity}
+                        </Icon>
+                        <Icon onClick={() => updateCart(lineItem.product, 1)}>
+                          <AddIcon />
+                        </Icon>
+                        <Icon onClick={() => deleteLineItem(lineItem)}>
+                          <DeleteOutlineIcon />
+                        </Icon>
+                      </Quantity>
+                      <ProductPrice>${lineItem.product.price}</ProductPrice>
+                    </PriceDiv>
+                  </Product>
+                </Info>
+              </ProductDiv>
+            );
+          })}
+          <OrderSummary>
+            <Summary>Order Summary</Summary>
+            <SummaryItem>
+              <OrderTotal>Total Amount: ${totalAmountOfCart}</OrderTotal>
+            </SummaryItem>
+            <SummaryItem>
+              <OrderShipping>Shipping: ${25}</OrderShipping>
+            </SummaryItem>
+            <SummaryItem>
+              <OrderTax>Tax: ${totalAmountOfCart * 0.04}</OrderTax>
+            </SummaryItem>
+            <SummaryItem>
+              <OrderSubtotal>
+                Subtotal: ${totalAmountOfCart + 25 + totalAmountOfCart * 0.04}
+              </OrderSubtotal>
+            </SummaryItem>
+          </OrderSummary>
+          <ShopDiv>
+            <ShopButton>
+              <Link
+                className="links"
+                style={{ textDecoration: 'none', color: 'black' }}
+                to="/products"
+              >
+                Continue Shopping
+              </Link>
+            </ShopButton>
+            <ShopButton>
+              <Link
+                className="links"
+                style={{ textDecoration: 'none', color: 'black' }}
+                to="/checkout"
+              >
+                Checkout
+              </Link>
+            </ShopButton>
+          </ShopDiv>
+        </Wrapper>
         <StripeContainer />
-      </main>
-
-    );
-  }
-}
+      </Container>
+      <Footer />
+    </div>
+  );
+};
 
 const mapStateToProps = ({ cart, auth, products }) => {
   return {
@@ -80,14 +166,14 @@ const mapStateToProps = ({ cart, auth, products }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchCart: () => {
-      dispatch(fetchCart())
+      dispatch(fetchCart());
     },
     deleteLineItem: (product) => {
-      dispatch(deleteLineItem(product))
+      dispatch(deleteLineItem(product));
     },
     updateCart: (product, diff = 1) => {
-      dispatch(updateCart(product, diff))
-    }
+      dispatch(updateCart(product, diff));
+    },
   };
 };
 

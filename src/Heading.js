@@ -1,10 +1,10 @@
-import React from "react";
-import { Container, Info } from "./styledComponents/HeadingStyles";
+import React from 'react';
+import { Container, Info } from './styledComponents/HeadingStyles';
 
 const Heading = () => {
   return (
     <Container>
-      <Info>Free Shipping on all orders $20+</Info>
+      <Info>Free Shipping on all orders $150+</Info>
     </Container>
   );
 };
