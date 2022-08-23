@@ -23,6 +23,7 @@ const Checkout = () => {
                 <h3>{ item.product.name }</h3>
                 <h4>{ item.product.colorway }</h4>
                 <h5>QTY: { item.quantity }</h5>
+                <h5>QTY: { item.product.price }</h5>
                 <img src={item.product.imageLocation} alt='item' width='20%'/>
               </li>
             )
