@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Home from './Home';
 import SignUp from './SignUp';
 import Nav from './Nav';
-import CartTwo from './Cart2';
+import Cart from './Cart';
 import Products from './Products';
 import ProductDetail from './ProductDetail';
 import Login from './Login';
@@ -21,7 +21,7 @@ class _App extends Component {
       <div>
         <Nav />
         <Route exact path="/" component={Home} />
-        <Route exact path="/cart" component={CartTwo} />
+        <Route exact path="/cart" component={Cart} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/mens" component={MensProduct} />
