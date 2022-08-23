@@ -1,82 +1,78 @@
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
-import {CardElement, useElements, useStripe} from "@stripe/react-stripe-js"
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
-const CARD_OPTIONS = {
+const CARD_OPTIONS = {};
 
-}
-
-const PaymentForm = ({cart}) => {
-  const [success, setSuccess] = useState(false)
+const PaymentForm = ({ cart }) => {
+  const [success, setSuccess] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
 
   let totalAmountOfCart = 0;
 
-  cart.lineItems.forEach(lineItem => {
+  cart.lineItems.forEach((lineItem) => {
     let quantity = lineItem.quantity;
     let price = lineItem.product.price;
-    if(quantity && price) {
-      let lineItemCost =  price*quantity;
+    if (quantity && price) {
+      let lineItemCost = price * quantity;
       totalAmountOfCart = lineItemCost + totalAmountOfCart;
     }
   });
 
-  const handleSubmit = async(evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement)
-    })
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: elements.getElement(CardElement),
+    });
 
-    if(!error) {
+    if (!error) {
       try {
-        const {id} = paymentMethod
+        const { id } = paymentMethod;
         const response = await axios.post('/api/orders/create-payment-intent', {
-          amount: ((totalAmountOfCart *.04) + 25 + totalAmountOfCart) * 100, 
-          id
-        })
-          
-        if(response.data.success) {
-          console.log("confirmed")
-          setSuccess(true)
-      }
-      } catch (error) {
-        console.log('There was an error', error)
-      }
+          amount: (totalAmountOfCart * 0.04 + 25 + totalAmountOfCart) * 100,
+          id,
+        });
 
+        if (response.data.success) {
+          console.log('confirmed');
+          setSuccess(true);
+        }
+      } catch (error) {
+        console.log('There was an error', error);
+      }
     } else {
-      console.log(error)
+      console.log(error);
     }
-}
+  };
 
   return (
     <>
-    {!success ? 
-   
+      {!success ? (
         <form onSubmit={handleSubmit}>
-          <fieldset className='FormGroup'></fieldset>
+          <fieldset className="FormGroup"></fieldset>
           <div className="FormRow">
-            <CardElement options={CARD_OPTIONS}/>
+            <CardElement options={CARD_OPTIONS} />
           </div>
           <fieldset>
             <button>Pay</button>
           </fieldset>
         </form>
-        : <div>
+      ) : (
+        <div>
           <h2>You Bought something</h2>
         </div>
-   
-    }
+      )}
     </>
-  )
-}
+  );
+};
 
-const mapStateToProps = ({cart}) => {
+const mapStateToProps = ({ cart }) => {
   return {
-    cart
+    cart,
   };
 };
 
-export default connect(mapStateToProps, null)(PaymentForm)
+export default connect(mapStateToProps, null)(PaymentForm);
