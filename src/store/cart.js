@@ -39,7 +39,7 @@ export const fetchCart = () => {
 
 export const updateCart = (product, diff)=> {
   return async(dispatch, getState)=> {
-    const lineItem = getState().cart.lineItems.find(lineItem => lineItem.productId === product.id) || { quantity: 0};
+    const lineItem = getState().cart.lineItems.find( lineItem => lineItem.productId === product.id ) || { quantity: 0 };
     const response = await axios.put('/api/orders/cart', { product, quantity: lineItem.quantity + diff}, {
       headers: {
         authorization: window.localStorage.getItem('token')
@@ -49,18 +49,17 @@ export const updateCart = (product, diff)=> {
   };
 };
 
-
-
-export const deleteLineItem = (lineItem) => {
-  return async(dispatch) => {
-   await axios.delete('/api/orders/cart', {
-      headers: {
-        authorization: window.localStorage.getItem('token'),
-      },
-      data: {
-        lineItem
-      }
-    });
+export const deleteLineItem = (product) => {
+  return async(dispatch, getState) => {
+    const lineItem = getState().cart.lineItems.find( lineItem => lineItem.productId === product.product.id );
+    console.log('---------delete item ----------', lineItem)
+    // await axios.delete('/api/orders/cart',
+    //   { lineItem }, {
+    //     headers: {
+    //       authorization: window.localStorage.getItem('token'),
+    //     }
+    //   }
+    // );
     dispatch(_deleteProduct(lineItem))
   };
 };

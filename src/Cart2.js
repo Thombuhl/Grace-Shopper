@@ -156,61 +156,63 @@ const CartTwo = ({ cart, updateCart, deleteLineItem }) => {
       <Container>
         <Wrapper>
           <Title>Your Cart</Title>
-          {cart.lineItems.map((lineItem) => {
-            return (
-              <ProductDiv key={lineItem.id}>
-                <Info>
-                  <HR />
-                  <Product>
-                    <ProductDetail>
-                      <ProductImage
-                        src={lineItem.product.imageLocation}
-                      ></ProductImage>
-                      <Details>
-                        <ProductName>
-                          <strong>Product Name:</strong>
-                          {lineItem.product.name.toUpperCase()}
-                        </ProductName>
-                        <ProductColor>
-                          <strong>Colorway:</strong>
-                          {lineItem.product.colorway}
-                        </ProductColor>
-                        <ProductSize>
-                          <strong>Size:</strong>
-                          {lineItem.product.size}
-                        </ProductSize>
-                      </Details>
-                    </ProductDetail>
-                    <PriceDiv>
-                      <Quantity>
-                        <Icon onClick={() => updateCart(lineItem.product, -1)}>
-                          <RemoveIcon />
-                        </Icon>
-                        <Icon
-                          style={{
-                            backgroundColor: '#53bf9d',
-                            width: '20px',
-                            height: '20px',
-                            cursor: 'wait',
-                            color: '#f6e3c5',
-                          }}
-                        >
-                          {lineItem.quantity}
-                        </Icon>
-                        <Icon onClick={() => updateCart(lineItem.product, 1)}>
-                          <AddIcon />
-                        </Icon>
-                        <Icon onClick={() => deleteLineItem(lineItem)}>
-                          <DeleteOutlineIcon />
-                        </Icon>
-                      </Quantity>
-                      <ProductPrice>${lineItem.product.price}</ProductPrice>
-                    </PriceDiv>
-                  </Product>
-                </Info>
-              </ProductDiv>
-            );
-          })}
+
+          { cart.lineItems.map( lineItem => {
+              return (
+                <ProductDiv key={ lineItem.id }>
+                  <Info>
+                    <HR />
+                    <Product>
+                      <ProductDetail>
+                        <ProductImage
+                          src={lineItem.product.imageLocation}
+                        ></ProductImage>
+                        <Details>
+                          <ProductName>
+                            <strong>Product Name:</strong>
+                            {lineItem.product.name.toUpperCase()}
+                          </ProductName>
+                          <ProductColor>
+                            <strong>Colorway:</strong>
+                            {lineItem.product.colorway}
+                          </ProductColor>
+                          <ProductSize>
+                            <strong>Size:</strong>
+                            {lineItem.product.size}
+                          </ProductSize>
+                        </Details>
+                      </ProductDetail>
+                      <PriceDiv>
+                        <Quantity>
+                          <Icon onClick={() => updateCart(lineItem.product, -1)}>
+                            <RemoveIcon />
+                          </Icon>
+                          <Icon
+                            style={{
+                              backgroundColor: '#53bf9d',
+                              width: '20px',
+                              height: '20px',
+                              cursor: 'wait',
+                              color: '#f6e3c5',
+                            }}
+                          >
+                            {lineItem.quantity}
+                          </Icon>
+                          <Icon onClick={() => updateCart(lineItem.product, 1)}>
+                            <AddIcon />
+                          </Icon>
+                          <Icon onClick={() => deleteLineItem(lineItem)}>
+                            <DeleteOutlineIcon />
+                          </Icon>
+                        </Quantity>
+                        <ProductPrice>${lineItem.product.price}</ProductPrice>
+                      </PriceDiv>
+                    </Product>
+                  </Info>
+                </ProductDiv>
+              );
+            })
+          }
           <OrderSummary>
             <Summary>Order Summary</Summary>
             <SummaryItem>

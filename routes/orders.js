@@ -5,7 +5,6 @@ const { isLoggedIn } = require("./middleware");
 
 module.exports = app;
 
-
 app.put("/cart", isLoggedIn, async (req, res, next) => {
   try {
     res.send(await req.user.addToCart(req.body));
@@ -55,6 +54,7 @@ app.delete('/favorite', isLoggedIn, async (req, res, next) => {
     next(ex)
   }
 })
+
 app.get('/purchases', isLoggedIn, async (req, res, next) => {
   try {
     res.send(await req.user.getPreviousOrders());
@@ -65,6 +65,7 @@ app.get('/purchases', isLoggedIn, async (req, res, next) => {
 
 app.delete('/cart', isLoggedIn, async (req, res, next) => {
   try{
+    res.send(req.body)
     const cart = await req.user.getCart()
     const items = cart.lineItems.find( item => item.id === req.body.product.id)
     res.status(204).send( await items.destroy() )
@@ -72,7 +73,6 @@ app.delete('/cart', isLoggedIn, async (req, res, next) => {
     next(ex)
   }
 })
-
 
 app.post("/", isLoggedIn, async (req, res, next) => {
   try {
