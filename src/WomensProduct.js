@@ -1,5 +1,6 @@
-import React, { Component, useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import ProductCards from './ProductCards';
 import {
   Container,
   FilterDiv,
@@ -7,12 +8,14 @@ import {
   Select,
   Option,
 } from './styledComponents/ProductsStyles';
-import ProductCards from './ProductCards';
 import Heading from './Heading';
 import Footer from './Footer';
 
-const Product = ({ products }) => {
+const MenProducts = ({ products }) => {
   const productsArr = Array.from(products);
+  const filteredProd = productsArr.filter(
+    (product) => product.gender === 'WOMENS'
+  );
   const filteredBrandsArr = [];
   const getBrands = productsArr.filter((product) => {
     const brandExists = filteredBrandsArr.includes(product.brand);
@@ -55,7 +58,7 @@ const Product = ({ products }) => {
         </FilterItem>
       </FilterDiv>
       <Container>
-        {productsArr.map((product) => {
+        {filteredProd.map((product) => {
           return <ProductCards key={product.id} product={product} />;
         })}
       </Container>
@@ -72,4 +75,4 @@ const mapState = ({ products, cart, auth }) => {
   };
 };
 
-export default connect(mapState)(Product);
+export default connect(mapState)(MenProducts);

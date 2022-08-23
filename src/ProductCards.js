@@ -31,7 +31,9 @@ const ProductCards = ({ product, addToCart }) => {
           </Link>
         </Icon>
         <Icon>
-          <FavoriteIcon />
+          <Link to="/favorites">
+            <FavoriteIcon style={{ color: 'black' }} />
+          </Link>
         </Icon>
       </IconDiv>
     </Container>
