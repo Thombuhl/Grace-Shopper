@@ -5,13 +5,6 @@ const { isLoggedIn } = require("./middleware");
 const { Product } = require("../db");
 module.exports = app;
 
-app.post("/", isLoggedIn, async (req, res, next) => {
-  try {
-    res.send(await req.user.createOrderFromCart());
-  } catch (ex) {
-    next(ex);
-  }
-});
 
 app.put("/cart", isLoggedIn, async (req, res, next) => {
   try {
@@ -29,6 +22,39 @@ app.get("/cart", isLoggedIn, async (req, res, next) => {
   }
 });
 
+app.post('/favorite', isLoggedIn, async(req, res, next)=> {
+  try{
+    res.send(await req.user.createOrderFromFavorite())
+  } catch (ex) {
+    next(ex)
+  }
+})
+
+app.put("/favorite", isLoggedIn, async (req, res, next) => {
+  try {
+    res.send(await req.user.addToFavorite(req.body));
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+app.get("/favorite", isLoggedIn, async (req, res, next) => {
+  try {
+    res.send(await req.user.getFavorite());
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+app.delete('/favorite', isLoggedIn, async (req, res, next) => {
+  try{
+    const favorite = await req.user.getFavorite()
+    const items = favorite.lineItems.find( item => item.productId === req.body.product.id)
+    res.status(204).send( await items.destroy() )
+  } catch (ex) {
+    next(ex)
+  }
+})
 app.get('/purchases', isLoggedIn, async (req, res, next) => {
   try {
     res.send(await req.user.getPreviousOrders());
@@ -40,12 +66,13 @@ app.get('/purchases', isLoggedIn, async (req, res, next) => {
 app.delete('/cart', isLoggedIn, async (req, res, next) => {
   try{
     const cart = await req.user.getCart()
-    const items = cart.lineItems.find( item => item.id === req.body.lineItem.id)
+    const items = cart.lineItems.find( item => item.id === req.body.product.id)
     res.status(204).send( await items.destroy() )
   } catch (ex) {
     next(ex)
   }
 })
+
 app.post("/create-payment-intent", async (req, res) => {
   const { Product } = req.body;
 console.log(Product)
@@ -65,3 +92,14 @@ console.log(Product)
     clientSecret: paymentIntent.client_secret,
   });
 });
+
+
+
+app.post("/", isLoggedIn, async (req, res, next) => {
+  try {
+    res.send(await req.user.createOrderFromCart());
+  } catch (ex) {
+    next(ex);
+  }
+});
+

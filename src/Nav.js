@@ -82,7 +82,7 @@ class Nav extends Component {
             <CenterNav>
               <Logo>
                 <Link className="links" to="/">
-                  GST7.
+                  SoleHyped.
                 </Link>
               </Logo>
             </CenterNav>
