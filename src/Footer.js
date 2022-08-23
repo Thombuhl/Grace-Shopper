@@ -27,7 +27,7 @@ const Footer = () => {
   return (
     <Container>
       <LeftFooter>
-        <Logo>GST7</Logo>
+        <Logo style={{ color: '#f6e3c5' }}>SoleNice.</Logo>
         <Info>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -68,6 +68,11 @@ const Footer = () => {
             </Link>
           </CenterItem>
           <CenterItem>
+            <Link style={{ color: '#f6e3c5' }} to="/products">
+              All Products
+            </Link>
+          </CenterItem>
+          <CenterItem>
             <Link style={{ color: '#f6e3c5' }} to="/mens">
               Mens
             </Link>
@@ -75,11 +80,6 @@ const Footer = () => {
           <CenterItem>
             <Link style={{ color: '#f6e3c5' }} to="/womens">
               Womens
-            </Link>
-          </CenterItem>
-          <CenterItem>
-            <Link style={{ color: '#f6e3c5' }} to="/products">
-              Unisex
             </Link>
           </CenterItem>
         </List>
