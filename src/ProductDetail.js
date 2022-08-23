@@ -1,7 +1,7 @@
 import React from 'react';
 import Heading from './Heading';
 import Footer from './Footer';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import {
   Container,
   Wrapper,
@@ -24,6 +24,10 @@ import {
 import { addToCart } from './store';
 
 const ProductDetail = ({ product, addToCart }) => {
+  const shoes = useSelector(state => state.products)
+  let sizes = Array.from(shoes).filter(shoe => shoe.silhoutte === product.silhoutte)
+  console.log(sizes)
+
   return (
     <div>
       <Heading />
@@ -37,12 +41,21 @@ const ProductDetail = ({ product, addToCart }) => {
             <Info>{product.description}</Info>
             <Price>${product.price}</Price>
             <SizeDiv>
-              <ColorWay>Color: {product.colorway}</ColorWay>
+              {/* <ColorWay>Color: {product.colorway}</ColorWay> */}
+              {
+                sizes.map( shoe => (
+                  <ColorWay> {shoe.colorway} </ColorWay>
+                ))
+              }
               <Size>
                 Size:
                 <SizeSelect>
                   <ChooseSize>--Select a size--</ChooseSize>
-                  <ChooseSize>{product.size}</ChooseSize>
+                  {
+                    sizes.map( shoe => (
+                      <ChooseSize>{shoe.size} {shoe.colorway}</ChooseSize>
+                    ))
+                  }
                 </SizeSelect>
               </Size>
             </SizeDiv>
