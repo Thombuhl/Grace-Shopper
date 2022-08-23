@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Home from './Home';
-import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Nav from './Nav';
 import CartTwo from './Cart2';

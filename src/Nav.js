@@ -1,8 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { HashRouter as Router, Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
