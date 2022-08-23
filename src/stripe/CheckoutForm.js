@@ -41,7 +41,7 @@ const PaymentForm = ({cart}) => {
       try {
         const {id} = paymentMethod
         const response = await axios.post('/api/orders/create-payment-intent', {
-          amount: totalAmountOfCart * 100, 
+          amount: ((totalAmountOfCart *.04) + 25 + totalAmountOfCart) * 100, 
           id
         })
           
