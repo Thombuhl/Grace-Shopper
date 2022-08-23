@@ -54,8 +54,6 @@ export const signup = (userInfo, history) => {
   return async (dispatch) => {
     const response =  await axios.post("/api/sessions/signup", userInfo);
     const { token } = response.data
-    console.log(token)
-
     window.localStorage.setItem('token', token); 
     const auth = (await axios.get('/api/sessions', {
       headers: {
