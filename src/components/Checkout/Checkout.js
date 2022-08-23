@@ -15,6 +15,7 @@ const Checkout = (props) => {
   const delivery = (cartTotal > 150 ? 0 : .05 * cartTotal).toFixed(2)
   const tax = (.04 * cartTotal).toFixed(2)
   const finalPrice = (cartTotal*1 + delivery*1 + tax*1).toFixed(2) 
+  const [shippingMethod, setShipingMethod] = useState()
   const [ shippingInfo, setShipingInfo ] = useState({
     email: '',
     firstName: '',
@@ -36,9 +37,9 @@ const Checkout = (props) => {
 
   useEffect(()=>{
     setShipingInfo({...shippingInfo, ...user})
-    console.log('-------------', user)
   },[user])
-  console.log('//////////////', shippingInfo)
+  
+  console.log(shippingMethod)
   
   const reviewAndPay = (e)=> {
     e.preventDefault()
@@ -46,7 +47,11 @@ const Checkout = (props) => {
     // props.history.push('/checkout/payment')
   }
 
-  
+  const handleChange = (e)=> {
+    const {name, value } = e.target
+    setShipingMethod({ [name]:value })
+  }
+
   return (
     <div className='checkout-component'>
       <form onSubmit={reviewAndPay} >
@@ -84,9 +89,9 @@ const Checkout = (props) => {
         </div>
         <h6>Country: USA</h6>
         <h2>Delivery Option [?]</h2>
-        <label htmlFor="">Standard  <input type="radio" name='shipping' className='shipping'/><p>3-5 bussiness day</p></label>
-        <label htmlFor="">Express <input type="radio" name='shipping' className='shipping'/><p>24 hour</p></label>
-        <label htmlFor="">Pickup  <input type="radio" name='shipping' className='shipping'/><p>Pick it up in our store</p></label>
+        <label htmlFor="">Standard  <input onChange={handleChange} type="radio" name='shippingMethod' className='shipping' value='notPriority'/><p>3-5 bussiness day</p></label>
+        <label htmlFor="">Express <input onChange={handleChange} type="radio" name='shippingMethod' className='shipping' value='priority'/><p>24 hour</p></label>
+        <label htmlFor="">Pickup  <input onChange={handleChange} type="radio" name='shippingMethod' className='shipping'value='pickUp'/><p>Pick it up in our store</p></label>
         <label htmlFor=""><input type="checkbox" checked={shippingInfo.isBillingMailingEqual} onClick={()=>{setShipingInfo({...shippingInfo, isBillingMailingEqual: !shippingInfo.isBillingMailingEqual})}}/> My billing and delivery information are the same</label>
         <label htmlFor=""><input type="checkbox" checked={shippingInfo.isValidAge} onClick={()=>{setShipingInfo({...shippingInfo, isValidAge: !shippingInfo.isValidAge})}}/> I'm 13+ years old *</label>
         <h5 >Also want product updates with our newsletter?</h5>
