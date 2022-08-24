@@ -11,7 +11,7 @@ import ProductDetail from './ProductDetail';
 import Login from './Login';
 import MensProduct from './MensProduct';
 import WomensProduct from './WomensProduct';
-
+import AccountProfile from './AccountProfile';
 class _App extends Component {
   async componentDidMount() {
     this.props.load();
@@ -26,6 +26,7 @@ class _App extends Component {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/mens" component={MensProduct} />
         <Route exact path="/womens" component={WomensProduct} />
+        <Route exact path="/account" component={AccountProfile} />
         <Switch>
           <Route exact path="/products" component={Products} />
           <Route exact path="/products/:id" component={ProductDetail} />

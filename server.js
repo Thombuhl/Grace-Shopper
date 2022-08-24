@@ -58,7 +58,7 @@ const setUp = async () => {
       firstName: 'Luceil',
       lastName: 'Munez',
       email: "lucy@gsdt7.com",
-      profileImage: await readFile('olaf.png')
+      profileImage: await readFile('elsa.png')
     });
 
     const foo = await Product.create({ 
