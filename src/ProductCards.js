@@ -7,11 +7,11 @@ import {
   IconDiv,
   Image,
 } from './styledComponents/ProductCardStyles';
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import InfoIcon from '@mui/icons-material/Info';
 import { addToCart } from './store';
 import { connect } from 'react-redux';
+import ModalBox from './Modal';
 
 const ProductCards = ({ product, addToCart }) => {
   return (
@@ -20,19 +20,16 @@ const ProductCards = ({ product, addToCart }) => {
       <Image src={product.imageLocation} />
       <IconDiv>
         <Icon>
-          <ShoppingBasketIcon
-            onClick={() => addToCart(product)}
-            style={{ color: 'black' }}
-          />
+          <ModalBox product={product} />
         </Icon>
         <Icon>
           <Link to={`/products/${product.id}`}>
-            <InfoIcon style={{ color: 'black' }} />
+            <InfoIcon style={{ color: '#f6e3c5' }} />
           </Link>
         </Icon>
         <Icon>
           <Link to="/favorites">
-            <FavoriteIcon style={{ color: 'black' }} />
+            <FavoriteIcon style={{ color: 'hotpink' }} />
           </Link>
         </Icon>
       </IconDiv>
