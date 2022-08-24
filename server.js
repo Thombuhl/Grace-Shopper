@@ -1,6 +1,6 @@
 /* eslint-disable */
 const app = require('./app');
-const { conn, User, Product } = require('./db');
+const { conn, User, Product, Discount } = require('./db');
 
 const SneaksAPI = require('sneaks-api');
 const sneaks = new SneaksAPI();
@@ -97,7 +97,15 @@ const setUp = async () => {
       numberInStock: 54,
     });
     
+    await Discount.create({
+      code: '10Dollar',
+      discountAmount: 10
+    })
     
+    await Discount.create({
+      code: '20Percent',
+      discountAmount: .20
+    })
 
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });

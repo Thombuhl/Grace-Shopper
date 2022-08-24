@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import '../../../public/checkout.css'
@@ -15,6 +16,7 @@ const Checkout = (props) => {
   const delivery = (cartTotal > 150 ? 0 : .05 * cartTotal).toFixed(2)
   const tax = (.04 * cartTotal).toFixed(2)
   const finalPrice = (cartTotal*1 + delivery*1 + tax*1).toFixed(2) 
+  // const [discountCode, setDiscountCode] = useState()
   const [shippingMethod, setShipingMethod] = useState()
   const [ shippingInfo, setShipingInfo ] = useState({
     email: '',
@@ -28,7 +30,9 @@ const Checkout = (props) => {
     shipping:'',
     isBillingMailingEqual: true,
     isValidAge: true,
-    newsLetter: true
+    newsLetter: true,
+    discountCode: '',
+    discountAmount: '',
   })
 
   const onChange = (ev) => {
@@ -39,17 +43,22 @@ const Checkout = (props) => {
     setShipingInfo({...shippingInfo, ...user})
   },[user])
   
-  console.log(shippingMethod)
   
   const reviewAndPay = (e)=> {
     e.preventDefault()
-    console.log(shippingInfo)
+    console.log(userCart.getCart)
     // props.history.push('/checkout/payment')
   }
 
   const handleChange = (e)=> {
     const {name, value } = e.target
     setShipingMethod({ [name]:value })
+  }
+
+  const fetchDiscount = async(e)=> {
+    e.preventDefault()
+
+    console.log(response.data)
   }
 
   return (
@@ -105,8 +114,8 @@ const Checkout = (props) => {
           </p>
           <p>Sales Tax: ${ tax }</p>
           <h5>TOTAL ${ finalPrice }</h5>
-          <input type="text" placeholder='Enter your promo code'/>
-          <button>+</button>
+          <input type="text" placeholder='Enter your promo code' name='discountCode'value={shippingInfo.discountCode} onChange={onChange}/>
+          <button onClick={fetchDiscount} >+</button>
           <div>
             <h5>Order Details</h5>
             {

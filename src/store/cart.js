@@ -53,7 +53,7 @@ export const updateCart = (product, diff)=> {
 
 export const deleteLineItem = (lineItem) => {
   return async(dispatch) => {
-   await axios.delete('/api/orders/cart', {
+    await axios.delete('/api/orders/cart', {
       headers: {
         authorization: window.localStorage.getItem('token'),
       },
@@ -85,5 +85,13 @@ export const addToCart = (product) => {
     dispatch(addProduct(response.data));
   };
 };
+
+export const applyDiscount = (code)=> {
+  return async (dispatch, getState) => {
+    let total = getState().cart.lineItems.reduce((accum, item)=>{ return accum += item.product.price }, 0)
+    const discountAmount = await axios.get('/api/discounts', {discountCode: code})
+    console.log(discountAmount)
+  }
+}
 
 export default cart;
