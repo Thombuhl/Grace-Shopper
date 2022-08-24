@@ -27,7 +27,7 @@ const AccountProfile = () => {
           reader.readAsDataURL(file)
         }}
       />
-      <img src={uploadFile} alt="upload" />
+      <img src={uploadFile} alt="upload" width='30%' />
     </div>
   )
 }
