@@ -2,13 +2,25 @@
 const app = require('./app');
 const { conn, User, Product } = require('./db');
 
+const readFile = (path)=> {
+  return new Promise((resolve, reject)=> {
+    require('fs').readFile(path, 'base64', (err, response)=> {
+      if(err){
+        reject(err)
+      }
+      else {
+        resolve(response)
+      }
+    })
+  })
+}
 const SneaksAPI = require('sneaks-api');
 const sneaks = new SneaksAPI();
 
 const setUp = async () => {
   try {
     await conn.sync({ force: true });
-
+    
     await User.create({
       username: 'chris',
       password: 'chris123',
@@ -24,11 +36,14 @@ const setUp = async () => {
       password: 'lorenzo123',
       email: 'lorenzo@gsdt7.com',
     });
-    await User.create({
-      username: 'doobin',
-      password: 'doobin123',
-      email: 'doobin@gsdt7.com',
-    });
+
+    const doobin = await User.create({
+        username: 'doobin',
+        password: 'doobin123',
+        email: 'doobin@gsdt7.com',
+        profileImage: await readFile('olaf.jpeg')
+      });
+
     const moe = await User.create({
       username: "moe",
       password: "moe_pw",
@@ -41,13 +56,16 @@ const setUp = async () => {
       addressZip: '10019',
       addressUnit: 'APT 5F',
     });
+
     const lucy = await User.create({
       username: "lucy",
       password: "lucy_pw",
       firstName: 'Luceil',
       lastName: 'Munez',
       email: "lucy@gsdt7.com",
+      profileImage: await readFile('elsa.png')
     });
+
     const foo = await Product.create({ 
       name: "adidas NMD R1 V2",
       brand: "adidas",
@@ -60,6 +78,7 @@ const setUp = async () => {
       gender: 'UNISEX',
       numberInStock: 58,
     });
+
     const bar = await Product.create({ 
       name: "adidas Ultra Boost Mid",
       brand: "adidas",
@@ -72,6 +91,7 @@ const setUp = async () => {
       gender: "UNISEX",
       numberInStock: 54,
     });
+
     const bzz = await Product.create({ 
       name: "adidas Ultra Boost Mid",
       brand: "adidas",
@@ -84,6 +104,7 @@ const setUp = async () => {
       gender: "UNISEX",
       numberInStock: 54,
     });
+
     const bfoo = await Product.create({ 
       name: "adidas Ultra Boost Mid",
       brand: "adidas",
@@ -96,8 +117,6 @@ const setUp = async () => {
       gender: "UNISEX",
       numberInStock: 54,
     });
-    
-    
 
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });
@@ -105,11 +124,10 @@ const setUp = async () => {
     const port = process.env.PORT || 3000;
     app.listen(port, () => console.log(`listening on port ${port}`));
 
-    await sneaks.getProducts('shoes', 500, function (er, products) {
+    await sneaks.getProducts('shoes', 300, function (er, products) {
       if (er) {
         console.log('error');
       }
-      
       // Iterate through the products and return only the information we want
       products
         .map((product) => {

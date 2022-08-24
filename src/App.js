@@ -11,6 +11,7 @@ import ProductDetail from './ProductDetail';
 import Login from './Login';
 import MensProduct from './MensProduct';
 import WomensProduct from './WomensProduct';
+import AccountProfile from './AccountProfile';
 import Register from './Register';
 import Checkout from './components/Checkout/Checkout'
 import PaymentForm from './stripe/CheckoutForm';
@@ -31,6 +32,7 @@ class _App extends Component {
         <Route exact path="/signup" component={Register} />
         <Route exact path="/mens" component={MensProduct} />
         <Route exact path="/womens" component={WomensProduct} />
+        <Route exact path="/account" component={AccountProfile} />
         <Switch>
           <Route exact path="/products" component={Products} />
           <Route exact path="/products/:id" component={ProductDetail} />

@@ -40,6 +40,7 @@ app.get("/", isLoggedIn, async (req, res, next) => {
     lastName: req.user.lastName,
     email: req.user.email,
     id: req.user.id,
+    profileImage: req.user.profileImage,
     addressStreet: req.user.addressStreet,
     addressCity: req.user.addressCity,
     addressState: req.user.addressState,
