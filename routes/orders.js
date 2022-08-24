@@ -99,7 +99,9 @@ app.post("/create-payment-intent", async (req, res, next) => {
 
 app.post('/', isLoggedIn, async (req, res, next) => {
   try {
-    res.send(await req.user.createOrderFromCart());
+    console.log(req.user)
+    res.send(req.body)
+    // res.send(await req.user.createOrderFromCart());
   } catch (ex) {
     next(ex);
   }
