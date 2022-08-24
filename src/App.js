@@ -11,6 +11,8 @@ import ProductDetail from './ProductDetail';
 import Login from './Login';
 import MensProduct from './MensProduct';
 import WomensProduct from './WomensProduct';
+import auth from './store/auth';
+import Favorites from './Favorites';
 
 class _App extends Component {
   async componentDidMount() {
@@ -26,9 +28,10 @@ class _App extends Component {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/mens" component={MensProduct} />
         <Route exact path="/womens" component={WomensProduct} />
+        <Route exact path="/favorites" component={Favorites} />
         <Switch>
-          <Route exact path="/products" component={Products} />
           <Route exact path="/products/:id" component={ProductDetail} />
+          <Route exact path="/products/:filter?" component={Products} />
         </Switch>
       </div>
     );
@@ -41,13 +44,15 @@ const mapDispatch = (dispatch) => {
       let response = await axios.get('/api/products');
       const products = response.data;
       dispatch({ type: 'GET_PRODUCTS', products });
-      response = await axios.get('/api/orders/cart', {
-        headers: {
-          authorization: window.localStorage.getItem('token'),
-        },
-      });
-      const cart = response.data;
-      dispatch({ type: 'SET_CART', cart });
+      if (auth.id) {
+        response = await axios.get('/api/orders/cart', {
+          headers: {
+            authorization: window.localStorage.getItem('token'),
+          },
+        });
+        const cart = response.data;
+        dispatch({ type: 'SET_CART', cart });
+      }
     },
   };
 };
