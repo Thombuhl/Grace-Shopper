@@ -64,4 +64,5 @@ export const signup = (userInfo, history) => {
     history.push('/')
   };
 };
+
 export default auth;

@@ -1,0 +1,36 @@
+.checkout-component {
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkout-component > form {
+  width: 70%;
+  padding: 1rem 1.5rem;
+  flex-direction: column;
+}
+
+/* .checkout-component form input {
+  width: 45%;
+} */
+
+.checkout-component > div {
+  width: 30%;
+}
+
+.checkout-component input {
+  margin: .5rem;
+  padding: .5rem;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-col input {
+  width: 2rem;
+}
