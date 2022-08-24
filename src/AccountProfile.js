@@ -8,13 +8,10 @@ const AccountProfile = () => {
       <h1> AccountProfile </h1>
       <div>
         <div>
-          <img src={`data:image/png;base64, ${user.profileImage}`} alt="profileImage" width='25%' />
+          <img src={`data:image/png;base64, ${user.profileImage}`} width='25%' /> 
           <h2>Name: {user.firstName}, {user.lastName}</h2>
           <h3>Username: {user.username}</h3>
           <h4>Email: {user.email}</h4>
-        </div>
-        <div>
-          <h3></h3>
         </div>
       </div>
     </div>
