@@ -1,9 +1,11 @@
 import React from 'react';
 import Heading from './Heading';
 import Footer from './Footer';
-import { connect } from 'react-redux';
+
+import { connect, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ModalBox from './Modal';
+
 import {
   Container,
   Wrapper,
@@ -24,7 +26,10 @@ import {
 } from './styledComponents/ProductDetailStyles';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const ProductDetail = ({ product }) => {
+
+const ProductDetail = ({ product, addToCart }) => {
+  const shoes = useSelector(state => state.products)
+  let sizes = Array.from(shoes).filter(shoe => shoe.silhoutte === product.silhoutte)
   return (
     <div>
       <Heading />
@@ -38,12 +43,20 @@ const ProductDetail = ({ product }) => {
             <Info>{product.description}</Info>
             <Price>${product.price}</Price>
             <SizeDiv>
-              <ColorWay>Color: {product.colorway}</ColorWay>
+              {
+                sizes.map( shoe => (
+                  <a href={`#/products/${shoe.id}`}>{shoe.colorway}</a>
+                  ))
+                }
               <Size>
                 Size:
                 <SizeSelect>
                   <ChooseSize>--Select a size--</ChooseSize>
-                  <ChooseSize>{product.size}</ChooseSize>
+                  {
+                    sizes.map( shoe => (
+                      <ChooseSize>{shoe.size} {shoe.colorway}</ChooseSize>
+                    ))
+                  }
                 </SizeSelect>
               </Size>
             </SizeDiv>
