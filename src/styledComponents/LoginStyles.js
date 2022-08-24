@@ -10,7 +10,7 @@ export const Container = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url('https://blog.klekt.com/wp-content/uploads/2021/01/Sneaker-Pile.jpg');
+    url('https://streetsense.co.in/wp-content/uploads/2020/01/https___hypebeast.com_image_2018_01_nike-sb-15-year-op-ed-1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 `;
@@ -22,8 +22,7 @@ export const Wrapper = styled.div`
   border-radius: 12px;
 `;
 
-export const Title = styled.h3`
-`;
+export const Title = styled.h3``;
 
 export const Form = styled.form`
   display: flex;

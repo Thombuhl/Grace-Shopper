@@ -1,7 +1,11 @@
 import React from 'react';
 import Heading from './Heading';
 import Footer from './Footer';
+
 import { connect, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import ModalBox from './Modal';
+
 import {
   Container,
   Wrapper,
@@ -16,17 +20,16 @@ import {
   SizeSelect,
   ChooseSize,
   AddDiv,
-  AddAmt,
-  Amount,
   Title,
+  Icon,
   Button,
 } from './styledComponents/ProductDetailStyles';
-import { addToCart } from './store';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 
 const ProductDetail = ({ product, addToCart }) => {
   const shoes = useSelector(state => state.products)
   let sizes = Array.from(shoes).filter(shoe => shoe.silhoutte === product.silhoutte)
-
   return (
     <div>
       <Heading />
@@ -58,7 +61,12 @@ const ProductDetail = ({ product, addToCart }) => {
               </Size>
             </SizeDiv>
             <AddDiv>
-              <Button onClick={() => addToCart(product)}>ADD TO CART</Button>
+              <ModalBox product={product} />
+              <Icon>
+                <Link style={{ color: 'hotpink' }} to={'/favorites'}>
+                  <FavoriteIcon />
+                </Link>
+              </Icon>
             </AddDiv>
           </InfoDiv>
         </Wrapper>
@@ -79,11 +87,7 @@ const mapState = ({ products }, { match }) => {
 };
 
 const mapDispatch = (dispatch) => {
-  return {
-    addToCart: (product) => {
-      dispatch(addToCart(product));
-    },
-  };
+  return {};
 };
 
 export default connect(mapState, mapDispatch)(ProductDetail);
