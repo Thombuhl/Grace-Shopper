@@ -28,7 +28,22 @@ const User = conn.define('user', {
   newsLetter:{
     type: Sequelize.BOOLEAN,
     defaultValue: false
-  }
+  },
+  addressStreet: {
+    type: Sequelize.STRING,
+  },
+  addressCity: {
+    type: Sequelize.STRING,
+  },
+  addressState: {
+    type: Sequelize.STRING,
+  },
+  addressZip: {
+    type: Sequelize.STRING,
+  },
+  addressUnit: {
+    type: Sequelize.STRING,
+  },
 });
 
 User.addHook('beforeSave', async (user) => {

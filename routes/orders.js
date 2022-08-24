@@ -67,8 +67,8 @@ app.get('/purchases', isLoggedIn, async (req, res, next) => {
 app.delete('/cart', isLoggedIn, async (req, res, next) => {
   try {
     const cart = await req.user.getCart();
-    const items = cart.lineItems.find((item) => item.Id === req.body.productId);
-    res.status(204).send(await items.destroy());
+    const item = cart.lineItems.find((item) => item.Id === req.body.productId);
+    res.status(204).send(await item.destroy());
   } catch (ex) {
     next(ex);
   }
@@ -95,7 +95,9 @@ app.post('/create-payment-intent', async (req, res) => {
 
 app.post('/', isLoggedIn, async (req, res, next) => {
   try {
-    res.send(await req.user.createOrderFromCart());
+    console.log(req.user)
+    res.send(req.body)
+    // res.send(await req.user.createOrderFromCart());
   } catch (ex) {
     next(ex);
   }
