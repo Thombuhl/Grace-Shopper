@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
+//createa thunks to edit user profile 
+
 const AccountProfile = () => {
+  const [uploadFile, setUploadFile] = useState()
   const user = useSelector(state => state.auth)
   return (
     <div>
@@ -14,6 +17,17 @@ const AccountProfile = () => {
           <h4>Email: {user.email}</h4>
         </div>
       </div>
+      <input type="file" ref={ el => console.log('------',el)} 
+        onChange={(ev)=> {
+          const file = ev.target.files[0] 
+          const reader = new FileReader()
+          reader.addEventListener('load',()=>{
+            setUploadFile(reader.result)
+          })
+          reader.readAsDataURL(file)
+        }}
+      />
+      <img src={uploadFile} alt="upload" />
     </div>
   )
 }
