@@ -13,6 +13,9 @@ const User = conn.define('user', {
   password: {
     type: Sequelize.STRING,
   },
+  profileImage: {
+    type: Sequelize.TEXT,
+  },
   firstName: {
     type: Sequelize.STRING,
   },
@@ -35,6 +38,9 @@ User.addHook('beforeSave', async (user) => {
   if (user._changed.has('password')) {
     user.password = await bcrypt.hash(user.password, 10);
   }
+  // else if (user._changed.has('profileImage')) {
+
+  // }
 });
 
 User.prototype.createOrderFromCart = async function () {
