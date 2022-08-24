@@ -3,22 +3,23 @@ import { login } from './store';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import {
-  Container,
   Wrapper,
   Button,
   Input,
   Title,
   Form,
 } from './styledComponents/LoginStyles';
+import { signup } from './store/auth';
+import { Container } from './styledComponents/SignUpStyles';
 
-class Login extends Component {
+class Register extends Component {
   constructor() {
     super();
     this.state = {
       username: '',
       password: '',
-      loginAttempt: false,
-      error: false,
+      email: '',
+      gender: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -29,26 +30,19 @@ class Login extends Component {
   }
 
   onSubmit(ev) {
-    try {
-      ev.preventDefault();
-      this.props.login(this.state);
-    } catch (err) {
-      console.log(err);
-    }
+    ev.preventDefault();
+    this.props.signup(this.state);
   }
 
   render() {
     const { onChange, onSubmit } = this;
-    const { username, password, loginSuccessful } = this.state;
-
-    if (loginSuccessful) {
-      return <Redirect to="/" />;
-    } else {
+    const { username, password, email, gender } = this.state;
+    {
       return (
         <Container>
           <Wrapper>
             <Title style={{ textAlign: 'center', color: '#f6e3c5' }}>
-              Sign In
+              Register
             </Title>
             <Form onSubmit={onSubmit}>
               <Input
@@ -63,19 +57,20 @@ class Login extends Component {
                 value={password}
                 placeholder="Enter Password"
               />
+              <Input
+                type="email"
+                name="email"
+                onChange={onChange}
+                value={email}
+                placeholder="Example@Email.com"
+              />
               <Link
-                style={{ textAlign: 'center', fontWeight: '900' }}
-                to="/resetpassword"
+                style={{ textAlign: 'center', fontWeight: 900 }}
+                to="/login"
               >
-                Forgot your Password?
+                Already have an Account?
               </Link>
-              <Link
-                style={{ textAlign: 'center', fontWeight: '900' }}
-                to="/signup"
-              >
-                Create account
-              </Link>
-              <Button>Sign In</Button>
+              <Button>Register</Button>
             </Form>
           </Wrapper>
         </Container>
@@ -86,10 +81,11 @@ class Login extends Component {
 
 const mapDispatch = (dispatch, { history }) => {
   return {
-    login: (credentials) => {
-      dispatch(login(credentials, history));
+    signup: (usrInfo) => {
+      dispatch(signup(usrInfo, history));
       history.push('/');
     },
   };
 };
-export default connect(null, mapDispatch)(Login);
+
+export default connect(null, mapDispatch)(Register);

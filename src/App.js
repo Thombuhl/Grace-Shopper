@@ -11,8 +11,10 @@ import ProductDetail from './ProductDetail';
 import Login from './Login';
 import MensProduct from './MensProduct';
 import WomensProduct from './WomensProduct';
+import Register from './Register';
 import Checkout from './components/Checkout/Checkout'
 import PaymentForm from './stripe/CheckoutForm';
+
 class _App extends Component {
   async componentDidMount() {
     this.props.load();
@@ -26,7 +28,7 @@ class _App extends Component {
         <Route exact path="/checkout/payment" component={PaymentForm} />
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/signup" component={Register} />
         <Route exact path="/mens" component={MensProduct} />
         <Route exact path="/womens" component={WomensProduct} />
         <Switch>
