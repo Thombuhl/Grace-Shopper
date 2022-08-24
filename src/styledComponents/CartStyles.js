@@ -123,8 +123,8 @@ export const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   margin: 3px;
   border-radius: 50%;
   background-color: gray;

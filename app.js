@@ -2,10 +2,12 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const cors = require("cors")
 
 app.use(express.json());
 app.use("/dist", express.static("dist"));
 app.use("/public", express.static(path.join(__dirname, "./public")));
+app.use(cors())
 
 // Routes
 app.use("/api/orders", require("./routes/orders"));

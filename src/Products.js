@@ -10,6 +10,7 @@ import {
 import ProductCards from './ProductCards';
 import Heading from './Heading';
 import Footer from './Footer';
+import ModalBox from './Modal';
 
 const Product = ({ products }) => {
   const productsArr = Array.from(products);

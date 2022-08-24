@@ -40,7 +40,12 @@ app.get("/", isLoggedIn, async (req, res, next) => {
     lastName: req.user.lastName,
     email: req.user.email,
     id: req.user.id,
-    profileImage: req.user.profileImage
+    profileImage: req.user.profileImage,
+    addressStreet: req.user.addressStreet,
+    addressCity: req.user.addressCity,
+    addressState: req.user.addressState,
+    addressZip: req.user.addressZip,
+    addressUnit: req.user.addressUnit,
   }
   res.send(userInfo);
 });
