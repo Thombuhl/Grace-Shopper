@@ -32,7 +32,8 @@
     "sneaks-api": "^1.2.3",
     "stripe": "^10.4.0",
     "styled-components": "^5.3.5",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "ws": "^8.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",

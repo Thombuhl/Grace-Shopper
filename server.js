@@ -1,6 +1,7 @@
 /* eslint-disable */
 const app = require('./app');
 const { conn, User, Product } = require('./db');
+const ws = require('ws')
 
 const readFile = (path)=> {
   return new Promise((resolve, reject)=> {
@@ -122,8 +123,24 @@ const setUp = async () => {
     await lucy.addToCart({ product: bar, quantity: 4 });
     await moe.addToCart({ product: bar, quantity: 7 });
     const port = process.env.PORT || 3000;
-    app.listen(port, () => console.log(`listening on port ${port}`));
+    const server = app.listen(port, () => console.log(`listening on port ${port}`));
+    
+    let sockets =  []
+    const socketServer = new ws.WebSocketServer({
+      server
+    })
 
+    socketServer.on('connection', (socket)=> {
+      sockets.push(socket)
+      socket.on('message', (data)=> {
+        sockets.forEach(socket => {
+          socket.send(data.toString())
+        })
+      })
+      socket.on('close', ()=>{
+        sockets = sockets.filter(s => s!== socket)
+      })
+    })
     await sneaks.getProducts('shoes', 300, function (er, products) {
       if (er) {
         console.log('error');

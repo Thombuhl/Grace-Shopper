@@ -19,6 +19,13 @@ import PaymentForm from './stripe/CheckoutForm';
 class _App extends Component {
   async componentDidMount() {
     this.props.load();
+    const url = window.location.origin.replace('http', 'ws')
+    window.socket = new WebSocket(url)
+    window.socket.addEventListener('message', (ev)=> {
+      const action = JSON.parse(ev.data)
+      this.props.dispatchAction(action)
+      console.log('--------------------', action)
+    })
   }
   render() {
     return (
@@ -56,6 +63,10 @@ const mapDispatch = (dispatch) => {
       const cart = response.data;
       dispatch({ type: 'SET_CART', cart });
     },
+    dispatchAction: (action) => {
+      console.log('000000000', action)
+      dispatch(action)
+    }
   };
 };
 

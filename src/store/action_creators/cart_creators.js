@@ -15,10 +15,12 @@ const _updateProd = (product) => {
 };
 
 const _deleteProduct = (lineItem) => {
-  return {
+  const action = {
     type: DELETE_PRODUCT,
     lineItem
   };
+  window.socket.send(JSON.stringify(action))
+  return action
 };
 
 const updateQuantity = (quantity) => {
@@ -30,10 +32,12 @@ const updateQuantity = (quantity) => {
 
 const addProduct = (product) => {
   console.log(product)
-  return {
+  const action = {
     type: ADD_PRODUCT_TO_CART,
     product
   }
+  window.socket.send(JSON.stringify(action))
+  return action
 }
 
 export {
