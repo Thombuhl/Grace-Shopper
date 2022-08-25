@@ -15,7 +15,7 @@ import AccountProfile from './AccountProfile';
 import Register from './Register';
 import Checkout from './components/Checkout/Checkout'
 import PaymentForm from './stripe/CheckoutForm';
-
+import { fetchCart } from './store';
 class _App extends Component {
   async componentDidMount() {
     this.props.load();
@@ -48,13 +48,7 @@ const mapDispatch = (dispatch) => {
       let response = await axios.get('/api/products');
       const products = response.data;
       dispatch({ type: 'GET_PRODUCTS', products });
-      response = await axios.get('/api/orders/cart', {
-        headers: {
-          authorization: window.localStorage.getItem('token'),
-        },
-      });
-      const cart = response.data;
-      dispatch({ type: 'SET_CART', cart });
+      fetchCart()
     },
   };
 };

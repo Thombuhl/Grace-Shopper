@@ -12,13 +12,16 @@ import {
   UPDATE_QUANTITY,
 } from './actions/cart_actions';
 
-const initialState = {
+let initialState = {
   lineItems: [],
 };
+
 
 const cart = (state = initialState, action) => {
   switch (action.type) {
     case SET_CART:
+      console.log(action.cart)
+      console.log(localStorage)
       return action.cart;
     case DELETE_PRODUCT:
       const lineItems = state.lineItems.filter(
@@ -36,6 +39,7 @@ const cart = (state = initialState, action) => {
 
 export const fetchCart = () => {
   const token = window.localStorage.getItem('token');
+  console.log('fetching cart, here is a users localstorage.token ', token)
   return async (dispatch) => {
     const response = await axios.get('/api/orders/cart', {
       headers: {
