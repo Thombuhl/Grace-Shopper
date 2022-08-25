@@ -28,16 +28,10 @@ body {
   width: 300px;
   margin: 0.5rem;
 }
-form {
-  height: 50px;
-  width: 300px;
-}
 
 fieldset button {
   background-color: #f6e3c5;
 }
-
-
 
 .logo {
   border-radius: 50%;
