@@ -133,7 +133,7 @@ const setUp = async () => {
     socketServer.on('connection', (socket)=> {
       sockets.push(socket)
       socket.on('message', (data)=> {
-        sockets.forEach(socket => {
+        sockets.filter(s => s !== socket).forEach(socket => {
           socket.send(data.toString())
         })
       })
