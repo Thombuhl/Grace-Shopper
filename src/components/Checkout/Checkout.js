@@ -1,9 +1,9 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import '../../../public/checkout.css'
+import { applyDiscount } from '../../store'
 
-const Checkout = (props) => {
+const Checkout = () => {
   const dispatch = useDispatch( )
   const user = useSelector(state => state.auth)
   const userCart = useSelector(state => state.cart) 
@@ -15,8 +15,6 @@ const Checkout = (props) => {
   }, 0)
   const delivery = (cartTotal > 150 ? 0 : .05 * cartTotal).toFixed(2)
   const tax = (.04 * cartTotal).toFixed(2)
-  const finalPrice = (cartTotal*1 + delivery*1 + tax*1).toFixed(2) 
-  // const [discountCode, setDiscountCode] = useState()
   const [shippingMethod, setShipingMethod] = useState()
   const [ shippingInfo, setShipingInfo ] = useState({
     email: '',
@@ -32,8 +30,13 @@ const Checkout = (props) => {
     isValidAge: true,
     newsLetter: true,
     discountCode: '',
-    discountAmount: '',
   })
+  const [discountAmount, setDiscountAmount] = useState(userCart.discountAmount)
+  const finalPrice = ((cartTotal*1 + delivery*1 + tax*1).toFixed(2))
+  const finalDiscount = discountAmount < 1 ?
+    finalPrice - finalPrice * discountAmount :
+    finalPrice - discountAmount
+  console.log('[[[[[[[' , finalDiscount)
 
   const onChange = (ev) => {
     setShipingInfo({...shippingInfo, [ev.target.name]: ev.target.value });
@@ -41,12 +44,13 @@ const Checkout = (props) => {
 
   useEffect(()=>{
     setShipingInfo({...shippingInfo, ...user})
-  },[user])
+    setDiscountAmount(userCart.discountAmount)
+  },[user, userCart])
+  console.log('---------', discountAmount)
   
   
   const reviewAndPay = (e)=> {
     e.preventDefault()
-    console.log(userCart.getCart)
     // props.history.push('/checkout/payment')
   }
 
@@ -57,8 +61,7 @@ const Checkout = (props) => {
 
   const fetchDiscount = async(e)=> {
     e.preventDefault()
-
-    console.log(response.data)
+    dispatch(applyDiscount(shippingInfo.discountCode))
   }
 
   return (
@@ -113,7 +116,12 @@ const Checkout = (props) => {
           <p>DELIVERY: ${ delivery }
           </p>
           <p>Sales Tax: ${ tax }</p>
-          <h5>TOTAL ${ finalPrice }</h5>
+          {
+            finalDiscount 
+              ? <p>BEFORE: ${ finalPrice } { discountAmount < 1 ? <strong>-{discountAmount*100}%</strong> : <strong>-{discountAmount}</strong> }</p>
+              : null
+          }
+          <h5>TOTAL ${ finalDiscount ? finalDiscount : finalPrice}</h5>
           <input type="text" placeholder='Enter your promo code' name='discountCode'value={shippingInfo.discountCode} onChange={onChange}/>
           <button onClick={fetchDiscount} >+</button>
           <div>

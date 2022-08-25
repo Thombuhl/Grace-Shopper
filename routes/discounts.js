@@ -7,11 +7,12 @@ module.exports = app;
 
 app.get("/", async (req, res, next) => {
   try {
-    res.send(await Discount.findAll({
-      where: {
-        code : req.body.discountCode
-      }
-    }));
+    res.send(await Discount.findAll())
+    // res.send(await Discount.findAll({
+    //   where: {
+    //     code : req.body.discountCode
+    //   }
+    // }));
   } catch (error) {
     next(error);
   }

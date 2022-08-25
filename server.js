@@ -106,6 +106,11 @@ const setUp = async () => {
       code: '20Percent',
       discountAmount: .20
     })
+    
+    await Discount.create({
+      code: 'Fullstack',
+      discountAmount: .30
+    })
 
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });
