@@ -38,8 +38,20 @@ const cart = (state = initialState, action) => {
 };
 
 export const fetchCart = () => {
-  const token = window.localStorage.getItem('token');
+  let token = window.localStorage.getItem('token');
   console.log('fetching cart, here is a users localstorage.token ', token)
+  if( !token ){
+    window.localStorage.setItem('token', 'guest')
+    window.localStorage.setItem('cart', JSON.stringify({ lineItem: []}))
+    const cart = window.localStorage.getItem('cart')
+    const token = window.localStorage.getItem('token')
+    console.log('---', token, cart.lineItem)
+  }
+  else if( token === 'guest' ){
+    const cart = window.localStorage.getItem('cart')
+    const token = window.localStorage.getItem('token')
+    console.log('+++++++++', token, cart)
+  }
   return async (dispatch) => {
     const response = await axios.get('/api/orders/cart', {
       headers: {
@@ -84,22 +96,32 @@ export const deleteLineItem = (lineItem) => {
 
 export const addToCart = (product) => {
   return async (dispatch, getState) => {
+    const token = window.localStorage.getItem('token')
     const lineItem = getState().cart.lineItems.find(
       (lineItem) => lineItem.productId === product.id
     ) || { quantity: 0 };
-    const response = await axios.put(
-      '/api/orders/cart',
-      {
-        product,
-        quantity: lineItem.quantity + 1,
-      },
-      {
-        headers: {
-          authorization: window.localStorage.getItem('token'),
+    if(token === 'guest'){
+      let cart = JSON.parse(window.localStorage.getItem('cart'))
+      cart.lineItem.push(product)
+      window.localStorage.setItem('cart', JSON.stringify(cart))
+      console.log(cart)
+      // cart.lineItem.push(product)
+    }
+    else {
+      const response = await axios.put(
+        '/api/orders/cart',
+        {
+          product,
+          quantity: lineItem.quantity + 1,
         },
-      }
-    );
-    dispatch(addProduct(response.data));
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      dispatch(addProduct(response.data));
+    }
   };
 };
 
