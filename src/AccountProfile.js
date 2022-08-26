@@ -1,35 +1,68 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-
-//createa thunks to edit user profile 
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import {
+  Container,
+  Wrapper,
+  Title,
+  UserDiv,
+  UserInfo,
+  UserName,
+  UserAccount,
+  UserEmail,
+  Image,
+  Input,
+  UploadImageDiv,
+} from './styledComponents/AccountProfileStyles';
+import Footer from './Footer';
+import { InputDiv } from './styledComponents/NewsLetterStyles';
+import { Link } from 'react-router-dom';
+//createa thunks to edit user profile
 
 const AccountProfile = () => {
-  const [uploadFile, setUploadFile] = useState()
-  const user = useSelector(state => state.auth)
+  const [uploadFile, setUploadFile] = useState();
+  const user = useSelector((state) => state.auth);
   return (
-    <div>
-      <h1> AccountProfile </h1>
-      <div>
-        <div>
-          <img src={`data:image/png;base64, ${user.profileImage}`} width='25%' /> 
-          <h2>Name: {user.firstName}, {user.lastName}</h2>
-          <h3>Username: {user.username}</h3>
-          <h4>Email: {user.email}</h4>
-        </div>
-      </div>
-      <input type="file" ref={ el => console.log('------',el)} 
-        onChange={(ev)=> {
-          const file = ev.target.files[0] 
-          const reader = new FileReader()
-          reader.addEventListener('load',()=>{
-            setUploadFile(reader.result)
-          })
-          reader.readAsDataURL(file)
-        }}
-      />
-      <img src={uploadFile} alt="upload" width='30%' />
-    </div>
-  )
-}
+    <Container>
+      <Wrapper>
+        <UserDiv>
+          <Title>Account Details</Title>
+          <Link style={{ textAlign: 'center' }} to="/edit">
+            <Image src={`data:image/png;base64, ${user.profileImage}`}></Image>
+          </Link>
+          <UserInfo>
+            Name:{' '}
+            <UserName>
+              {user.firstName}, {user.lastName}
+            </UserName>
+          </UserInfo>
+          <UserInfo>
+            Username: <UserAccount>{user.username}</UserAccount>
+          </UserInfo>
+          <UserInfo>
+            Email: <UserEmail>{user.email}</UserEmail>
+          </UserInfo>
+        </UserDiv>
+        <InputDiv>
+          <Input
+            type="file"
+            ref={(el) => console.log('------', el)}
+            onChange={(ev) => {
+              const file = ev.target.files[0];
+              const reader = new FileReader();
+              reader.addEventListener('load', () => {
+                setUploadFile(reader.result);
+              });
+              reader.readAsDataURL(file);
+            }}
+          />
+        </InputDiv>
+        <UploadImageDiv>
+          <Image style={{ border: 'none' }} src={uploadFile} alt="upload" />
+        </UploadImageDiv>
+      </Wrapper>
+      <Footer />
+    </Container>
+  );
+};
 
-export default AccountProfile
+export default AccountProfile;
