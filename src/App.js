@@ -21,6 +21,13 @@ import { fetchCart } from './store';
 class _App extends Component {
   async componentDidMount() {
     this.props.load();
+    const url = window.location.origin.replace('http', 'ws')
+    window.socket = new WebSocket(url)
+    window.socket.addEventListener('message', (ev)=> {
+      const action = JSON.parse(ev.data)
+      this.props.dispatchAction(action)
+      console.log('--------------------', action)
+    })
   }
   render() {
     return (
@@ -54,6 +61,10 @@ const mapDispatch = (dispatch) => {
       dispatch({ type: 'GET_PRODUCTS', products });
       fetchCart()
     },
+    dispatchAction: (action) => {
+      console.log('000000000', action)
+      dispatch(action)
+    }
   };
 };
 
