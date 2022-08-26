@@ -39,6 +39,14 @@ import {
 
 const Cart = ({ cart, updateCart, deleteLineItem }) => {
   let totalAmountOfCart = 0;
+  const token = window.localStorage.getItem('token')
+  let browserCart = []
+
+  if(token === 'guest'){
+    browserCart = JSON.parse(window.localStorage.getItem('cart'))
+  }
+  else browserCart = cart
+  browserCart.lineItems.map(item => console.log(item)) 
 
   cart.lineItems.forEach((lineItem) => {
     let quantity = lineItem.quantity;
@@ -55,7 +63,7 @@ const Cart = ({ cart, updateCart, deleteLineItem }) => {
       <Container>
         <Wrapper>
           <Title>Your Cart</Title>
-          {cart.lineItems.map((lineItem) => {
+          {browserCart.lineItems.map((lineItem) => {
             return (
               <ProductDiv key={lineItem.id}>
                 <Info>
