@@ -50,7 +50,6 @@ export const fetchCart = () => {
   else if( token === 'guest' ){
     const cart = window.localStorage.getItem('cart')
     const token = window.localStorage.getItem('token')
-    console.log('+++++++++', token, cart)
   }
   return async (dispatch) => {
     const response = await axios.get('/api/orders/cart', {
@@ -64,33 +63,51 @@ export const fetchCart = () => {
 
 export const updateCart = (product, diff) => {
   return async (dispatch, getState) => {
-    const lineItem = getState().cart.lineItems.find(
-      (lineItem) => lineItem.productId === product.id
-    ) || { quantity: 0 };
-    const response = await axios.put(
-      '/api/orders/cart',
-      { product, quantity: lineItem.quantity + diff },
-      {
-        headers: {
-          authorization: window.localStorage.getItem('token'),
-        },
-      }
-    );
-    dispatch({ type: 'SET_CART', cart: response.data });
+    const token = window.localStorage.getItem('token')
+    if(token === 'guest'){
+      let cart = JSON.parse(window.localStorage.getItem('cart'))
+      cart.lineItems.find( lineItem => lineItem.productId === product.id) || { quantity:0 }
+      window.localStorage.setItem('cart', JSON.stringify(cart))
+      console.log(cart)
+    }
+    else {
+      const lineItem = getState().cart.lineItems.find(
+        (lineItem) => lineItem.productId === product.id
+      ) || { quantity: 0 };
+      const response = await axios.put(
+        '/api/orders/cart',
+        { product, quantity: lineItem.quantity + diff },
+        {
+          headers: {
+            authorization: window.localStorage.getItem('token'),
+          },
+        }
+      );
+      dispatch({ type: 'SET_CART', cart: response.data });
+    }
   };
 };
 
 export const deleteLineItem = (lineItem) => {
   return async (dispatch) => {
-    await axios.delete('/api/orders/cart', {
-      headers: {
-        authorization: window.localStorage.getItem('token'),
-      },
-      data: {
-        lineItem,
-      },
-    });
-    dispatch(_deleteProduct(lineItem));
+    const token = window.localStorage.getItem('token')
+    if( token === 'guest' ){
+      const cart = JSON.parse(window.localStorage.getItem('cart'))
+      const newCart = cart.lineItems.filter( item => item.product.id !== lineItem.product.id)
+      window.localStorage.setItem('cart', JSON.stringify( {lineItems: newCart} ))
+      fetchCart()
+    }
+    else {
+      await axios.delete('/api/orders/cart', {
+        headers: {
+          authorization: token
+        },
+        data: {
+          lineItem,
+        },
+      });
+      dispatch(_deleteProduct(lineItem));
+    }
   };
 };
 

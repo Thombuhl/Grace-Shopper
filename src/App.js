@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Home from './Home';
-import SignUp from './SignUp';
 import Nav from './Nav';
 import Cart from './Cart';
 import Products from './Products';
