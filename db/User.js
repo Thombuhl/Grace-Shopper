@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt');
 const User = conn.define('user', {
   username: {
     type: Sequelize.STRING,
-    unique: true,
   },
   password: {
     type: Sequelize.STRING,
@@ -35,18 +34,23 @@ const User = conn.define('user', {
   },
   addressStreet: {
     type: Sequelize.STRING,
+    defaultValue: ''
   },
   addressCity: {
     type: Sequelize.STRING,
+    defaultValue: ''
   },
   addressState: {
     type: Sequelize.STRING,
+    defaultValue: ''
   },
   addressZip: {
     type: Sequelize.STRING,
+    defaultValue: ''
   },
   addressUnit: {
     type: Sequelize.STRING,
+    defaultValue: ''
   },
 });
 
