@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import ProductCards from './ProductCards';
 import {
@@ -16,43 +16,75 @@ const MenProducts = ({ products, colorNames, brandNames }) => {
   const filteredProd = productsArr.filter(
     (product) => product.gender === 'MENS'
   );
+  const [filter, setFilter] = useState({});
+  const [sort, setSort] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const url = `/products/${JSON.stringify(filter)}`;
+  const handleFilters = (event) => {
+    const value = event.target.value;
+    setFilter({
+      ...filter,
+      [event.target.name]: value,
+    });
+  };
+  console.log('filter', filter);
+  useEffect(() => {
+    if (filter) {
+      setFilteredProducts(
+        filteredProd.filter((product) =>
+          Object.entries(filter).every(([key, value]) => {
+            console.log('product', product);
+            console.log('key:', product[key], 'value:', value);
+            return product[key].includes(value);
+          })
+        )
+      );
+    } else if (filter === 'Brands')
+      productsArr.map((product) => {
+        return <ProductCards key={product.id} product={product} />;
+      });
+  }, [filter, products]);
+  useEffect(() => {
+    if (sort === 'newest') {
+      setFilteredProducts((prev) => [...prev].sort((a, b) => a.id - b.id));
+    } else if (sort === 'low') {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => a.price - b.price)
+      );
+    } else {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => b.price - a.price)
+      );
+    }
+  }, [sort]);
   return (
     <div>
       <Heading />
       <FilterDiv>
         <FilterItem style={{ fontSize: '1rem' }}>
-          Filter Products:
-          <Select>
-            <Option>--Brand--</Option>
+          <Select name="brand" onChange={handleFilters}>
+            <Option>Brands</Option>
             {brandNames.map((item) => {
-              return (
-                <Option key={item.id}>
-                  {item.brand} ({item.count})
-                </Option>
-              );
+              return <Option key={item.id}>{item.brand}</Option>;
             })}
           </Select>
-          <Select>
-            <Option>--Color--</Option>
+          <Select name="colorway" onChange={handleFilters}>
+            <Option>Colors</Option>
             {colorNames.map((item) => {
-              return (
-                <Option key={item.id}>
-                  {item.color} ({item.count})
-                </Option>
-              );
+              return <Option key={item.id}>{item.color}</Option>;
             })}
           </Select>
         </FilterItem>
         <FilterItem>
-          Sort by:
-          <Select>
-            <Option>Price:(High to Low)</Option>
-            <Option>Price:(Low to High)</Option>
+          <Select onChange={(event) => setSort(event.target.value)}>
+            <Option value="newest">Newest</Option>
+            <Option value="high">Price:(Descending)</Option>
+            <Option value="low">Price:(Ascending)</Option>
           </Select>
         </FilterItem>
       </FilterDiv>
       <Container>
-        {filteredProd.map((product) => {
+        {filteredProducts.map((product) => {
           return <ProductCards key={product.id} product={product} />;
         })}
       </Container>
@@ -79,7 +111,7 @@ const mapState = ({ products, cart, auth }, { match }) => {
   }, {});
   const colorNames = Object.values(colorsArr);
   const brandsArr = filteredProductsArr.reduce((acc, product) => {
-    const brand = product.brand.toUpperCase();
+    const brand = product.brand;
     acc[brand] = acc[brand] || {
       id: product.id,
       brand,

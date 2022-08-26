@@ -45,7 +45,7 @@ const Product = ({ products, colorNames, brandNames }) => {
   useEffect(() => {
     if (sort === 'newest') {
       setFilteredProducts((prev) => [...prev].sort((a, b) => a.id - b.id));
-    } else if (sort === 'high') {
+    } else if (sort === 'low') {
       setFilteredProducts((prev) =>
         [...prev].sort((a, b) => a.price - b.price)
       );
@@ -60,7 +60,6 @@ const Product = ({ products, colorNames, brandNames }) => {
       <Heading />
       <FilterDiv>
         <FilterItem style={{ fontSize: '1rem' }}>
-          Filter Products:
           <Select name="brand" onChange={handleFilters}>
             <Option>Brands</Option>
             {brandNames.map((item) => {
@@ -75,11 +74,10 @@ const Product = ({ products, colorNames, brandNames }) => {
           </Select>
         </FilterItem>
         <FilterItem>
-          Sort by:
           <Select onChange={(event) => setSort(event.target.value)}>
             <Option value="newest">Newest</Option>
-            <Option value="high">Price:(Ascending)</Option>
-            <Option value="low">Price:(Descending)</Option>
+            <Option value="high">Price:(Descending)</Option>
+            <Option value="low">Price:(Ascending)</Option>
           </Select>
         </FilterItem>
       </FilterDiv>
