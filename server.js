@@ -12,21 +12,29 @@ const setUp = async () => {
     const chris = await User.create({
       username: 'chris',
       password: 'chris123',
+      firstName: 'Chris',
+      lastName: 'Wong',
       email: 'chris@gsdt7.com',
     });
     const thomas = await User.create({
       username: 'thomas',
       password: 'thomas123',
+      firstName: 'Thomas',
+      lastName: 'Buhl',
       email: 'thomas@gsdt7.com',
     });
     const lorenzo = await User.create({
       username: 'lorenzo',
       password: 'lorenzo123',
+      firstName: 'Lorenzo',
+      lastName: 'Noel',
       email: 'lorenzo@gsdt7.com',
     });
     const doobin = await User.create({
       username: 'doobin',
       password: 'doobin123',
+      firstName: 'Doobin',
+      lastName: 'Lee',
       email: 'doobin@gsdt7.com',
     });
     const moe = await User.create({
