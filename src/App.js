@@ -10,11 +10,14 @@ import ProductDetail from './ProductDetail';
 import Login from './Login';
 import MensProduct from './MensProduct';
 import WomensProduct from './WomensProduct';
+import auth from './store/auth';
+import Favorites from './Favorites';
 import AccountProfile from './AccountProfile';
 import Register from './Register';
 import Checkout from './components/Checkout/Checkout'
 import PaymentForm from './stripe/CheckoutForm';
 import { fetchCart } from './store';
+
 class _App extends Component {
   async componentDidMount() {
     this.props.load();
@@ -31,10 +34,12 @@ class _App extends Component {
         <Route exact path="/signup" component={Register} />
         <Route exact path="/mens" component={MensProduct} />
         <Route exact path="/womens" component={WomensProduct} />
+        <Route exact path="/favorites" component={Favorites} />
         <Route exact path="/account" component={AccountProfile} />
+
         <Switch>
-          <Route exact path="/products" component={Products} />
           <Route exact path="/products/:id" component={ProductDetail} />
+          <Route exact path="/products/:filter?" component={Products} />
         </Switch>
       </div>
     );

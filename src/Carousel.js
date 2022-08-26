@@ -15,6 +15,7 @@ import {
   Title,
   Button,
 } from './styledComponents/CarouselStyles';
+import { Link } from 'react-router-dom';
 
 const Carousel = () => {
   const [slideItem, setSlideItem] = useState(0);
@@ -40,8 +41,13 @@ const Carousel = () => {
               <InfoDiv>
                 <Title>{slideItem.title}</Title>
                 <Info>{slideItem.info}</Info>
-                <Button onClick={() => console.log('Shop now!')}>
-                  Shop Now
+                <Button>
+                  <Link
+                    style={{ textDecoration: 'none', color: '#f6e3c5' }}
+                    to="/products"
+                  >
+                    Shop Now
+                  </Link>
                 </Button>
               </InfoDiv>
             </Slide>
