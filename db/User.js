@@ -35,18 +35,23 @@ const User = conn.define('user', {
   },
   addressStreet: {
     type: Sequelize.STRING,
+    defaultValue: ''
   },
   addressCity: {
     type: Sequelize.STRING,
+    defaultValue: ''
   },
   addressState: {
     type: Sequelize.STRING,
+    defaultValue: ''
   },
   addressZip: {
     type: Sequelize.STRING,
+    defaultValue: ''
   },
   addressUnit: {
     type: Sequelize.STRING,
+    defaultValue: ''
   },
 });
 
