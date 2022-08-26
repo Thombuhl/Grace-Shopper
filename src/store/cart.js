@@ -45,7 +45,6 @@ export const fetchCart = () => {
     window.localStorage.setItem('cart', JSON.stringify({ lineItems: []}))
     const cart = window.localStorage.getItem('cart')
     const token = window.localStorage.getItem('token')
-    console.log('---', token, cart.lineItems)
   }
   else if( token === 'guest' ){
     const cart = window.localStorage.getItem('cart')
@@ -66,9 +65,8 @@ export const updateCart = (product, diff) => {
     const token = window.localStorage.getItem('token')
     if(token === 'guest'){
       let cart = JSON.parse(window.localStorage.getItem('cart'))
-      cart.lineItems.find( lineItem => lineItem.productId === product.id) || { quantity:0 }
+      cart.lineItems.find( lineItem => lineItem.product.id === product.id) || { quantity:0 }
       window.localStorage.setItem('cart', JSON.stringify(cart))
-      console.log(cart)
     }
     else {
       const lineItem = getState().cart.lineItems.find(
@@ -121,8 +119,6 @@ export const addToCart = (product) => {
       let cart = JSON.parse(window.localStorage.getItem('cart'))
       cart.lineItems.push({ product })
       window.localStorage.setItem('cart', JSON.stringify(cart))
-      console.log(cart)
-      // cart.lineItem.push(product)
     }
     else {
       const response = await axios.put(
