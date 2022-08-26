@@ -41,9 +41,16 @@ const Carousel = () => {
               <InfoDiv>
                 <Title>{slideItem.title}</Title>
                 <Info>{slideItem.info}</Info>
-                <Button>
+                <Button
+                  style={{
+                    backgroundColor: '#53bf9d',
+                  }}
+                >
                   <Link
-                    style={{ textDecoration: 'none', color: '#f6e3c5' }}
+                    style={{
+                      textDecoration: 'none',
+                      color: '#f6e3c5',
+                    }}
                     to="/products"
                   >
                     Shop Now

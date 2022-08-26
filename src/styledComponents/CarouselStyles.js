@@ -65,7 +65,11 @@ export const Info = styled.p`
 export const Button = styled.button`
   padding: 10px;
   font-size: 20px;
-  background-color: #53bf9d;
-  cursor: pointer;
   border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 1s ease;
+  &:hover {
+    transform: scale(1.3);
+  }
 `;
