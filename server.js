@@ -1,6 +1,6 @@
 /* eslint-disable */
 const app = require('./app');
-const { conn, User, Product } = require('./db');
+const { conn, User, Product, Discount } = require('./db');
 
 const readFile = (path)=> {
   return new Promise((resolve, reject)=> {
@@ -116,7 +116,21 @@ const setUp = async () => {
       description: "With this launch in November 2017, as part of the Sneaker Exchange brand, adidas Consortium brought together Solexbox and Packer Shoes. This Ultra Boost Mid features a Silfra Rift-inspired layout where the North American and Eurasian tectonic plates intersect on the Mid-Atlantic Ridge. It is also finished in black-grey gradient coloring, with pink and Photo Blue speckles accented.",
       gender: "UNISEX",
       numberInStock: 54,
-    });
+    });  
+    await Discount.create({
+      code: '10Dollar',
+      discountAmount: 10
+    })
+    
+    await Discount.create({
+      code: '20Percent',
+      discountAmount: .20
+    })
+    
+    await Discount.create({
+      code: 'Fullstack',
+      discountAmount: .30
+    })
 
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });

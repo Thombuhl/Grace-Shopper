@@ -1,16 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
 import {
-  _deleteProduct,
-  _updateProd,
-  _setCart,
-  addProduct,
-} from './action_creators/cart_creators';
-import {
-  ADD_PRODUCT_TO_CART,
-  DELETE_PRODUCT,
-  SET_CART,
-  UPDATE_QUANTITY,
-} from './actions/cart_actions';
+  _deleteProduct, 
+  _updateProd, 
+  _setCart, 
+  addProduct, 
+  _applyDiscount
+} from "./action_creators/cart_creators";
+import { 
+  ADD_PRODUCT_TO_CART, 
+  APPLY_DISCOUNT, 
+  DELETE_PRODUCT, 
+  SET_CART, 
+  UPDATE_QUANTITY 
+} from "./actions/cart_actions";
 
 let initialState = {
   lineItems: [],
@@ -29,12 +31,14 @@ const cart = (state = initialState, action) => {
       );
       return { ...state, lineItems };
     case ADD_PRODUCT_TO_CART:
-      let newProducts = action.lineItems;
-      return { ...state, newProducts };
+     let newProducts = action.lineItems;
+     return {...state, newProducts}
+    case APPLY_DISCOUNT:
+      return {...state, discountAmount:action.code}
+    default: 
+      return state
+  };
 
-    default:
-      return state;
-  }
 };
 
 export const fetchCart = () => {
@@ -135,6 +139,14 @@ export const addToCart = (product) => {
       );
       dispatch(addProduct(response.data));
     }
+  };
+};
+
+export const applyDiscount = (code) => {
+  return async (dispatch) => {
+    const discountCodes = (await axios.get(`/api/discounts`)).data
+    const discount = discountCodes.find( discount => discount.code === code ).discountAmount
+    dispatch(_applyDiscount(discount))
   };
 };
 
