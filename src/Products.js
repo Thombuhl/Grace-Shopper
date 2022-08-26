@@ -11,6 +11,7 @@ import ProductCards from './ProductCards';
 import Heading from './Heading';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
+import ModalBox from './Modal';
 
 const Product = ({ products, colorNames, brandNames }) => {
   const productsArr = Array.from(products);

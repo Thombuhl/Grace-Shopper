@@ -1,7 +1,19 @@
 /* eslint-disable */
 const app = require('./app');
-const { conn, User, Product } = require('./db');
+const { conn, User, Product, Discount } = require('./db');
 
+const readFile = (path)=> {
+  return new Promise((resolve, reject)=> {
+    require('fs').readFile(path, 'base64', (err, response)=> {
+      if(err){
+        reject(err)
+      }
+      else {
+        resolve(response)
+      }
+    })
+  })
+}
 const SneaksAPI = require('sneaks-api');
 const sneaks = new SneaksAPI();
 
@@ -30,6 +42,7 @@ const setUp = async () => {
       lastName: 'Noel',
       email: 'lorenzo@gsdt7.com',
     });
+
     const doobin = await User.create({
       username: 'doobin',
       password: 'doobin123',
@@ -42,8 +55,14 @@ const setUp = async () => {
       password: 'moe_pw',
       firstName: 'Moesy',
       lastName: 'Smith',
-      email: 'moe@gsdt7.com',
+      email: "moe@gsdt7.com",
+      addressStreet: '123 Dream Ville St',
+      addressCity: 'New York',
+      addressState: 'NY',
+      addressZip: '10019',
+      addressUnit: 'APT 5F',
     });
+
     const lucy = await User.create({
       username: 'lucy',
       password: 'lucy_pw',
@@ -149,6 +168,20 @@ const setUp = async () => {
       gender: 'UNISEX',
       numberInStock: 54,
     });
+    await Discount.create({
+      code: '10Dollar',
+      discountAmount: 10
+    })
+    
+    await Discount.create({
+      code: '20Percent',
+      discountAmount: .20
+    })
+    
+    await Discount.create({
+      code: 'Fullstack',
+      discountAmount: .30
+    })
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });
     await moe.addToCart({ product: dfoo, quantity: 7 });

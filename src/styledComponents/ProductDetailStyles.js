@@ -53,7 +53,6 @@ export const ChooseSize = styled.option``;
 
 export const AddDiv = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 75%;
   margin-top: 75px;
@@ -87,5 +86,22 @@ export const Button = styled.button`
   &:hover {
     background-color: #f6e3c5;
     color: #53bf9d;
+  }
+`;
+
+export const Icon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  margin: 3px;
+  border-radius: 50%;
+  background-color: gray;
+  transition: all 0.7s ease;
+  &:hover {
+    background-color: teal;
+    transform: scale(1.3);
+    cursor: pointer;
   }
 `;

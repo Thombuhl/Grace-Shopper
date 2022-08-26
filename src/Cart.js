@@ -39,6 +39,14 @@ import {
 
 const Cart = ({ cart, updateCart, deleteLineItem }) => {
   let totalAmountOfCart = 0;
+  const token = window.localStorage.getItem('token')
+  let browserCart = []
+
+  if(token === 'guest'){
+    browserCart = JSON.parse(window.localStorage.getItem('cart'))
+  }
+  else browserCart = cart
+  browserCart.lineItems.map(item => console.log(item)) 
 
   cart.lineItems.forEach((lineItem) => {
     let quantity = lineItem.quantity;
@@ -55,7 +63,7 @@ const Cart = ({ cart, updateCart, deleteLineItem }) => {
       <Container>
         <Wrapper>
           <Title>Your Cart</Title>
-          {cart.lineItems.map((lineItem) => {
+          {browserCart.lineItems.map((lineItem) => {
             return (
               <ProductDiv key={lineItem.id}>
                 <Info>
@@ -113,17 +121,22 @@ const Cart = ({ cart, updateCart, deleteLineItem }) => {
           <OrderSummary>
             <Summary>Order Summary</Summary>
             <SummaryItem>
-              <OrderTotal>Total Amount: ${totalAmountOfCart}</OrderTotal>
+              <OrderTotal>
+                Total Amount: ${totalAmountOfCart.toFixed(2)}
+              </OrderTotal>
             </SummaryItem>
             <SummaryItem>
-              <OrderShipping>Shipping: ${25}</OrderShipping>
+              <OrderShipping>
+                Shipping: {totalAmountOfCart > 150 ? 'Free Shipping' : `$${25}`}
+              </OrderShipping>
             </SummaryItem>
             <SummaryItem>
-              <OrderTax>Tax: ${totalAmountOfCart * 0.04}</OrderTax>
+              <OrderTax>Tax: ${(totalAmountOfCart * 0.04).toFixed(2)}</OrderTax>
             </SummaryItem>
             <SummaryItem>
               <OrderSubtotal>
-                Subtotal: ${totalAmountOfCart + 25 + totalAmountOfCart * 0.04}
+                Subtotal: $
+                {(totalAmountOfCart + 25 + totalAmountOfCart * 0.04).toFixed(2)}
               </OrderSubtotal>
             </SummaryItem>
           </OrderSummary>
