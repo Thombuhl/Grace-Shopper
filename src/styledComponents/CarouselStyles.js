@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;
@@ -20,8 +20,8 @@ export const ArrowDirection = styled.div`
   top: 0;
   bottom: 0;
   margin: auto;
-  left: ${(props) => props.direction === "back" && "10px"};
-  right: ${(props) => props.direction === "forward" && "10px"};
+  left: ${(props) => props.direction === 'back' && '10px'};
+  right: ${(props) => props.direction === 'forward' && '10px'};
   cursor: pointer;
   opacity: 0.35;
   z-index: 3;
@@ -65,6 +65,7 @@ export const Info = styled.p`
 export const Button = styled.button`
   padding: 10px;
   font-size: 20px;
-  background-color: transparent;
+  background-color: #53bf9d;
   cursor: pointer;
+  border: none;
 `;
