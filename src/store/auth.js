@@ -2,6 +2,7 @@
 import axios from "axios";
 import { _logout, _handleToken } from "./action_creators/auth_creators";
 import { SET_AUTH } from "./actions/auth_actions";
+import { fetchCart } from "./cart";
 
 
 const auth = (state = {}, action) => {
@@ -15,7 +16,7 @@ const auth = (state = {}, action) => {
 
 export const logout = () => {
   return (dispatch) => {
-    window.localStorage.removeItem("token");
+    window.localStorage.setItem('token', 'guest')
     dispatch(_logout());
   };
 };

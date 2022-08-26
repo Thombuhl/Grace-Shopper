@@ -18,6 +18,12 @@ const Order = conn.define("order", {
   confirmationId: {
     type: Sequelize.UUID,
   },
+  shippingAddress: {
+    type: Sequelize.STRING
+  },
+  orderTotal: {
+    type: Sequelize.FLOAT
+  }
 });
 
 module.exports = Order;
