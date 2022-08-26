@@ -1,69 +1,41 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import {applyDiscount} from '../../store'
 
 export const OrderSummary = () => {
-
   const dispatch = useDispatch( )
-
-  const user = useSelector(state => state.auth)
   const userCart = useSelector(state => state.cart) 
-  
   const cartItems = userCart.lineItems.reduce((accum, item)=>{
     return accum += item.quantity 
   }, 0)
   const cartTotal = userCart.lineItems.reduce((accum, item)=>{
     return accum += (item.product.price * item.quantity)
   }, 0).toFixed(2)
-  
   const deliveryFee = (cartTotal > 150 ? 0 : .05 * cartTotal).toFixed(2)
   const taxFee = (.04 * cartTotal).toFixed(2)
-  
-  const [shippingMethod, setShipingMethod] = useState({})
-  const [ shippingInfo, setShipingInfo ] = useState({
-    email: '',
-    firstName: '',
-    lastName: '',
-    addressStreet: '',
-    addressCity: '',
-    addressState: '',
-    addressZip: '',
-    addressUnit: '',
-    shipping:'',
-    isBillingMailingEqual: true,
-    isValidAge: true,
-    newsLetter: true,
+  const [ discountInfo, setDiscountInfo ] = useState({
     discountCode: '',
+    discountAmount: userCart.discountAmount || 0, 
+    discountValue: ''
   })
-
-  const [discountAmount, setDiscountAmount] = useState(userCart.discountAmount)
-  const finalPrice = ((cartTotal*1 + deliveryFee*1 + taxFee*1).toFixed(2))
-  const finalDiscount = discountAmount < 1 ?
-    finalPrice - finalPrice * discountAmount :
-    finalPrice - discountAmount
+  const cartTotalPrice = ((cartTotal*1 + deliveryFee*1 + taxFee*1).toFixed(2))
+  const totalAfterDiscount = discountInfo.discountAmount < 1 ?
+    cartTotalPrice - cartTotalPrice * discountInfo.discountAmount :
+    cartTotalPrice - discountInfo.discountAmount
 
   const onChange = (ev) => {
-    setShipingInfo({...shippingInfo, [ev.target.name]: ev.target.value });
+    console.log(discountInfo)
+    setDiscountInfo({...discountInfo, [ev.target.name]: ev.target.value });
   };
 
   useEffect(()=>{
-    // setShipingInfo({...shippingInfo, ...user})
-    setDiscountAmount(userCart.discountAmount)
-  },[user, userCart])
+    console.log(discountInfo, userCart)
+    setDiscountInfo({...discountInfo, discountAmount: userCart.discountAmount})
+  },[ userCart ])
   
-  
-  const reviewAndPay = (e)=> {
-    e.preventDefault()
-    // props.history.push('/checkout/payment')
-  }
-
-  const handleChange = (e)=> {
-    const {name, value } = e.target
-    setShipingMethod({ [name]:value })
-  }
-
   const fetchDiscount = async(e)=> {
     e.preventDefault()
-    dispatch(applyDiscount(shippingInfo.discountCode))
+    dispatch(applyDiscount(discountInfo.discountCode))
   }
 
   return (
@@ -74,12 +46,12 @@ export const OrderSummary = () => {
       </p>
       <p>Sales Tax: ${ taxFee }</p>
       {
-        finalDiscount 
-          ? <p>BEFORE: ${ finalPrice } { discountAmount < 1 ? <strong>-{discountAmount*100}%</strong> : <strong>-{discountAmount}</strong> }</p>
+        totalAfterDiscount < cartTotalPrice
+          ? <p>Discount: { discountInfo.discountAmount < 1 ? <strong>-{discountInfo.discountAmount*100}%</strong> : <strong>-${discountInfo.discountAmount}</strong> }</p>
           : null
       }
-      <h5>TOTAL ${ finalDiscount ? finalDiscount : finalPrice}</h5>
-      <input type="text" placeholder='Enter your promo code' name='discountCode'value={shippingInfo.discountCode} onChange={onChange}/>
+      <h5>TOTAL ${ totalAfterDiscount ? totalAfterDiscount : cartTotalPrice}</h5>
+      <input type="text" placeholder='Enter your promo code' name='discountCode' value={discountInfo.discountCode} onChange={onChange}/>
       <button onClick={fetchDiscount} >+</button>
       <div>
         <h5>Order Details</h5>

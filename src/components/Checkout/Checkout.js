@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import '../../../public/checkout.css'
+import { OrderSummary } from './OrderSummary'
 
 // TODO:
 //   Redirect User to Review & Pay route on click
@@ -91,7 +92,7 @@ const Checkout = () => {
         <label htmlFor=""> <input type="checkbox" checked={shippingInfo.newsLetter} onChange={()=>{setShipingInfo({...shippingInfo, newsLetter: !shippingInfo.newsLetter})}}/> Yes, I'd like to receive emails about exclusive sales and more</label>
         <button disabled={ !shippingInfo.isValidAge || !shippingInfo.addressStreet || !shippingInfo.addressCity || !shippingInfo.addressState || !shippingInfo.addressZip }>Review and Pay</button>
       </form>
-      {/* <OrderSummary /> */}
+      <OrderSummary />
   </div>
   )
 }
