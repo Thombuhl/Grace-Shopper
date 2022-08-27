@@ -27,29 +27,28 @@ class _App extends Component {
     window.socket.addEventListener('message', (ev) => {
       const action = JSON.parse(ev.data);
       this.props.dispatchAction(action);
-      console.log('--------------------', action);
     });
   }
   render() {
     return (
       <div>
         <Nav />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/cart" component={Cart} />
-        <Route exact path="/checkout/payment" component={PaymentForm} />
-        <Route exact path="/checkout" component={Checkout} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Register} />
-        <Route exact path="/mens" component={MensProduct} />
-        <Route exact path="/womens" component={WomensProduct} />
-        {/* <Route exact path="/favorites" component={Favorites} /> */}
-        <Route exact path="/account" component={AccountProfile} />
-
-        <Switch>
-          <Route exact path="/products/:id" component={ProductDetail} />
-          <Route exact path="/products/:filter?" component={Products} />
-        </Switch>
-        <Route exact path="*" component={ErrorPage} />
+          <Switch>
+            <Route exact path="/products/:id" component={ProductDetail} />
+            <Route exact path="/products/:filter?" component={Products} />
+          </Switch>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout/payment" component={PaymentForm} />
+            <Route exact path="/checkout" component={Checkout} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Register} />
+            <Route exact path="/mens" component={MensProduct} />
+            <Route exact path="/womens" component={WomensProduct} />
+            <Route exact path="/account" component={AccountProfile} />
+            <Route exact path="*" component={ErrorPage} />
+          </Switch>
       </div>
     );
   }
