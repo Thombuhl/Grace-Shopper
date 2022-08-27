@@ -95,7 +95,7 @@ class Nav extends Component {
                     <Link
                       className="dropdown-btn left-menu-button"
                       style={{ color: '#f6e3c5' }}
-                      to="/"
+                      to="/account"
                     >
                       Welcome {auth.username}
                       <img
@@ -109,7 +109,6 @@ class Nav extends Component {
                     </Link>
                   </button>
                   <div className="dropdown-content">
-                    <Link to="/account">My Account</Link>
                     <Link onClick={logout} to="/">
                       Logout
                     </Link>
