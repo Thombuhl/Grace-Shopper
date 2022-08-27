@@ -27,7 +27,7 @@ import {
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
-const ProductDetail = ({ product, addToCart }) => {
+const ProductDetail = ({ product, addToCart, history }) => {
   const shoes = useSelector(state => state.products)
   let sizes = Array.from(shoes).filter(shoe => shoe.silhoutte === product.silhoutte)
   return (
@@ -44,10 +44,22 @@ const ProductDetail = ({ product, addToCart }) => {
             <Price>${product.price}</Price>
             <SizeDiv>
               {
-                sizes.map( shoe => (
-                  <a href={`#/products/${shoe.id}`}>{shoe.colorway}</a>
-                  ))
-                }
+                sizes.map( shoe => {
+                  const nonExistentColors = ['Muslin', 'Cardinal', 'Rope', 'Magnet']
+                  const colorways = shoe.colorway.split('/').sort((a,b)=> a.length - b.length)
+                  let colors = colorways.map(color => color.split(' ').length > 1 ? color.split(' ')[1] : color.split(' ')[0]).filter( color => !nonExistentColors.includes(color))
+                  colors.length <1 ? colors=['black'] : colors
+                  console.log(history)
+                  return (
+                    <div style={{ background: "white"}}>
+                      <button
+                        onClick={()=> history.push(`/products/${shoe.id}`)}
+                        style={{ width:"20px", height: "20px", background:`linear-gradient(${colors.join(', ')}, white)` , margin:"1rem" }}>
+                      </button>
+                    </div>
+                  )
+                })
+              }
               <Size>
                 Size:
                 <SizeSelect>
@@ -76,13 +88,15 @@ const ProductDetail = ({ product, addToCart }) => {
   );
 };
 
-const mapState = ({ products }, { match }) => {
+const mapState = ({ products }, { match, history }) => {
+  console.log(match)
   const productId = match.params.id * 1;
   const productsArr = Array.from(products);
   const product = productsArr.find((product) => product.id === productId) || {};
   return {
     products,
     product,
+    history
   };
 };
 
