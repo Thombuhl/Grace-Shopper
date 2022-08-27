@@ -161,8 +161,10 @@ form > * {
 
 .searchResult {
   background-color: rgb(111, 182, 147);
-  position: absolute;
-  z-index: 3;
   text-align: center;
   text-transform: capitalize;
+}
+
+.searchResult > a > p{
+  z-index: 20;
 }
