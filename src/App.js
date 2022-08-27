@@ -42,7 +42,7 @@ class _App extends Component {
         <Route exact path="/signup" component={Register} />
         <Route exact path="/mens" component={MensProduct} />
         <Route exact path="/womens" component={WomensProduct} />
-        <Route exact path="/favorites" component={Favorites} />
+        {/* <Route exact path="/favorites" component={Favorites} /> */}
         <Route exact path="/account" component={AccountProfile} />
 
         <Switch>
