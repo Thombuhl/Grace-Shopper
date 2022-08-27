@@ -73,7 +73,7 @@ class Nav extends Component {
               <Logo>
                 <Link className="links" to="/">
                   <img
-                    style={{ width: '8.5vw', height: '8.5vh' }}
+                    style={{ width: '6vw', height: '6vh' }}
                     src="../public/solenice.png"
                   />
                 </Link>
