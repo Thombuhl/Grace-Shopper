@@ -24,6 +24,7 @@ import auth from './store/auth';
 class Nav extends Component {
   componentDidMount() {
     this.props.exchangeToken();
+    this.props.fetchCart();
   }
 
   render() {
