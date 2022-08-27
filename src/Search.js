@@ -8,7 +8,6 @@ const Search = ({ products }) => {
     <div className="search">
       <div className="searchInput">
         <input
-          className="text-warning"
           type="text"
           placeholder="Search ..."
           onChange={(event) => setFilteredData(event.target.value)}
