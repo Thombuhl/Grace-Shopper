@@ -17,6 +17,7 @@ import Register from './Register';
 import Checkout from './components/Checkout/Checkout';
 import PaymentForm from './stripe/CheckoutForm';
 import { fetchCart } from './store';
+import { ErrorPage } from './components/Error/ErrorPage';
 
 class _App extends Component {
   async componentDidMount() {
@@ -48,6 +49,7 @@ class _App extends Component {
           <Route exact path="/products/:id" component={ProductDetail} />
           <Route exact path="/products/:filter?" component={Products} />
         </Switch>
+        <Route path="*" component={ErrorPage} />
       </div>
     );
   }
