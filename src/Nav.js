@@ -54,9 +54,9 @@ class Nav extends Component {
                     </Link>
                   </button>
                   <div className="dropdown-content">
-                    <a href="#/mens/category2">New Arrival</a>
-                    <a href="#/mens/category1">Most Popular</a>
-                    <a href="#/mens/category2">Fan Favorite</a>
+                    <a href="#/mens/category1">New Arrival</a>
+                    <a href="#/mens/category2">Most Popular</a>
+                    <a href="#/mens/category3">Fan Favorite</a>
                   </div>
                 </div>
               </LeftNavItem>
@@ -68,9 +68,9 @@ class Nav extends Component {
                     </Link>
                   </button>
                   <div className="dropdown-content">
-                    <a href="#/womens/category2">New Arrival</a>
-                    <a href="#/womens/category1">Most Popular</a>
-                    <a href="#/womens/category2">Fan Favorite</a>
+                    <a href="#/womens/category1">New Arrival</a>
+                    <a href="#/womens/category2">Most Popular</a>
+                    <a href="#/womens/category3">Fan Favorite</a>
                   </div>
                 </div>
               </LeftNavItem>
