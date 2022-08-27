@@ -100,7 +100,7 @@ const Footer = () => {
         <Title>Contacts</Title>
         <RightItem>
           <a
-            href="https://www.google.com/maps/place/1+Infinite+Loop,+Cupertino,+CA+95014/@37.3318226,-122.0322864,17z/data=!3m1!4b1!4m5!3m4!1s0x808fb5b7176a341d:0x4ae040c5bfc59fcd!8m2!3d37.3318226!4d-122.0300924"
+            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
             style={{ color: '#f6e3c5', textDecoration: 'none' }}
           >
             <PlaceIcon style={{ marginRight: '5px' }} /> 1 Infinite Loop
