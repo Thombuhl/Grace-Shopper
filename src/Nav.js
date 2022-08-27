@@ -18,6 +18,7 @@ import {
   RightNavItem,
   Logo,
 } from './styledComponents/NavStyles';
+import Search from './Search';
 
 class Nav extends Component {
   componentDidMount() {
@@ -40,8 +41,6 @@ class Nav extends Component {
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
                   </div>
                 </div>
               </LeftNavItem>
@@ -54,8 +53,6 @@ class Nav extends Component {
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
                   </div>
                 </div>
               </LeftNavItem>
@@ -68,8 +65,6 @@ class Nav extends Component {
                   </button>
                   <div className="dropdown-content">
                     <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
                   </div>
                 </div>
               </LeftNavItem>
@@ -77,25 +72,14 @@ class Nav extends Component {
             <CenterNav>
               <Logo>
                 <Link className="links" to="/">
-                  SoleNice.
+                  <img
+                    style={{ width: '8.5vw', height: '8.5vh' }}
+                    src="../public/solenice.png"
+                  />
                 </Link>
               </Logo>
             </CenterNav>
             <RightNav>
-              <InputBase
-                className="search"
-                placeholder="Search…"
-                inputProps={{
-                  'aria-label': 'search',
-                  style: {
-                    padding: 5,
-                  },
-                }}
-                endAdornment={
-                  <SearchIcon style={{ color: 'gray', padding: 2 }} />
-                }
-              />
-
               {auth.id ? (
                 <div className="dropdown">
                   <button
@@ -107,12 +91,18 @@ class Nav extends Component {
                       style={{ color: '#f6e3c5' }}
                       to="/"
                     >
-                      Welcome, {auth.firstName} {auth.lastName}!
+                      Welcome {auth.firstName}
+                      <img
+                        style={{
+                          borderRadius: '50%',
+                          marginLeft: '10px',
+                        }}
+                        src={auth.profileImage}
+                      ></img>
                     </Link>
                   </button>
                   <div className="dropdown-content">
                     <Link to="/account">My Account</Link>
-                    <Link to="/edit">Edit Profile</Link>
                     <Link onClick={logout} to="/">
                       Logout
                     </Link>
@@ -134,7 +124,6 @@ class Nav extends Component {
                   </RightNav>
                 </div>
               )}
-
               <RightNavItem>
                 <Link className="links" to="/cart">
                   <IconButton onClick={fetchCart} aria-label="cart">
