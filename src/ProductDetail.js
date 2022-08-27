@@ -33,7 +33,7 @@ const ProductDetail = ({ product, addToCart, history, match }) => {
     <div>
       <Heading />
       <Container>
-      <button onClick={()=> history.go(-1)}>BACK</button>
+      <button onClick={()=> history.push('/products')}>BACK</button>
         <Wrapper>
           <ImageDiv>
             <Image src={product.imageLocation} />
