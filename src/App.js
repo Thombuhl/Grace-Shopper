@@ -49,7 +49,7 @@ class _App extends Component {
           <Route exact path="/products/:id" component={ProductDetail} />
           <Route exact path="/products/:filter?" component={Products} />
         </Switch>
-        <Route path="*" component={ErrorPage} />
+        <Route exact path="*" component={ErrorPage} />
       </div>
     );
   }
