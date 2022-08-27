@@ -93,11 +93,12 @@ class Nav extends Component {
                       style={{ color: '#f6e3c5' }}
                       to="/"
                     >
-                      Welcome {auth.firstName}
+                      Welcome {auth.username}
                       <img
                         style={{
                           borderRadius: '50%',
-                          marginLeft: '10px',
+                          marginLeft: '5px',
+                          width: '2%',
                         }}
                         src={auth.profileImage}
                       ></img>
