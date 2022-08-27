@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { applyDiscount } from '../../store';
+import styled from 'styled-components';
+export const Image = styled.img``;
 import StripeContainer from '../../stripe/StripeContainer';
 import { applyDiscount } from '../../store';
+
 
 export const OrderSummary = () => {
   const dispatch = useDispatch();
@@ -74,11 +78,18 @@ export const OrderSummary = () => {
         onChange={onChange}
       />
       <button onClick={fetchDiscount}>+</button>
+      <br></br>
+      <br></br>
       <div>
         <h5>Order Details</h5>
         {userCart.lineItems.map((item) => (
           <li key={item.id} className="flex-row">
-            <img src={item.product.imageLocation} alt="product" width="30%" />
+            <img
+              style={{ width: '30%', marginRight: '40px' }}
+              src={item.product.imageLocation}
+              alt="product"
+              width="30%"
+            />
             <div>
               <p>{item.product.name}</p>
               <p>{item.product.colorway}</p>
@@ -90,11 +101,14 @@ export const OrderSummary = () => {
           </li>
         ))}
       </div>
+      <br></br>
+      <br></br>
       <h6>ACCEPTED PAYMENT METHODS</h6>
       <div>
-        <img src="" alt="MasterCard Icon" />
-        <img src="" alt="AMEX Icon" />
-        <img src="" alt="Visa Icon" />
+        <Image
+          style={{ marginBottom: '30px' }}
+          src="http://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_17.gif"
+        ></Image>
       </div>
       <StripeContainer />
     </div>

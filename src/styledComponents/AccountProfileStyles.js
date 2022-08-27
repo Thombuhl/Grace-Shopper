@@ -32,7 +32,7 @@ export const UserDiv = styled.div`
   background-color: #53bf9d;
   border-radius: 12px;
   transition: all 1s ease;
-  border: 2px dotted black;
+  border: 1px solid black;
   width: 40vw;
   height: 70vh;
 
@@ -75,16 +75,16 @@ export const Image = styled.img`
 `;
 
 export const Input = styled.input`
-  width: 30vw;
+  width: 100%;
   height: 10vh;
   padding: 20px;
   background-color: #53bf9d;
   color: #f6e3c5;
-  font-weight: 00;
+  font-weight: 300;
   text-transform: uppercase;
   transition: all 1s ease;
   text-shadow: 2px 2px black;
-  border: 2px dotted black;
+  border: 1px solid black;
   &:hover {
     background-color: #f6e3c5;
     color: #53bf9d;
@@ -94,6 +94,7 @@ export const Input = styled.input`
 
 export const InputDiv = styled.div`
   margin-bottom: 30px;
+  width: 30vw;
 `;
 
 export const UploadImageDiv = styled.div`
