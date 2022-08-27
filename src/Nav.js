@@ -101,8 +101,8 @@ class Nav extends Component {
                       <img
                         style={{
                           borderRadius: '50%',
-                          marginLeft: '5px',
-                          width: '20%',
+                          marginLeft: '10px',
+                          width: '25px',
                         }}
                         src={auth.profileImage}
                       ></img>

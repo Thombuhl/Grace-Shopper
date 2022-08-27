@@ -64,7 +64,7 @@ export const UserEmail = styled.span`
 `;
 
 export const Image = styled.img`
-  width: 20%;
+  width: 50px;
   border: 1px dotted black;
   border-radius: 50%;
   margin: 20px 0px;
