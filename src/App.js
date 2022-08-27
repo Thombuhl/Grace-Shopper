@@ -17,7 +17,7 @@ import Register from './Register';
 import Checkout from './components/Checkout/Checkout';
 import PaymentForm from './stripe/CheckoutForm';
 import { fetchCart } from './store';
-import { ErrorPage } from './components/Error/ErrorPage';
+import ErrorPage  from './components/Error/ErrorPage';
 
 class _App extends Component {
   async componentDidMount() {
