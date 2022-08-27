@@ -41,9 +41,9 @@ class Nav extends Component {
                       Shop All
                     </Link>
                   </button>
-                  <div className="dropdown-content">
+                  {/* <div className="dropdown-content">
                     <a href="#">Link 1</a>
-                  </div>
+                  </div> */}
                 </div>
               </LeftNavItem>
               <LeftNavItem className="menu-item">
@@ -54,7 +54,7 @@ class Nav extends Component {
                     </Link>
                   </button>
                   <div className="dropdown-content">
-                    <a href="#">Link 1</a>
+                    <a href="#/mens/category1">Most Popular</a>
                   </div>
                 </div>
               </LeftNavItem>
@@ -66,7 +66,7 @@ class Nav extends Component {
                     </Link>
                   </button>
                   <div className="dropdown-content">
-                    <a href="#">Link 1</a>
+                    <a href="#/womens/category1">New Arrival</a>
                   </div>
                 </div>
               </LeftNavItem>
