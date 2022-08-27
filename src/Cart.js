@@ -75,7 +75,9 @@ const Cart = ({ cart, updateCart, deleteLineItem }) => {
                       <Details>
                         <ProductName>
                           <strong>Product Name:</strong>
-                          {lineItem.product.name.toUpperCase()}
+                          <a href={`#/products/${lineItem.product.id}`}>
+                            {lineItem.product.name.toUpperCase()}
+                          </a>
                         </ProductName>
                         <ProductColor>
                           <strong>Colorway:</strong>
