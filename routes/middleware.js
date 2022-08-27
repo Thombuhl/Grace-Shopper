@@ -9,7 +9,12 @@ const isLoggedIn = async (req, res, next) => {
     next(ex);
   }
 };
-
+const isAdminIn = (req , res ,next)=>{
+  if(req.user.isAdmin === false){
+    return next('access denied', 401)
+  }
+next()
+}
 module.exports = {
-  isLoggedIn,
+  isLoggedIn, isAdminIn
 };

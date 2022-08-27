@@ -2,10 +2,10 @@
 const express = require("express");
 const app = express.Router();
 const { Product } = require("../db");
-
+const { isAdminIn} = require("./middleware");
 module.exports = app;
 
-app.post("/", async (req, res) => {
+app.post("/", isAdminIn, async (req, res) => {
   try {
     const newProduct = new Product(req.body);
     const savedProduct = await newProduct.save();

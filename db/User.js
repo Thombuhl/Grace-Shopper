@@ -52,6 +52,11 @@ const User = conn.define('user', {
     type: Sequelize.STRING,
     defaultValue: ''
   },
+  isAdmin:{
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  }
+
 });
 
 User.addHook('beforeSave', async (user) => {

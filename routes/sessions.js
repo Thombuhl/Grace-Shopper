@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express.Router();
 const { User } = require("../db");
-const { isLoggedIn } = require("./middleware");
+const { isLoggedIn , isAdminIn} = require("./middleware");
 
 module.exports = app;
 
@@ -30,6 +30,14 @@ app.post("/signup", async (req, res, next) => {
     }
   } catch (er) {
     next(er);
+  }
+});
+app.get("/user ", isAdminIn,  async (req, res, next) => {
+  try {
+    res.send(await User.findAll())
+    
+  } catch (error) {
+    next(error);
   }
 });
 
