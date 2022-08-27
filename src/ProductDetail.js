@@ -1,7 +1,6 @@
 import React from 'react';
 import Heading from './Heading';
 import Footer from './Footer';
-
 import { connect, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ModalBox from './Modal';
@@ -27,13 +26,14 @@ import {
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
-const ProductDetail = ({ product, addToCart, history }) => {
+const ProductDetail = ({ product, addToCart, history, match }) => {
   const shoes = useSelector(state => state.products)
   let sizes = Array.from(shoes).filter(shoe => shoe.silhoutte === product.silhoutte)
   return (
     <div>
       <Heading />
       <Container>
+      <button onClick={()=> history.go(-1)}>BACK</button>
         <Wrapper>
           <ImageDiv>
             <Image src={product.imageLocation} />
@@ -48,13 +48,12 @@ const ProductDetail = ({ product, addToCart, history }) => {
                   const nonExistentColors = ['Muslin', 'Cardinal', 'Rope', 'Magnet']
                   const colorways = shoe.colorway.split('/').sort((a,b)=> a.length - b.length)
                   let colors = colorways.map(color => color.split(' ').length > 1 ? color.split(' ')[1] : color.split(' ')[0]).filter( color => !nonExistentColors.includes(color))
-                  colors.length <1 ? colors=['black'] : colors
-                  console.log(history)
+                  colors.length <1 ? colors.push('black') : colors
                   return (
                     <div style={{ background: "white"}}>
                       <button
                         onClick={()=> history.push(`/products/${shoe.id}`)}
-                        style={{ width:"20px", height: "20px", background:`linear-gradient(${colors.join(', ')}, white)` , margin:"1rem" }}>
+                        style={{ width:"30px", height: "30px", background:`linear-gradient(${colors.join(', ')}, white)` , margin:"1rem" }}>
                       </button>
                     </div>
                   )
@@ -89,7 +88,7 @@ const ProductDetail = ({ product, addToCart, history }) => {
 };
 
 const mapState = ({ products }, { match, history }) => {
-  console.log(match)
+  console.log(history)
   const productId = match.params.id * 1;
   const productsArr = Array.from(products);
   const product = productsArr.find((product) => product.id === productId) || {};

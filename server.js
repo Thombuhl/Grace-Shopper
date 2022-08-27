@@ -212,7 +212,7 @@ const setUp = async () => {
         sockets = sockets.filter(s => s!== socket)
       })
     })
-    await sneaks.getProducts('shoes', 300, function (er, products) {
+    await sneaks.getProducts('shoes', 600, function (er, products) {
       if (er) {
         console.log('error');
       }
