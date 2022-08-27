@@ -7,7 +7,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Footer from './Footer';
 import Heading from './Heading';
-import StripeContainer from './stripe/StripeContainer';
+
 import {
   Container,
   Wrapper,
@@ -160,7 +160,6 @@ const Cart = ({ cart, updateCart, deleteLineItem }) => {
             </ShopButton>
           </ShopDiv>
         </Wrapper>
-        <StripeContainer />
       </Container>
       <Footer />
     </div>

@@ -17,12 +17,15 @@ import {
   RightNav,
   RightNavItem,
   Logo,
-} from './styledComponents/NavStyles';
 import Search from './Search';
+import auth from './store/auth';
 
 class Nav extends Component {
   componentDidMount() {
     this.props.exchangeToken();
+  }
+  componentDidUpdate() {
+    this.props.fetchCart();
   }
 
   render() {

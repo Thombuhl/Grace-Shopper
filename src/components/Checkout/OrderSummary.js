@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { applyDiscount } from '../../store';
 import styled from 'styled-components';
-
 export const Image = styled.img``;
+import StripeContainer from '../../stripe/StripeContainer';
+import { applyDiscount } from '../../store';
+
 
 export const OrderSummary = () => {
   const dispatch = useDispatch();
@@ -108,6 +110,7 @@ export const OrderSummary = () => {
           src="http://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_17.gif"
         ></Image>
       </div>
+      <StripeContainer />
     </div>
   );
 };
