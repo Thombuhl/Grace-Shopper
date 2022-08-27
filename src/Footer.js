@@ -27,7 +27,19 @@ const Footer = () => {
   return (
     <Container>
       <LeftFooter>
-        <Logo style={{ color: '#f6e3c5' }}>SoleNice.</Logo>
+        <Logo>
+          <Link to="/">
+            <img
+              style={{
+                width: '20vw',
+                height: '10vh',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+              }}
+              src="../public/solenice.png"
+            />
+          </Link>
+        </Logo>
         <Info>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
