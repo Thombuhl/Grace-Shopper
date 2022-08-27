@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express.Router();
 const { isLoggedIn } = require('./middleware');
-const stripe = require("stripe")('sk_test_51LZ1KkHgH8V7eWW5re4zadDxBHH5r5sbWkKxtL9qV2tytsNHjniCnddMCjOAq49QKDActxfoq8KrbGBImfoROYYK00HXDxKON1');
+const stripe = require("stripe")('');
 
 module.exports = app;
 
