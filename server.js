@@ -201,7 +201,6 @@ const setUp = async () => {
     const socketServer = new ws.WebSocketServer({
       server,
     });
-
     socketServer.on('connection', (socket) => {
       sockets.push(socket);
       socket.on('message', (data) => {
