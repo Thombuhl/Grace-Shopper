@@ -18,7 +18,7 @@ import {
   Title,
   Info,
 } from '../../styledComponents/CheckoutStyles';
-
+import Footer from '../../Footer';
 
 // TODO:
 //   Redirect User to Review & Pay route on click
@@ -217,9 +217,23 @@ const Checkout = () => {
                 Yes, I'd like to receive emails about exclusive sales and more
               </label>
             </InputDiv>
+            <InputDiv>
+              <Button
+                disabled={
+                  !shippingInfo.isValidAge ||
+                  !shippingInfo.addressStreet ||
+                  !shippingInfo.addressCity ||
+                  !shippingInfo.addressState ||
+                  !shippingInfo.addressZip
+                }
+              >
+                Review and Pay
+              </Button>
+            </InputDiv>
           </Form>
         </FormDiv>
       </Wrapper>
+      <Footer />
     </Container>
   );
 };
