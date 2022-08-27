@@ -233,7 +233,6 @@ const Checkout = () => {
           </Form>
         </FormDiv>
       </Wrapper>
-      <Footer />
     </Container>
   );
 };
