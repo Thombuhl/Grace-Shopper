@@ -12,6 +12,7 @@ import Heading from './Heading';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import ModalBox from './Modal';
+import Search from './Search';
 
 const Product = ({ products, colorNames, brandNames }) => {
   const productsArr = Array.from(products);
@@ -73,6 +74,9 @@ const Product = ({ products, colorNames, brandNames }) => {
               return <Option key={item.id}>{item.color}</Option>;
             })}
           </Select>
+        </FilterItem>
+        <FilterItem>
+          <Search />
         </FilterItem>
         <FilterItem>
           <Select onChange={(event) => setSort(event.target.value)}>

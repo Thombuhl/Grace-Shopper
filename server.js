@@ -1,20 +1,19 @@
 /* eslint-disable */
 const app = require('./app');
-const ws = require('ws')
+const ws = require('ws');
 const { conn, User, Product, Discount } = require('./db');
 
-const readFile = (path)=> {
-  return new Promise((resolve, reject)=> {
-    require('fs').readFile(path, 'base64', (err, response)=> {
-      if(err){
-        reject(err)
+const readFile = (path) => {
+  return new Promise((resolve, reject) => {
+    require('fs').readFile(path, 'base64', (err, response) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(response);
       }
-      else {
-        resolve(response)
-      }
-    })
-  })
-}
+    });
+  });
+};
 const SneaksAPI = require('sneaks-api');
 const sneaks = new SneaksAPI();
 
@@ -56,7 +55,7 @@ const setUp = async () => {
       password: 'moe_pw',
       firstName: 'Moesy',
       lastName: 'Smith',
-      email: "moe@gsdt7.com",
+      email: 'moe@gsdt7.com',
       addressStreet: '123 Dream Ville St',
       addressCity: 'New York',
       addressState: 'NY',
@@ -161,7 +160,7 @@ const setUp = async () => {
       size: 9.5,
       price: 45400,
       imageLocation:
-        'https://images.stockx.com/images/Nike-Dunk-SB-Low-Paris.jpg?fit=fill&bg=FFFFFF&w=576&h=384&fm=avif&auto=compress&dpr=1&trim=color&updated_at=1606325852&q=57',
+        'https://images.stockx.com/images/Nike-Dunk-SB-Low-Staple-NYC-Pigeon-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1606322680',
       colorway: 'Medium Grey/Dark Grey/White/Orange',
       silhoutte: 'Nike dunk low SB',
       description:
@@ -171,18 +170,18 @@ const setUp = async () => {
     });
     await Discount.create({
       code: '10Dollar',
-      discountAmount: 10
-    })
-    
+      discountAmount: 10,
+    });
+
     await Discount.create({
       code: '20Percent',
-      discountAmount: .20
-    })
-    
+      discountAmount: 0.2,
+    });
+
     await Discount.create({
       code: 'Fullstack',
-      discountAmount: .30
-    })
+      discountAmount: 0.3,
+    });
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });
     await moe.addToCart({ product: dfoo, quantity: 7 });
@@ -194,25 +193,28 @@ const setUp = async () => {
     await lorenzo.addToCart({ product: bzz, quantity: 4 });
     await doobin.addToCart({ product: cfoo, quantity: 4 });
     const port = process.env.PORT || 3000;
-    const server = app.listen(port, () => console.log(`listening on port ${port}`));
-    
-    let sockets =  []
-    const socketServer = new ws.WebSocketServer({
-      server
-    })
+    const server = app.listen(port, () =>
+      console.log(`listening on port ${port}`)
+    );
 
-    socketServer.on('connection', (socket)=> {
-      sockets.push(socket)
-      socket.on('message', (data)=> {
-        sockets.filter(s => s !== socket).forEach(socket => {
-          socket.send(data.toString())
-        })
-      })
-      socket.on('close', ()=>{
-        sockets = sockets.filter(s => s!== socket)
-      })
-    })
-    await sneaks.getProducts('shoes', 600, function (er, products) {
+    let sockets = [];
+    const socketServer = new ws.WebSocketServer({
+      server,
+    });
+    socketServer.on('connection', (socket) => {
+      sockets.push(socket);
+      socket.on('message', (data) => {
+        sockets
+          .filter((s) => s !== socket)
+          .forEach((socket) => {
+            socket.send(data.toString());
+          });
+      });
+      socket.on('close', () => {
+        sockets = sockets.filter((s) => s !== socket);
+      });
+    });
+    await sneaks.getProducts('shoes', 300, function (er, products) {
       if (er) {
         console.log('error');
       }

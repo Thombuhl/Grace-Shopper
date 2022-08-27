@@ -51,18 +51,47 @@ const PaymentForm = ({ cart }) => {
   return (
     <>
       {!success ? (
-        <form onSubmit={handleSubmit}>
-          <fieldset className="FormGroup"></fieldset>
-          <div className="FormRow">
-            <CardElement options={CARD_OPTIONS} />
-          </div>
-          <fieldset>
-            <button>Pay</button>
-          </fieldset>
-        </form>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <form
+            style={{
+              width: '50vw',
+              height: '20vh',
+              border: '1px solid black',
+              borderRadius: '12px',
+              backgroundColor: '#53bf9d',
+            }}
+            onSubmit={handleSubmit}
+          >
+            <fieldset className="FormGroup"></fieldset>
+            <div style={{ fontWeight: 900 }} className="FormRow">
+              <CardElement options={CARD_OPTIONS} />
+            </div>
+            <button
+              style={{
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                padding: '10px',
+                width: '20%',
+                backgroundColor: '#f6e3c5',
+                color: '#53bf9d',
+                borderRadius: '12px',
+                border: 'none',
+                fontWeight: 900,
+              }}
+            >
+              Pay
+            </button>
+          </form>
+        </div>
       ) : (
         <div>
-          <h2>You Bought something</h2>
+          <h2>Order Placed</h2>
         </div>
       )}
     </>

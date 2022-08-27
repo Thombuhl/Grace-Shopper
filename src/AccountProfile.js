@@ -32,7 +32,7 @@ const AccountProfile = () => {
           <UserInfo>
             Name:{' '}
             <UserName>
-              {user.firstName}, {user.lastName}
+              {user.lastName}, {user.firstName}
             </UserName>
           </UserInfo>
           <UserInfo>

@@ -10,6 +10,7 @@ import {
 } from './styledComponents/ProductsStyles';
 import Heading from './Heading';
 import Footer from './Footer';
+import Search from './Search';
 
 const MenProducts = ({ products, brandNames, colorNames }) => {
   const productsArr = Array.from(products);
@@ -72,6 +73,9 @@ const MenProducts = ({ products, brandNames, colorNames }) => {
               return <Option key={item.id}>{item.color}</Option>;
             })}
           </Select>
+        </FilterItem>
+        <FilterItem>
+          <Search />
         </FilterItem>
         <FilterItem>
           <Select onChange={(event) => setSort(event.target.value)}>
