@@ -14,20 +14,20 @@ import auth from './store/auth';
 import Favorites from './Favorites';
 import AccountProfile from './AccountProfile';
 import Register from './Register';
-import Checkout from './components/Checkout/Checkout'
+import Checkout from './components/Checkout/Checkout';
 import PaymentForm from './stripe/CheckoutForm';
 import { fetchCart } from './store';
 
 class _App extends Component {
   async componentDidMount() {
     this.props.load();
-    const url = window.location.origin.replace('http', 'ws')
-    window.socket = new WebSocket(url)
-    window.socket.addEventListener('message', (ev)=> {
-      const action = JSON.parse(ev.data)
-      this.props.dispatchAction(action)
-      console.log('--------------------', action)
-    })
+    const url = window.location.origin.replace('http', 'ws');
+    window.socket = new WebSocket(url);
+    window.socket.addEventListener('message', (ev) => {
+      const action = JSON.parse(ev.data);
+      this.props.dispatchAction(action);
+      console.log('--------------------', action);
+    });
   }
   render() {
     return (
@@ -59,12 +59,12 @@ const mapDispatch = (dispatch) => {
       let response = await axios.get('/api/products');
       const products = response.data;
       dispatch({ type: 'GET_PRODUCTS', products });
-      fetchCart()
+      fetchCart();
     },
     dispatchAction: (action) => {
-      console.log('000000000', action)
-      dispatch(action)
-    }
+      console.log('000000000', action);
+      dispatch(action);
+    },
   };
 };
 
