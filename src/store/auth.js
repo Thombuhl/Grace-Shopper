@@ -1,9 +1,8 @@
 /* eslint-disable */
-import axios from "axios";
-import { _logout, _handleToken } from "./action_creators/auth_creators";
-import { SET_AUTH } from "./actions/auth_actions";
-import { fetchCart } from "./cart";
-
+import axios from 'axios';
+import { _logout, _handleToken } from './action_creators/auth_creators';
+import { SET_AUTH } from './actions/auth_actions';
+import { fetchCar, clearCart } from './cart';
 
 const auth = (state = {}, action) => {
   switch (action.type) {
@@ -16,16 +15,16 @@ const auth = (state = {}, action) => {
 
 export const logout = () => {
   return (dispatch) => {
-    window.localStorage.setItem('token', 'guest')
+    window.localStorage.setItem('token', 'guest');
     dispatch(_logout());
   };
 };
 
 export const exchangeToken = () => {
   return async (dispatch) => {
-    const token = window.localStorage.getItem("token");
+    const token = window.localStorage.getItem('token');
     if (token) {
-      const response = await axios.get("/api/sessions", {
+      const response = await axios.get('/api/sessions', {
         headers: {
           authorization: token,
         },
@@ -38,31 +37,35 @@ export const exchangeToken = () => {
 
 export const login = (credentials, history) => {
   return async (dispatch) => {
-    let response = await axios.post('/api/sessions', credentials)
+    let response = await axios.post('/api/sessions', credentials);
     const { token } = response.data;
-    window.localStorage.setItem('token', token); 
-    const auth = (await axios.get('/api/sessions', {
-      headers: {
-        authorization: token
-      }
-    })).data
+    window.localStorage.setItem('token', token);
+    const auth = (
+      await axios.get('/api/sessions', {
+        headers: {
+          authorization: token,
+        },
+      })
+    ).data;
     dispatch(_handleToken(auth));
-    history.push('/')
+    history.push('/');
   };
 };
 
 export const signup = (userInfo, history) => {
   return async (dispatch) => {
-    const response =  await axios.post("/api/sessions/signup", userInfo);
-    const { token } = response.data
-    window.localStorage.setItem('token', token); 
-    const auth = (await axios.get('/api/sessions', {
-      headers: {
-        authorization: token
-      }
-    })).data
+    const response = await axios.post('/api/sessions/signup', userInfo);
+    const { token } = response.data;
+    window.localStorage.setItem('token', token);
+    const auth = (
+      await axios.get('/api/sessions', {
+        headers: {
+          authorization: token,
+        },
+      })
+    ).data;
     dispatch(_handleToken(auth));
-    history.push('/')
+    history.push('/');
   };
 };
 

@@ -4,8 +4,6 @@ import { applyDiscount } from '../../store';
 import styled from 'styled-components';
 export const Image = styled.img``;
 import StripeContainer from '../../stripe/StripeContainer';
-import { applyDiscount } from '../../store';
-
 
 export const OrderSummary = () => {
   const dispatch = useDispatch();

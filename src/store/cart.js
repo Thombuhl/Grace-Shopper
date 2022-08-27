@@ -21,8 +21,6 @@ let initialState = {
 const cart = (state = initialState, action) => {
   switch (action.type) {
     case SET_CART:
-      console.log(action.cart);
-      console.log(localStorage);
       return action.cart;
     case DELETE_PRODUCT:
       const lineItems = state.lineItems.filter(
@@ -112,6 +110,12 @@ export const deleteLineItem = (lineItem) => {
       });
       dispatch(_deleteProduct(lineItem));
     }
+  };
+};
+
+export const clearCart = () => {
+  return async (dispatch, getState) => {
+    console.log(getState);
   };
 };
 

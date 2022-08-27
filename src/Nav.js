@@ -17,6 +17,7 @@ import {
   RightNav,
   RightNavItem,
   Logo,
+} from './styledComponents/NavStyles';
 import Search from './Search';
 import auth from './store/auth';
 
