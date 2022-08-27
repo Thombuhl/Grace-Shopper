@@ -7,7 +7,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Footer from './Footer';
 import Heading from './Heading';
-import StripeContainer from './stripe/StripeContainer';
+
 import {
   Container,
   Wrapper,
@@ -39,14 +39,13 @@ import {
 
 const Cart = ({ cart, updateCart, deleteLineItem }) => {
   let totalAmountOfCart = 0;
-  const token = window.localStorage.getItem('token')
-  let browserCart = []
+  const token = window.localStorage.getItem('token');
+  let browserCart = [];
 
-  if(token === 'guest'){
-    browserCart = JSON.parse(window.localStorage.getItem('cart'))
-  }
-  else browserCart = cart
-  browserCart.lineItems.map(item => console.log(item)) 
+  if (token === 'guest') {
+    browserCart = JSON.parse(window.localStorage.getItem('cart'));
+  } else browserCart = cart;
+  browserCart.lineItems.map((item) => console.log(item));
 
   cart.lineItems.forEach((lineItem) => {
     let quantity = lineItem.quantity;
@@ -161,7 +160,6 @@ const Cart = ({ cart, updateCart, deleteLineItem }) => {
             </ShopButton>
           </ShopDiv>
         </Wrapper>
-        <StripeContainer />
       </Container>
       <Footer />
     </div>

@@ -18,10 +18,14 @@ import {
   RightNavItem,
   Logo,
 } from './styledComponents/NavStyles';
+import auth from './store/auth';
 
 class Nav extends Component {
   componentDidMount() {
     this.props.exchangeToken();
+  }
+  componentDidUpdate() {
+    this.props.fetchCart();
   }
 
   render() {

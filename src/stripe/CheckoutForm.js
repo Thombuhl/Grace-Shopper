@@ -62,7 +62,7 @@ const PaymentForm = ({ cart }) => {
         </form>
       ) : (
         <div>
-          <h2>You Bought something</h2>
+          <h2>Order Placed</h2>
         </div>
       )}
     </>
