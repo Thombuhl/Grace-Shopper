@@ -158,3 +158,11 @@ form > * {
   transform: scale(1.3);
   cursor: pointer;
 }
+
+.searchResult {
+  background-color: rgb(111, 182, 147);
+  position: absolute;
+  z-index: 3;
+  text-align: center;
+  text-transform: capitalize;
+}

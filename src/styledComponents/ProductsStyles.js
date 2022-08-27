@@ -10,6 +10,7 @@ export const Container = styled.div`
 export const FilterDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  position: relative;
 `;
 
 export const FilterItem = styled.div`
